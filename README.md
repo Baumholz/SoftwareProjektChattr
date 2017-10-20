@@ -1,7 +1,6 @@
 # Chattr 1718
 
-Chattr is a **revolutionary** messaging application tailored specifically to group communication. Chattr aims to simplify getting together with unique and 
-innovative features like group polls. No matter your group’s needs, Chattr has what you need!
+Chattr is a **revolutionary** messaging application tailored specifically to group communication. Chattr aims to simplify getting together with unique and innovative features like group polls. No matter your group’s needs, Chattr has what you need!
 
 
 ## To-Do List

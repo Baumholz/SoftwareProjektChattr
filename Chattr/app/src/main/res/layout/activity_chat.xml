@@ -7,9 +7,48 @@
     tools:context="com.example.david.chattr.ChatActivity">
 
 
+    <EditText
+        android:id="@+id/chatInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
 
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chatPartner" />
 
+    <TextView
+        android:id="@+id/chatPartner"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:layout_marginBottom="476dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/chatInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/chatPartnerImage"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/chatPartnerImage"
+        android:layout_width="94dp"
+        android:layout_height="61dp"
+        android:src="@drawable/hund"
+        app:srcCompat="@drawable/hund2" />
 
-
+    <ListView
+        android:id="@+id/chat"
+        android:layout_width="0dp"
+        android:layout_height="452dp"
+        android:layout_marginBottom="58dp"
+        android:layout_marginTop="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chatPartnerImage" />
 </android.support.constraint.ConstraintLayout>

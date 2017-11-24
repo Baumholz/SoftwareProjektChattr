@@ -52,6 +52,7 @@ public class ChatListAdapter extends BaseAdapter {
 
         TextView profileName = view.findViewById(R.id.profilName);
 
+
         profilePicture.setImageResource(user.getProfilePicture());
         profileName.setText(user.getName());
 

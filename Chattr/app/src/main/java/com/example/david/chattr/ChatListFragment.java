@@ -35,7 +35,7 @@ public class ChatListFragment extends Fragment{
         recipients.add(user2);
 
         final ChatListAdapter myChatListAdapter = new ChatListAdapter(recipients);
-        ListView chatListView = (ListView) view.findViewById(R.id.chatListView);
+        final ListView chatListView = (ListView) view.findViewById(R.id.chatListView);
         chatListView.setAdapter(myChatListAdapter);
 
         //David i changed something her added an intent to the chatActivity #Manu
@@ -43,10 +43,15 @@ public class ChatListFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                UserProfile entry = (UserProfile) myChatListAdapter.getItem(i);
+
+
+                int pos = chatListView.getSelectedItemPosition();
 
               Intent intent = new Intent(ChatListFragment.this.getActivity(),ChatActivity.class);
-                startActivity(intent);
+             //intent.putExtra("position",pos);
+              intent.putExtra("picture",recipients.get(i).getProfilePicture());
+              intent.putExtra("name",recipients.get(i).getName());
+              startActivity(intent);
             }
         });
 

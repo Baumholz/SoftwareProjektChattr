@@ -1,54 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.david.chattr.ChatActivity">
+    tools:context="com.example.david.chattr.ChatActivity"
+    android:orientation="vertical">
 
 
-    <EditText
-        android:id="@+id/chatInput"
-        android:layout_width="0dp"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatPartner" />
+            <ImageView
+                android:id="@+id/profilePicutreChat"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
 
-    <TextView
-        android:id="@+id/chatPartner"
-        android:layout_width="0dp"
-        android:layout_height="72dp"
-        android:layout_marginBottom="476dp"
-        android:layout_marginEnd="6dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/chatInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chatPartnerImage"
-        app:layout_constraintTop_toTopOf="parent" />
+    </android.support.v7.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/chatPartnerImage"
-        android:layout_width="94dp"
-        android:layout_height="61dp"
-        android:src="@drawable/hund"
-        app:srcCompat="@drawable/hund2" />
+
 
     <ListView
         android:id="@+id/chat"
-        android:layout_width="0dp"
-        android:layout_height="452dp"
-        android:layout_marginBottom="58dp"
-        android:layout_marginTop="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatPartnerImage" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@android:dimen/app_icon_size"
+        android:layout_gravity="top"
+        android:layout_weight="1"
+        />
+    <EditText
+        android:id="@+id/chatInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="0dp"
+        android:gravity="bottom"
+        android:layout_weight="0"
+        />
+
+
+</LinearLayout>

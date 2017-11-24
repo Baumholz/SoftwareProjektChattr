@@ -42,10 +42,10 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Chat List";
-//                        Resources.getSystem().getString(R.string.chatlist_title_fragment);
+                return "Chats";
+//                        Resources.getSystem().getString(R.string.chatlist_title_fragment); Nullpointerexeption for some reason, I left it hard coded.
             case 1:
-                return "Contact List";
+                return "Contacts";
             default:
                 return null;
         }

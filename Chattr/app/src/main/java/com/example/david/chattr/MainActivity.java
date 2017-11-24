@@ -1,11 +1,14 @@
 package com.example.david.chattr;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+
+import com.example.david.chattr.mqtt_chat.MyMqttService;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
+
+        //Start the MQTT Serice
+        Intent intent = new Intent(MainActivity.this, MyMqttService.class);
+        intent.putExtra("topic", "pub/trainID/camID/");
+        intent.putExtra("clientID", "SampleMessageReceiver");
+        startService(intent);
     }
 
     @Override

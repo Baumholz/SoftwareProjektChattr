@@ -23,8 +23,7 @@ import java.util.ArrayList;
 
 public class ChatActivity extends AppCompatActivity {
 
-    ArrayList<Message> messages
-            ;
+    ArrayList<Message> messages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

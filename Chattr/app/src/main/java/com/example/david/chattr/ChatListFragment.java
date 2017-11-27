@@ -2,7 +2,6 @@ package com.example.david.chattr;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,6 +42,7 @@ public class ChatListFragment extends Fragment{
         chatListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
 
 
                 int pos = chatListView.getSelectedItemPosition();

@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 public class ChatActivity extends AppCompatActivity {
 
+    ArrayList<Message> messages;
     ArrayList<Message> messages
             ;
     EditText giveInput;
@@ -66,6 +67,9 @@ public class ChatActivity extends AppCompatActivity {
 
         myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages);
 
+
+        ImageView profilPicture = (ImageView) findViewById(R.id.profilePicutreChat);
+        ListView chatListView = (ListView) findViewById(R.id.chat);
         chatListView.setAdapter(myChatActivityListViewAdapter);
 
 

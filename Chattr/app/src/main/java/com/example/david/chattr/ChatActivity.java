@@ -29,8 +29,6 @@ import java.util.ArrayList;
 public class ChatActivity extends AppCompatActivity {
 
     ArrayList<Message> messages;
-    ArrayList<Message> messages
-            ;
     EditText giveInput;
     String name;
     ChatActivityListViewAdapter myChatActivityListViewAdapter;
@@ -48,7 +46,6 @@ public class ChatActivity extends AppCompatActivity {
         toolbar.setTitle(name);
         ImageView profilPicture = (ImageView) findViewById(R.id.profilePicutreChat);
         ListView chatListView = (ListView) findViewById(R.id.chat);
-        Button sendButton = (Button) findViewById(R.id.sendButton);
 
         setSupportActionBar(toolbar);
 
@@ -58,37 +55,14 @@ public class ChatActivity extends AppCompatActivity {
         Intent intentToAdapter = new Intent(ChatActivity.this,ChatActivityListViewAdapter.class);
         intentToAdapter.putExtra("me",name);
 
-        Message m1 = new Message("Harald","Olaf",null,false,null,"Hey what's up");
-        Message m2 = new Message("Olaf","Harald",null,false,null,"Software Priject");
-
         messages = new ArrayList<Message>();
-        messages.add(m1);
-        messages.add(m2);
 
         myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages);
-
-
-        ImageView profilPicture = (ImageView) findViewById(R.id.profilePicutreChat);
-        ListView chatListView = (ListView) findViewById(R.id.chat);
         chatListView.setAdapter(myChatActivityListViewAdapter);
 
 
         int pic = (int)getIntent().getSerializableExtra("picture");
         profilPicture.setImageResource(pic);
-
-//        sendButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.send));
-
-//        sendButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String message = giveInput.getText().toString();
-//                if (message.isEmpty() == false) {
-//                    Message myMessage = new Message(name, null, null, false, null, message);
-//                    messages.add(myMessage);
-//                }
-//                giveInput.setText("");
-//            }
-//        });
     }
 
     public void onEditTextButtonClicked(View v) {

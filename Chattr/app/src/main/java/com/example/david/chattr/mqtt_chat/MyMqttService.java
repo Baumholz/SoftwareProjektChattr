@@ -28,8 +28,8 @@ public class MyMqttService extends Service implements MqttCallback{
 
     private final IBinder myBinder = new MyLocalBinder();
 
-//    private final static String Broker = "tcp://iluhotcopvh4gnmu.myfritz.net:1883";
-    private final static String Broker = "tcp://broker.hivemq.com:1883";
+    private final static String Broker = "tcp://iluhotcopvh4gnmu.myfritz.net:1883";
+//    private final static String Broker = "tcp://broker.hivemq.com:1883";
     private final static int Quos = 2;
 
     MqttAndroidClient client;

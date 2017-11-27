@@ -5,14 +5,19 @@ import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.david.chattr.entities.users.Message;
@@ -25,6 +30,9 @@ public class ChatActivity extends AppCompatActivity {
 
     ArrayList<Message> messages
             ;
+    EditText giveInput;
+    String name;
+    ChatActivityListViewAdapter myChatActivityListViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,40 +40,63 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         Intent intent = getIntent();
-        String name = (String)getIntent().getSerializableExtra("name");
-        //only to test it
+        name = (String)getIntent().getSerializableExtra("name");
+
+        giveInput = (EditText)findViewById(R.id.chatInput);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(name);
+        ImageView profilPicture = (ImageView) findViewById(R.id.profilePicutreChat);
+        ListView chatListView = (ListView) findViewById(R.id.chat);
+        Button sendButton = (Button) findViewById(R.id.sendButton);
+
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-      //  getSupportActionBar().setIcon(R.drawable.hund);
 
+        Intent intentToAdapter = new Intent(ChatActivity.this,ChatActivityListViewAdapter.class);
+        intentToAdapter.putExtra("me",name);
 
-        UserProfile user1 = new UserProfile("0340442323","none","0","Olaf",R.drawable.hund);
-        UserProfile user2 = new UserProfile("0340446364","none","1","Harald",R.drawable.hund2);
-        Message m1 = new Message("53423234","23243423",null,false,null,"Hey what's up");
-        Message m2 = new Message("23243423","53423234",null,false,null,"Software Priject");
+        Message m1 = new Message("Harald","Olaf",null,false,null,"Hey what's up");
+        Message m2 = new Message("Olaf","Harald",null,false,null,"Software Priject");
 
         messages = new ArrayList<Message>();
         messages.add(m1);
         messages.add(m2);
 
-        ChatActivityListViewAdapter myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages);
+        myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages);
 
-        ImageView profilPicture = (ImageView) findViewById(R.id.profilePicutreChat);
-        ListView chatListView = (ListView) findViewById(R.id.chat);
         chatListView.setAdapter(myChatActivityListViewAdapter);
 
-        EditText giveInput = (EditText)findViewById(R.id.chatInput);
 
         int pic = (int)getIntent().getSerializableExtra("picture");
-
-
         profilPicture.setImageResource(pic);
 
+//        sendButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.send));
+
+//        sendButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String message = giveInput.getText().toString();
+//                if (message.isEmpty() == false) {
+//                    Message myMessage = new Message(name, null, null, false, null, message);
+//                    messages.add(myMessage);
+//                }
+//                giveInput.setText("");
+//            }
+//        });
     }
+
+    public void onEditTextButtonClicked(View v) {
+        String message = giveInput.getText().toString();
+        if (message.isEmpty() == false) {
+            Message myMessage = new Message(name, null, null, false, null, message);
+            messages.add(myMessage);
+            myChatActivityListViewAdapter.notifyDataSetChanged();
+        }
+        giveInput.setText("");
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.chat_activity_menu, menu);

@@ -1,6 +1,8 @@
 package com.example.david.chattr;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +53,7 @@ public class ChatActivityListViewAdapter extends BaseAdapter{
 
         TextView chatInput = view.findViewById(R.id.listViewText);
         chatInput.setText(message.getText());
-
+       // chatInput.setBackgroundColor(Color.GREEN);
         return view;
     }
 }

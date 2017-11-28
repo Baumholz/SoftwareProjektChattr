@@ -35,7 +35,7 @@ public class MyMqttService extends Service implements MqttCallback{
     MqttAndroidClient client;
 
 //    private String topic;
-    private String clientID;
+    private String clientId;
 //    private Context context;
 
     public MyMqttService() {
@@ -46,10 +46,10 @@ public class MyMqttService extends Service implements MqttCallback{
     public int onStartCommand(Intent intent, int flags, int startId) {
 
 //        topic = intent.getStringExtra("topic");
-        if (clientID != null) {
-            clientID = intent.getStringExtra("clientID");
+        if (clientId != null) {
+            clientId = intent.getStringExtra("clientId");
         } else {
-            clientID = "SampleMessageReceiver";
+            clientId = "SampleMessageReceiver";
         }
 
         try {
@@ -63,7 +63,7 @@ public class MyMqttService extends Service implements MqttCallback{
 
     private void connect() throws MqttException {
 
-        client = new MqttAndroidClient(this.getApplicationContext(), Broker, clientID);
+        client = new MqttAndroidClient(this.getApplicationContext(), Broker, clientId);
 
         IMqttToken token = client.connect();
         token.setActionCallback(new IMqttActionListener() {

@@ -5,6 +5,7 @@ public abstract class Profile {
 
     protected String id;
     protected String name;
+    protected int profilePicture;
 
     public String getId() {
         return id;
@@ -17,6 +18,4 @@ public abstract class Profile {
     public int getProfilePicture() {
         return profilePicture;
     }
-
-    protected int profilePicture;
 }

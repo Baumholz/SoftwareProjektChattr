@@ -34,13 +34,16 @@ public class MyMqttService extends Service implements MqttCallback{
 
     MqttAndroidClient client;
 
-//    private String topic;
+    //    private String topic;
     private String clientId;
 //    private Context context;
 
-    public MyMqttService() {
+    // Returns this instance of MyMqttService, so that other clients/Activities can call its methods
+    public class MyLocalBinder extends Binder {
+        public MyMqttService getService() {
+            return MyMqttService.this;
+        }
     }
-
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -71,7 +74,7 @@ public class MyMqttService extends Service implements MqttCallback{
             public void onSuccess(IMqttToken asyncActionToken) {
                 // We are connected
                 Log.d(TAG, "onSuccess");
-                Toast.makeText(MyMqttService.this, "Connected", Toast.LENGTH_LONG).show();
+                Toast.makeText(MyMqttService.this, "Connected", Toast.LENGTH_SHORT).show();
                 client.setCallback(MyMqttService.this);
             }
 
@@ -79,7 +82,7 @@ public class MyMqttService extends Service implements MqttCallback{
             public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                 // Something went wrong e.g. connection timeout or firewall problems
                 Log.d(TAG, "onFailure");
-                Toast.makeText(MyMqttService.this, "Not connected", Toast.LENGTH_LONG).show();
+                Toast.makeText(MyMqttService.this, "Not connected", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -90,7 +93,7 @@ public class MyMqttService extends Service implements MqttCallback{
             mMessage.setRetained(true);
             client.publish(topic, mMessage);
             Log.d(TAG, "Message send");
-            Toast.makeText(MyMqttService.this, "Message send", Toast.LENGTH_LONG).show();
+            Toast.makeText(MyMqttService.this, "Message send", Toast.LENGTH_SHORT).show();
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -103,13 +106,13 @@ public class MyMqttService extends Service implements MqttCallback{
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     Log.d(TAG, "Subscribed successfully");
-                    Toast.makeText(MyMqttService.this, "Subscribed successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MyMqttService.this, "Subscribed successfully", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.d(TAG, "Failed to subscribe");
-                    Toast.makeText(MyMqttService.this, "Failed to subscribe", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MyMqttService.this, "Failed to subscribe", Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (MqttException e) {
@@ -124,9 +127,10 @@ public class MyMqttService extends Service implements MqttCallback{
 
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
+        //Todo: Find out why messages do not arrive
         String mMessage = message.getPayload().toString();
         Log.d(TAG, "Message arrived");
-        Toast.makeText(MyMqttService.this, "Message arrived", Toast.LENGTH_LONG).show();
+        Toast.makeText(MyMqttService.this, "Message arrived", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -138,14 +142,5 @@ public class MyMqttService extends Service implements MqttCallback{
     @Override
     public IBinder onBind(Intent intent) {
         return myBinder;
-    }
-
-
-
-
-    public class MyLocalBinder extends Binder {
-        MyMqttService getService() {
-            return MyMqttService.this;
-        }
     }
 }

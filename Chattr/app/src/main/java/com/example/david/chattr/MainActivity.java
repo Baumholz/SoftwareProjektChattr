@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import com.example.david.chattr.mainactivity_fragments.PagerAdapter;
 import com.example.david.chattr.mqtt_chat.MyMqttService;
 
 
@@ -29,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         //Start the MQTT Serice
-        Intent intent = new Intent(MainActivity.this, MyMqttService.class);
-        intent.putExtra("topic", "pub/trainID/camID/");
-        intent.putExtra("clientID", "SampleMessageReceiver");
-        startService(intent);
+        Intent startServiceIntent = new Intent(MainActivity.this, MyMqttService.class);
+        startServiceIntent.putExtra("topic", "pub/trainID/camID/");
+        startServiceIntent.putExtra("clientID", "SampleMessageReceiver");
+        startService(startServiceIntent);
     }
 
     @Override

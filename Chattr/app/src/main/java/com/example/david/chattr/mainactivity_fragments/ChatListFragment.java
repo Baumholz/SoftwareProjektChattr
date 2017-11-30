@@ -1,4 +1,4 @@
-package com.example.david.chattr;
+package com.example.david.chattr.mainactivity_fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.david.chattr.ChatActivity;
+import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;
 
 import java.util.ArrayList;
@@ -51,6 +53,7 @@ public class ChatListFragment extends Fragment{
              //intent.putExtra("position",pos);
               intent.putExtra("picture",recipients.get(i).getProfilePicture());
               intent.putExtra("name",recipients.get(i).getName());
+              intent.putExtra("phoneNumber",recipients.get(i).getName());
               startActivity(intent);
             }
         });

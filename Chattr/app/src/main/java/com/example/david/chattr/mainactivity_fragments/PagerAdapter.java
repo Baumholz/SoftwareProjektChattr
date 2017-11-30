@@ -1,4 +1,4 @@
-package com.example.david.chattr;
+package com.example.david.chattr.mainactivity_fragments;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;

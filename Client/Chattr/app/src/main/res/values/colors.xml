@@ -3,4 +3,9 @@
     <color name="colorPrimary">#e1de00</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="buttonColor">#FFFFFF</color>
+    <color name="profileText">#303F9F</color>
+    <color name="badgesBackground">#f6f2a2</color>
+    <color name="commonGroupsBackground">#aeb8fa</color>
 </resources>

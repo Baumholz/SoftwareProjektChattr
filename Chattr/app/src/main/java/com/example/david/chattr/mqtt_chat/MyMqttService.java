@@ -64,7 +64,7 @@ public class MyMqttService extends Service implements MqttCallback{
         return Service.START_STICKY;
     }
 
-    private void connect() throws MqttException {
+    public void connect() throws MqttException {
 
         client = new MqttAndroidClient(this.getApplicationContext(), Broker, clientId);
 
@@ -93,26 +93,26 @@ public class MyMqttService extends Service implements MqttCallback{
             mMessage.setRetained(true);
             client.publish(topic, mMessage);
             Log.d(TAG, "Message send");
-            Toast.makeText(MyMqttService.this, "Message send", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(MyMqttService.this, "Message send on topic: " + topic + "\n" + message, Toast.LENGTH_SHORT).show();
         } catch (MqttException e) {
             e.printStackTrace();
         }
     }
 
-    public void subscribe(String topic) {
+    public void subscribe(final String topic) {
         try {
             IMqttToken token = client.subscribe(topic, Quos);
             token.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.d(TAG, "Subscribed successfully");
-                    Toast.makeText(MyMqttService.this, "Subscribed successfully", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Subscribed successfully on topic: " + topic);
+                    Toast.makeText(MyMqttService.this, "Subscribed successfully on topic: " + topic, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.d(TAG, "Failed to subscribe");
-                    Toast.makeText(MyMqttService.this, "Failed to subscribe", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Failed to subscribe on topic: " + topic);
+                    Toast.makeText(MyMqttService.this, "Failed to subscribe on topic: " + topic, Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (MqttException e) {
@@ -129,8 +129,8 @@ public class MyMqttService extends Service implements MqttCallback{
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         //Todo: Find out why messages do not arrive
         String mMessage = message.getPayload().toString();
-        Log.d(TAG, "Message arrived");
-        Toast.makeText(MyMqttService.this, "Message arrived", Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "Message arrived on topic: " + topic + "\n" + message);
+        Toast.makeText(MyMqttService.this, "Message arrived: " + message, Toast.LENGTH_SHORT).show();
     }
 
     @Override

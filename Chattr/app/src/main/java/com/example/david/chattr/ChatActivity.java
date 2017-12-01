@@ -57,8 +57,8 @@ public class ChatActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        Intent intentToAdapter = new Intent(ChatActivity.this,ChatActivityListViewAdapter.class);
-        intentToAdapter.putExtra("me",name);
+//        Intent intentToAdapter = new Intent(ChatActivity.this,ChatActivityListViewAdapter.class);
+//        intentToAdapter.putExtra("me",name);
 
         messages = new ArrayList<Message>();
 
@@ -78,7 +78,7 @@ public class ChatActivity extends AppCompatActivity {
             messages.add(myMessage);
             myChatActivityListViewAdapter.notifyDataSetChanged();
             //Todo: Do the topic timestamp thing
-            mqttService.sendMessage("pub/trainID/camID/", myMessage.getText());
+            mqttService.sendMessage("/pub/trainID/camID/", myMessage.getText());
         }
         giveInput.setText("");
     }
@@ -114,9 +114,9 @@ public class ChatActivity extends AppCompatActivity {
 
             phoneNumber = (String)getIntent().getSerializableExtra("phoneNumber");
             //Todo: Systax for hidden message (JSON?)
-            mqttService.sendMessage(phoneNumber, "sender_nr\n" + "pub/trainID/camID/");
+            mqttService.sendMessage("/pub/trainID/camID/", "message");
             //Subscribe to newly created topic Todo: Real timestamp as topic
-            mqttService.subscribe("pub/trainID/camID/");
+            mqttService.subscribe("/pub/trainID/camID/");
         }
 
         @Override

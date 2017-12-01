@@ -1,72 +1,84 @@
 package com.example.david.chattr.entities.messaging;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 
 /**
  * Created by manu on 17.11.2017.
  */
 
-public class Message <T> {
+public class Message {
     // i gave Message a String to test it. I know its wrong so we can delete it later
-    protected String senderId;
-    protected String recipientId;
-    protected Date timeSent;
-    protected boolean isQueued;
-    protected Date timeReceived;
+    protected String id;
+    protected int timestamp;
+    protected String senderNr;
+    protected boolean recipientNr;
+    protected String content;
 
-    protected String text;
-
-    public String getText() {
-        return text;
+    @Override
+    public String toString() {
+        JSONObject message = new JSONObject();
+        try {
+            message.put("id" , id);
+            message.put("timestamp" , timestamp);
+            message.put("senderNr" , senderNr);
+            message.put("recipientNr" , recipientNr);
+            message.put("content" , content);
+            return message.toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public Message(String senderId, String recipientId, Date timeSent, boolean isQueued, Date timeReceived, String text) {
-        this.senderId = senderId;
-        this.recipientId = recipientId;
-        this.timeSent = timeSent;
-        this.isQueued = isQueued;
-        this.timeReceived = timeReceived;
+    public Message(String id, int timestamp, String senderNr, boolean recipientNr, String content) {
 
-        this.text = text;
+        this.id = id;
+        this.timestamp = timestamp;
+        this.senderNr = senderNr;
+        this.recipientNr = recipientNr;
+        this.content = content;
     }
 
-    public String getsenderId() {
-        return senderId;
+    public String getId() {
+        return id;
     }
 
-    public void setsenderId(String senderId) {
-        this.senderId = senderId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getrecipientId() {
-        return recipientId;
+    public int getTimestamp() {
+        return timestamp;
     }
 
-    public void setrecipientId(String recipientId) {
-        this.recipientId = recipientId;
+    public void setTimestamp(int timestamp) {
+        this.timestamp = timestamp;
     }
 
-    public Date getTimeSent() {
-        return timeSent;
+    public String getSenderNr() {
+        return senderNr;
     }
 
-    public void setTimeSent(Date timeSent) {
-        this.timeSent = timeSent;
+    public void setSenderNr(String senderNr) {
+        this.senderNr = senderNr;
     }
 
-    public boolean isQueued() {
-        return isQueued;
+    public boolean isRecipientNr() {
+        return recipientNr;
     }
 
-    public void setQueued(boolean queued) {
-        isQueued = queued;
+    public void setRecipientNr(boolean recipientNr) {
+        this.recipientNr = recipientNr;
     }
 
-    public Date getTimeReceived() {
-        return timeReceived;
+    public String getContent() {
+        return content;
     }
 
-    public void setTimeReceived(Date timeReceived) {
-        this.timeReceived = timeReceived;
+    public void setContent(String content) {
+        this.content = content;
     }
 }

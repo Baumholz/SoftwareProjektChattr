@@ -50,7 +50,7 @@ public class ChatActivityListViewAdapter extends BaseAdapter{
         }
 
         TextView chatInput = view.findViewById(R.id.listViewText);
-        chatInput.setText(message.getText());
+        chatInput.setText(message.getContent());
        // chatInput.setBackgroundColor(Color.GREEN);
         return view;
     }

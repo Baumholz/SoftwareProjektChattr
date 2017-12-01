@@ -20,6 +20,7 @@ import com.example.david.chattr.mqtt_chat.MyMqttService;
 
 import com.example.david.chattr.mqtt_chat.MyMqttService.MyLocalBinder;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ChatActivity extends AppCompatActivity {
@@ -74,11 +75,11 @@ public class ChatActivity extends AppCompatActivity {
     public void onEditTextButtonClicked(View v) {
         String message = giveInput.getText().toString();
         if (!message.isEmpty()) {
-            Message myMessage = new Message(name, null, null, false, null, message);
+            Message myMessage = new Message(name, 2004, "me", false, message);
             messages.add(myMessage);
             myChatActivityListViewAdapter.notifyDataSetChanged();
             //Todo: Do the topic timestamp thing
-            mqttService.sendMessage("/pub/trainID/camID/", myMessage.getText());
+            mqttService.sendMessage("/pub/trainID/camID/", myMessage.getContent());
         }
         giveInput.setText("");
     }

@@ -25,6 +25,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
             case 1:
                 ContactListFragment Tab2 = new ContactListFragment();
                 return Tab2;
+            case 2:
+                NewContactFragment Tab3 = new NewContactFragment();
+                return Tab3;
             default:
                 return null;
         }
@@ -33,7 +36,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
     //Number of Tabs/Fragments. You need to increment this number for each new fragment/tab.
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     //The Tab Title
@@ -46,6 +49,8 @@ public class PagerAdapter extends FragmentPagerAdapter {
 //                        Resources.getSystem().getString(R.string.chatlist_title_fragment); Nullpointerexeption for some reason, I left it hard coded.
             case 1:
                 return "Contacts";
+            case 2:
+                return "New Contact";
             default:
                 return null;
         }

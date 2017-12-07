@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TableRow
+        android:id="@+id/rowManually"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.25" >
+
+        <Button
+            android:id="@+id/manuallButton"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:textColor="@color/profileText"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            android:text="Add contact manually" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/rowNfc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.25" >
+
+        <Button
+            android:id="@+id/nfcButton"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:textColor="@color/profileText"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            android:text="Add contact with NFC" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/rowNewQr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.25" >
+
+        <Button
+            android:id="@+id/NewQrButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Add Contact with QR"
+            android:background="@android:color/transparent"
+            android:textColor="@color/profileText"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/rowShowQr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.25" >
+
+        <Button
+            android:id="@+id/ShowQrButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@android:color/transparent"
+            android:textColor="@color/profileText"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            android:text="Show own QR-Code" />
+    </TableRow>
+</LinearLayout>

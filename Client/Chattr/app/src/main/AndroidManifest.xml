@@ -32,6 +32,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".NewContactActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+            <intent-filter>
+
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <service android:name="org.eclipse.paho.android.service.MqttService" >
         </service>
         <service android:name=".mqtt_chat.MyMqttService"/>

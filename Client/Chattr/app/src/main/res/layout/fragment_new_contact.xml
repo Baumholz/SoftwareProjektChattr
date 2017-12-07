@@ -47,14 +47,14 @@
         android:layout_weight="0.25" >
 
         <Button
-            android:id="@+id/NewQrButton"
+            android:id="@+id/qrButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:gravity="center"
             android:text="Add Contact with QR"
-            android:background="@android:color/transparent"
-            android:textColor="@color/profileText"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/profileText"
             android:textStyle="bold"
             android:visibility="visible" />
     </TableRow>
@@ -66,14 +66,14 @@
         android:layout_weight="0.25" >
 
         <Button
-            android:id="@+id/ShowQrButton"
+            android:id="@+id/showQrButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:background="@android:color/transparent"
-            android:textColor="@color/profileText"
+            android:gravity="center"
+            android:text="Show own QR-Code"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textStyle="bold"
-            android:text="Show own QR-Code" />
+            android:textColor="@color/profileText"
+            android:textStyle="bold" />
     </TableRow>
 </LinearLayout>

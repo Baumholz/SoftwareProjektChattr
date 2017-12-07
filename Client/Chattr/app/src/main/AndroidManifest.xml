@@ -15,34 +15,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" >
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChatActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" >
-            <!--for the second activity-->
+        <activity
+            android:name=".ChatActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+
+            <!-- for the second activity -->
             <intent-filter>
-
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewContactActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" >
+        <activity
+            android:name=".NewManuallContactActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
-
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name="org.eclipse.paho.android.service.MqttService" >
-        </service>
-        <service android:name=".mqtt_chat.MyMqttService"/>
+
+        <service android:name="org.eclipse.paho.android.service.MqttService"></service>
+        <service android:name=".mqtt_chat.MyMqttService" />
+
+        <activity android:name=".ShowQrActivity"></activity>
     </application>
 
 </manifest>

@@ -7,12 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Chatter_Server" />
-        <module name="Chattr_Server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Chatter_Server" target="1.5" />
-      <module name="Chattr_Server" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

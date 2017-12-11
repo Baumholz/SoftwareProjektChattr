@@ -21,30 +21,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  */
 
-public class MQTTSubscribeSample implements MqttCallback {
+public class MQTTSubscribe implements MqttCallback {
 
-    public static void main(String[] args) {
-       /* JsonNewObjMsg tmp = new JsonNewObjMsg("64627", 2, 50.61897, 13.02953, "SignalHp1(wh).PNG", "DB8814Hp1.jpg",
-                "Hauptsignal",
-                "Signal Hp 1, " + "<br>Bedeutung: Fahrt.<br>" + "Formsignal: Tageszeichen  "
-                        + "<br>Ein Signalflügel – bei zweiflügligen Signalen<br>"
-                        + "der obere Flügel – zeigt schräg nach rechts aufwärts.",
-                "8856", "2016-06-13", "18:37" ,"Am 07.01.2008 aufgestellt"); */
+
+    public void subscribe() {
 
         // Topic auf das gehört wird!
         String topic = "#";
         int qos = 2;
         String broker = "tcp://iluhotcopvh4gnmu.myfritz.net:1883"; // Hostadresse, für Testzwecke
-        // "tcp://91.250.113.207:1883"
-        // nur lokal!
-        String clientId = "SampleMessageReceiver";
+        String clientId = "ServerMessageReceiver";
         MemoryPersistence persistence = new MemoryPersistence();
 
         try {
             MqttAsyncClient sampleClient = new MqttAsyncClient(broker, clientId, persistence);
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setCleanSession(true);
-            sampleClient.setCallback(new MQTTSubscribeSample());
+            sampleClient.setCallback(new MQTTSubscribe());
             System.out.println("Connecting to broker: " + broker);
             sampleClient.connect(connOpts);
             System.out.println("Connected");
@@ -53,24 +46,16 @@ public class MQTTSubscribeSample implements MqttCallback {
             System.out.println("Subscribed" + "\n");
         } catch (Exception me) {
             if (me instanceof MqttException) {
-                System.out.println("reason " + ((MqttException) me).getReasonCode());
+
+        MQTTErrorFileHandler errFilehandler = new MQTTErrorFileHandler();
+               String error = errFilehandler.getErrorCode(((MqttException) me).getReasonCode());
+                System.out.println("ERROR: "+error);
             }
             System.out.println("msg " + me.getMessage());
             System.out.println("loc " + me.getLocalizedMessage());
             System.out.println("cause " + me.getCause());
             System.out.println("excep " + me);
             me.printStackTrace();
-        }
-        for (int i = 0; i < 3; i++) {
-            MQTTPublishSample test1 = new MQTTPublishSample();
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            test1.sendTestMessage(tmp);
-
         }
     }
 
@@ -79,22 +64,25 @@ public class MQTTSubscribeSample implements MqttCallback {
 
     }
 
-    public void deliveryComplete(IMqttDeliveryToken arg0) {
-        System.err.println("delivery complete");
-    }
-
     /**
      * hier könnte eine automatische sortierung nach topics geschehen, aktuell
      * nur Demonstration des message empfangs
      */
     public void messageArrived(String topic, MqttMessage message) throws Exception {
+
         ObjectMapper mapper = new ObjectMapper();
         String tmp = new String(message.getPayload());
-
-        JsonNewObjMsg obj = mapper.readValue(tmp, JsonNewObjMsg.class);
+        Message obj = mapper.readValue(tmp, Message.class);
 
         System.out.println(obj.toString() + "\n");
 
     }
+
+
+    public void deliveryComplete(IMqttDeliveryToken arg0) {
+        System.err.println("delivery complete");
+    }
+
+
 
 }

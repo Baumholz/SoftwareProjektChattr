@@ -16,19 +16,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author mkurras
  *
  */
-public class MQTTPublishSample {
+public class MQTTPublish {
 
     /*
      * Das Objekt wird beim Ausführen der Methode übergeben.
      */
-    public boolean sendTestMessage(JsonNewObjMsg tmp) {
+    public boolean sendTestMessage(Message tmp) {
 
-        String topic = "/pub/trainID/camID/";
+        String topic = "/receiver";
         ObjectMapper mapper = new ObjectMapper();
 
         int qos = 2; // quality of service
         String broker = "tcp://iluhotcopvh4gnmu.myfritz.net:1883"; //91.250.113.207
-        String clientId = "SampleMessagePublisherRailMap";
+        String clientId = "ServerPublish";
         MemoryPersistence persistence = new MemoryPersistence();
 
         try {

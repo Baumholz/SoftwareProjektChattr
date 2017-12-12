@@ -27,7 +27,7 @@ public class MQTTSubscribe implements MqttCallback {
     public void subscribe() {
 
         // Topic auf das gehört wird!
-        String topic = "#";
+        String topic = "all/#";
         int qos = 2;
         String broker = "tcp://iluhotcopvh4gnmu.myfritz.net:1883"; // Hostadresse, für Testzwecke
         String clientId = "ServerMessageReceiver";
@@ -60,21 +60,23 @@ public class MQTTSubscribe implements MqttCallback {
     }
 
     public void connectionLost(Throwable arg0) {
+        System.out.println(arg0.getMessage());
+      arg0.printStackTrace();
         System.err.println("connection lost");
 
     }
 
     /**
-     * hier könnte eine automatische sortierung nach topics geschehen, aktuell
+     * hier kommt die Datenbank anbindung, aktuell
      * nur Demonstration des message empfangs
      */
     public void messageArrived(String topic, MqttMessage message) throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
         String tmp = new String(message.getPayload());
-        Message obj = mapper.readValue(tmp, Message.class);
-
-        System.out.println(obj.toString() + "\n");
+      //  Message obj = mapper.readValue(tmp, Message.class);
+       // System.out.println(obj.toString() + "\n");
+        System.out.println(tmp);
 
     }
 

@@ -1,23 +1,39 @@
 package MQTT_Handler;
 
+import DemoMessageSender.PublishMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//import org.json.simple.JSONArray;
-//import org.json.simple.JSONObject;
+
 public class Message {
 
 
     protected String id;
     protected int timestamp;
     protected String senderNr;
-    protected boolean recipientNr;
+    protected String recipientNr;
+
+    public String getRecipientNr() {
+        return recipientNr;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
     protected String content;
+    protected String topic;
+    PublishMessage dm;
+    JSONObject message;
 
     @Override
     public String toString() {
 
-        JSONObject message = new JSONObject();
+        message = new JSONObject();
         try {
             message.put("id" , id);
             message.put("timestamp" , timestamp);
@@ -31,15 +47,22 @@ public class Message {
         return null;
     }
 
-    public Message(String id, int timestamp, String senderNr, boolean recipientNr, String content) {
+    public Message(String id, int timestamp, String senderNr, String recipientNr, String content, String topic) {
 
         this.id = id;
         this.timestamp = timestamp;
         this.senderNr = senderNr;
         this.recipientNr = recipientNr;
         this.content = content;
+        this.topic = topic;
     }
 
+    public void sendMessage(){
+       dm = new PublishMessage();
+       dm.sendTestMessage(this, 2);
+
+
+    }
     public String getId() {
         return id;
     }
@@ -64,11 +87,11 @@ public class Message {
         this.senderNr = senderNr;
     }
 
-    public boolean isRecipientNr() {
+    public String isRecipientNr() {
         return recipientNr;
     }
 
-    public void setRecipientNr(boolean recipientNr) {
+    public void setRecipientNr(String recipientNr) {
         this.recipientNr = recipientNr;
     }
 

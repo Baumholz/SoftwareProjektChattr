@@ -1,7 +1,7 @@
 package DemoMessageSender;
 
 import MQTT_Handler.MQTTErrorFileHandler;
-import MQTT_Handler.Message;
+import Entities.Message;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.paho.client.mqttv3.MqttClient;

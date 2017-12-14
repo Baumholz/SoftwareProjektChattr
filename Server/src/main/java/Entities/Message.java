@@ -1,4 +1,4 @@
-package MQTT_Handler;
+package Entities;
 
 import DemoMessageSender.PublishMessage;
 import org.json.JSONException;
@@ -8,12 +8,16 @@ import org.json.JSONObject;
 public class Message {
 
 
-    protected String id;
-    protected int timestamp;
-    protected String senderNr;
-    protected String recipientNr;
+    private String id;
+    private int timestamp;
+    private long senderNr;
+    private long recipientNr;
+    private String content;
+    private String topic;
+    PublishMessage dm;
+    JSONObject message;
 
-    public String getRecipientNr() {
+    public long getRecipientNr() {
         return recipientNr;
     }
 
@@ -24,11 +28,6 @@ public class Message {
     public void setTopic(String topic) {
         this.topic = topic;
     }
-
-    protected String content;
-    protected String topic;
-    PublishMessage dm;
-    JSONObject message;
 
     @Override
     public String toString() {
@@ -47,7 +46,7 @@ public class Message {
         return null;
     }
 
-    public Message(String id, int timestamp, String senderNr, String recipientNr, String content, String topic) {
+    public Message(String id, int timestamp, long senderNr, long recipientNr, String content, String topic) {
 
         this.id = id;
         this.timestamp = timestamp;
@@ -79,19 +78,19 @@ public class Message {
         this.timestamp = timestamp;
     }
 
-    public String getSenderNr() {
+    public long getSenderNr() {
         return senderNr;
     }
 
-    public void setSenderNr(String senderNr) {
+    public void setSenderNr(long senderNr) {
         this.senderNr = senderNr;
     }
 
-    public String isRecipientNr() {
+    public long isRecipientNr() {
         return recipientNr;
     }
 
-    public void setRecipientNr(String recipientNr) {
+    public void setRecipientNr(long recipientNr) {
         this.recipientNr = recipientNr;
     }
 

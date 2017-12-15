@@ -41,10 +41,17 @@
             </intent-filter>
         </activity>
 
-        <service android:name="org.eclipse.paho.android.service.MqttService"></service>
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
         <service android:name=".mqtt_chat.MyMqttService" />
 
-        <activity android:name=".ShowQrActivity"></activity>
+        <activity android:name=".ShowQrActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".HomeActivity">
+            <intent-filter>
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

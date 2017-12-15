@@ -1,4 +1,4 @@
-package com.example.david.chattr.mainactivity_fragments;
+package com.example.david.chattr.homeactivity_fragments;
 
 import android.content.Intent;
 import android.os.Bundle;

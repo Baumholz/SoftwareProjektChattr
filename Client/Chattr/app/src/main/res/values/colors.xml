@@ -8,4 +8,6 @@
     <color name="profileText">#303F9F</color>
     <color name="badgesBackground">#f6f2a2</color>
     <color name="commonGroupsBackground">#aeb8fa</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

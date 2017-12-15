@@ -10,13 +10,13 @@ public interface PersonDB {
 
     void insert(Person person);
 
-    Person selectById(long id);
+    Person selectById(String id);
 
     List<Person> selectAll();
 
-    void delete(long id);
+    void delete(String id);
 
-    void update(Person person, int id);
+    void update(Person person, String id);
 
 
 }

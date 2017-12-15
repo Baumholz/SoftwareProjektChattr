@@ -3,6 +3,7 @@ package MQTT_Handler;
 import Daba.PersonDBImpl;
 import Daba.SQLiteJDBC;
 import DemoMessageSender.PublishMessage;
+import Entities.Person;
 
 
 import java.util.Calendar;
@@ -17,6 +18,8 @@ public class startServer {
         db.createTable(); */
         PersonDBImpl pdi = new PersonDBImpl();
         pdi.createPersonTable();
+        Person person = new Person("015734975250","01520975250", "Micha", "c/data/pictures/profilepicture");
+        pdi.insert(person);
         /*  MQTTSubscribe sub = new MQTTSubscribe();
         sub.subscribe();
 

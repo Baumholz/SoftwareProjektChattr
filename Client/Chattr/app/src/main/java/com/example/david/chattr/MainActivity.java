@@ -14,15 +14,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //if no phone number is save, an activity to sign up is started thirst
+        // If no phone number is saved, an activity to sign up is started
         SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
         String phoneNumber = sharedPreferences.getString("phoneNumber", "default");
+
         if (phoneNumber.equals("default")) {
-            Intent intent = new Intent(this, SignUpActivity.class);
-            startActivity(intent);
+            Intent signUpIntent = new Intent(this, SignUpActivity.class);
+            startActivity(signUpIntent);
         } else {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
+            Intent homeIntent = new Intent(this, HomeActivity.class);
+            homeIntent.putExtra("phone_number", phoneNumber);
+            startActivity(homeIntent);
         }
     }
 }

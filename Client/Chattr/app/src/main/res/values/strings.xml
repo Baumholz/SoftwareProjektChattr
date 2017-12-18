@@ -7,13 +7,14 @@
     <string name="broker">tcp://iluhotcopvh4gnmu.myfritz.net:1883</string>
 
     <string name="title_activity_sign_up">Sign Up</string>
+
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="dummy_club1">International Dog Lovers</string>
     <string name="dummy_club2">Pretty Princesses</string>
 
     <string name="bio_placeholder">Bio</string>
-    <string name="phone_number_placeholder">+ 1 (888) 888–8888</string>
+    <string name="phone_number_placeholder">+1 (888) 888–8888</string>
     <string name="nickname_placeholder">(Nickname)</string>
     <string name="name_placeholder">First Last</string>
 
@@ -32,4 +33,17 @@
     <string name="groups_contact_header">Common Groups</string>
     <string name="groups_personal_header">Your Groups</string>
 
+    <!--Activity Titles-->
+    <string name="home_title">Chattr Home</string>
+    <string name="personal_profile_title">Personal Profile</string>
+
+    <!--Menu Strings-->
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="action_record">Record Video</string>
+    <string name="action_save">Save</string>
+    <string name="action_label">Add Label</string>
+    <string name="action_play">Play Video</string>
+    <string name="action_profile">Profile</string>
+    <string name="hello_world">Hello world!</string>
 </resources>

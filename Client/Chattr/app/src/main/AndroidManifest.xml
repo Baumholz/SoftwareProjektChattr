@@ -10,48 +10,54 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/chattr_icon"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ChatActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-
-            <!-- for the second activity -->
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".EditContactActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+        <!--SERVICES-->
         <service android:name="org.eclipse.paho.android.service.MqttService" />
         <service android:name=".mqtt_chat.MyMqttService" />
 
-        <activity android:name=".ShowQrActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".HomeActivity">
+        <!--ACTIVITIES-->
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
-
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <activity
+            android:name="com.example.david.chattr.HomeActivity"
+            android:label="@string/home_title"
+            android:uiOptions="splitActionBarWhenNarrow">
+            <meta-data
+                android:name="android.support.UI_OPTIONS"
+                android:value="splitActionBarWhenNarrow" />
+        </activity>
+
+        <activity
+            android:name=".profiles.personal.PersonalProfileActivity"
+            android:label="@string/personal_profile_title"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".profiles.contacts.ShowQrActivity" />
+
+        <activity
+            android:name=".chatting.ChatActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <activity
+            android:name=".profiles.contacts.EditContactActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+    </application>
 </manifest>

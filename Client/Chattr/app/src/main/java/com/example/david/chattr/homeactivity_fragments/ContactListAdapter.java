@@ -1,4 +1,4 @@
-package com.example.david.chattr.mainactivity_fragments;
+package com.example.david.chattr.homeactivity_fragments;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,29 +8,28 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;
 
 import java.util.ArrayList;
 
 
-public class ChatListAdapter extends BaseAdapter {
+public class ContactListAdapter extends BaseAdapter {
 
-    private ArrayList<UserProfile> recipients ;
+    private ArrayList<UserProfile> contacts ;
 
-    public ChatListAdapter(ArrayList<UserProfile> recipients) {
-        this.recipients = recipients;
+    public ContactListAdapter(ArrayList<UserProfile> contacts) {
+        this.contacts = contacts;
     }
 
     @Override
     public int getCount() {
-        return recipients.size();
+        return contacts.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return recipients.get(i);
+        return contacts.get(i);
     }
 
     @Override
@@ -42,7 +41,7 @@ public class ChatListAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         Context context = viewGroup.getContext();
-        UserProfile user = recipients.get(i);
+        UserProfile user = contacts.get(i);
 
         if(view == null){
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

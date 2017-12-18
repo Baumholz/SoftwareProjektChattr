@@ -7,6 +7,7 @@
 
     <ImageView
         android:id="@+id/cover_image"
+        android:contentDescription="@string/profile_cover_img"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:adjustViewBounds="false"
@@ -20,31 +21,64 @@
         android:layout_marginTop="-50dp"
         android:orientation="vertical">
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_image"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_gravity="center"
-            android:src="@drawable/default_profile_img"
-            app:civ_border_color="@color/colorPrimaryDark"
-            app:civ_border_width="2dp" />
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/user_name"
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:contentDescription="@string/main_profile_img"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/default_profile_img"
+                app:civ_border_color="@color/colorPrimaryDark"
+                app:civ_border_width="2dp" />
+
+            <ImageView
+                android:id="@+id/online_status"
+                android:contentDescription="@string/online_status_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/online_gradient" />
+        </RelativeLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:gravity="center"
-            android:text="Name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/name_placeholder"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/nickname_placeholder"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="italic" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/phone_number"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:gravity="center"
-            android:text="+1 (888) 888-8888"
+            android:text="@string/phone_number_placeholder"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="normal" />
@@ -54,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:gravity="center"
-            android:text="Bio"
+            android:text="@string/bio_placeholder"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="italic" />

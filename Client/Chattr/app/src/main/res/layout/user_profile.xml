@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:orientation="horizontal"
-            android:paddingBottom="2dp">
+            android:paddingBottom="2dp"
+            android:baselineAligned="false">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -29,9 +30,10 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/badge_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Badges"
+                    android:text="@string/badges_contact_header"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold|italic" />
@@ -45,6 +47,7 @@
 
                 <ImageButton
                     android:id="@+id/more_badges"
+                    android:contentDescription="@string/see_more_icon"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="end"
@@ -86,8 +89,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
         android:background="@color/palePrimaryDark" />
 
     <LinearLayout
@@ -101,7 +104,8 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:orientation="horizontal"
-            android:paddingBottom="2dp">
+            android:paddingBottom="2dp"
+            android:baselineAligned="false">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -109,9 +113,10 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/groups_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Common Groups"
+                    android:text="@string/groups_contact_header"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold|italic" />
@@ -125,6 +130,7 @@
 
                 <ImageButton
                     android:id="@+id/more_groups_arrow"
+                    android:contentDescription="@string/see_more_icon"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="end"
@@ -162,7 +168,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:padding="2dp"
-                    android:text="International Dog Lovers"
+                    android:text="@string/dummy_club1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
@@ -187,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:padding="2dp"
-                    android:text="Pretty Princess Club"
+                    android:text="@string/dummy_club2"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/colorPrimaryDark" />
             </LinearLayout>
@@ -197,8 +203,87 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
         android:background="@color/palePrimaryDark" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:id="@+id/edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:gravity="end|center_vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:contentDescription="@string/edit_profile_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/dark_gradient" />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/edit_icon"
+                android:scaleType="centerCrop" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:padding="10dp">
+
+                <ImageView
+                    android:contentDescription="@string/add_contact_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/primary_gradient" />
+
+                <Button
+                    android:id="@+id/add_user"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/add_contact" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/add_contact"
+                    android:contentDescription="@string/new_msg_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/accent_gradient" />
+
+                <Button
+                    android:id="@+id/new_message"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/new_msg_icon" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -4,10 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="palePrimary">#f6f2a2</color>
+    <color name="palePrimaryDark">#4352b0</color>
+    <color name="paleAccent">#fe679a</color>
+
     <color name="buttonColor">#FFFFFF</color>
-    <color name="profileText">#303F9F</color>
-    <color name="badgesBackground">#f6f2a2</color>
-    <color name="commonGroupsBackground">#aeb8fa</color>
 
     <color name="black_overlay">#66000000</color>
 </resources>

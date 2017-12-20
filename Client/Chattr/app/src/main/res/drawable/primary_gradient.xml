@@ -9,7 +9,11 @@
         android:topLeftRadius="20dp"
         android:topRightRadius="20dp" />
 
-    <solid android:color="@color/badgesBackground" />
+    <gradient
+        android:angle="270"
+        android:startColor="@color/colorPrimary"
+        android:centerColor="@color/colorPrimary"
+        android:endColor="@color/palePrimary" />
 
     <padding
         android:bottom="0dp"
@@ -19,6 +23,6 @@
 
     <size
         android:height="60dp"
-        android:width="270dp" />
+        android:width="60dp" />
 
 </shape>

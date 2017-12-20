@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.david.chattr.NewManuallContactActivity;
+import com.example.david.chattr.EditContactActivity;
 import com.example.david.chattr.R;
 import com.example.david.chattr.ShowQrActivity;
 
@@ -36,7 +36,7 @@ public class NewContactFragment extends Fragment{
         manuallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), NewManuallContactActivity.class);
+                Intent intent = new Intent(getActivity(), EditContactActivity.class);
                 startActivity(intent);
             }
         });

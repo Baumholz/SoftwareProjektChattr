@@ -16,7 +16,7 @@
             android:gravity="center"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/profileText"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textStyle="bold"
             android:text="Add contact manually" />
@@ -34,7 +34,7 @@
             android:gravity="center"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/profileText"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textStyle="bold"
             android:text="Add contact with NFC" />
@@ -54,7 +54,7 @@
             android:gravity="center"
             android:text="Add Contact with QR"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/profileText"
             android:textStyle="bold"
             android:visibility="visible" />
     </TableRow>
@@ -73,7 +73,7 @@
             android:gravity="center"
             android:text="Show own QR-Code"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/profileText"
             android:textStyle="bold" />
     </TableRow>
 </LinearLayout>

@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EditContactActivity"
+            android:name=".NewManuallContactActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

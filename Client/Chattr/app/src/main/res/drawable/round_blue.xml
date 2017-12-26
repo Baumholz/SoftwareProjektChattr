@@ -9,11 +9,7 @@
         android:topLeftRadius="20dp"
         android:topRightRadius="20dp" />
 
-    <gradient
-        android:angle="270"
-        android:startColor="@color/colorPrimaryDark"
-        android:centerColor="@color/colorPrimaryDark"
-        android:endColor="@color/palePrimaryDark" />
+    <solid android:color="@color/commonGroupsBackground" />
 
     <padding
         android:bottom="0dp"
@@ -23,6 +19,6 @@
 
     <size
         android:height="60dp"
-        android:width="60dp" />
+        android:width="270dp" />
 
 </shape>

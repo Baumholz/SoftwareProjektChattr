@@ -1,24 +1,31 @@
 package com.example.david.chattr;
 
 import android.content.ComponentName;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.BaseColumns;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import com.example.david.chattr.entities.messaging.Message;
 import com.example.david.chattr.mqtt_chat.MyMqttService;
 
 import com.example.david.chattr.mqtt_chat.MyMqttService.MyLocalBinder;
+import com.example.david.chattr.mqtt_chat.MySQLiteHelper;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,6 +39,9 @@ public class ChatActivity extends AppCompatActivity {
     String phoneNumber;
     ChatActivityListViewAdapter myChatActivityListViewAdapter;
 
+    MySQLiteHelper myDb = new MySQLiteHelper(this);
+    SQLiteDatabase db;
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -44,6 +54,8 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+
 
         name = (String)getIntent().getSerializableExtra("name");
 
@@ -63,6 +75,23 @@ public class ChatActivity extends AppCompatActivity {
 
         messages = new ArrayList<Message>();
 
+        db = myDb.getReadableDatabase();
+        String [] projection = {
+
+                BaseColumns._ID,
+                MySQLiteHelper.COL_1,
+                MySQLiteHelper.COL_5
+        };
+        String selection = MySQLiteHelper.COL_1 + " = ?";
+        String [] selectionArgs = {name};
+        Cursor c = db.query(MySQLiteHelper.TABLE, projection, selection, selectionArgs,null,null,null);
+
+        while (c.moveToNext()){
+            String temp = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.COL_5));
+            Message oldMessage = new Message(name,2004,"me",false,temp);
+            messages.add(oldMessage);
+        }
+
         myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages);
         chatListView.setAdapter(myChatActivityListViewAdapter);
 
@@ -80,6 +109,20 @@ public class ChatActivity extends AppCompatActivity {
             myChatActivityListViewAdapter.notifyDataSetChanged();
             //Todo: Do the topic timestamp thing
             mqttService.sendMessage("all/pub/trainID/camID/", myMessage.getContent());
+
+            db = myDb.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(MySQLiteHelper.COL_1,name);
+            values.put(MySQLiteHelper.COL_5,message);
+            long result = db.insert(MySQLiteHelper.TABLE, null, values);
+           // boolean isInserted =  myDb.insertData(message);
+
+            if(result != -1) {
+               Toast.makeText(ChatActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
+            }else{
+               Toast.makeText(ChatActivity.this, "Data not Inserted", Toast.LENGTH_SHORT).show();
+            }
+
         }
         giveInput.setText("");
     }

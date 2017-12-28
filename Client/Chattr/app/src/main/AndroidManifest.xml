@@ -3,6 +3,7 @@
     package="com.example.david.chattr">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".start_activities.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChatActivity"
+            android:name=".mqtt_chat.ChatActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
 
             <!-- for the second activity -->
@@ -35,7 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewManuallContactActivity"
+            android:name=".new_contact.NewManuallContactActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -45,14 +46,15 @@
         <service android:name="org.eclipse.paho.android.service.MqttService" />
         <service android:name=".mqtt_chat.MyMqttService" />
 
-        <activity android:name=".QrCode.ShowQrActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".HomeActivity">
+        <activity android:name=".new_contact.ShowQrActivity" />
+        <activity android:name=".start_activities.SignUpActivity" />
+        <activity android:name=".start_activities.HomeActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QrCode.QrScannerActivity"></activity>
+        <activity android:name=".new_contact.QrScannerActivity" />
+        <activity android:name=".new_contact.NfcBeamActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.david.chattr;
+package com.example.david.chattr.mqtt_chat;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.david.chattr.R;
 import com.example.david.chattr.entities.messaging.Message;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.david.chattr;
+package com.example.david.chattr.start_activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,7 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import com.example.david.chattr.R;
 
 public class SignUpActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.david.chattr.QrCode;
+package com.example.david.chattr.new_contact;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -33,7 +33,7 @@ public class ShowQrActivity extends AppCompatActivity {
 
         // Example: {"phoneNumber":"015774738436","status":"","firstName":"David","name":"Hierholz","profilePicture":-1}
         //Todo: Get all the data from the internal Storage
-        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
         String phoneNumber = sharedPreferences.getString("phoneNumber", "0");
         UserProfile user = new UserProfile(phoneNumber, "", "David","Hierholz", -1);
         String text2Qr = user.toJson().toString();

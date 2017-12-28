@@ -1,10 +1,12 @@
-package com.example.david.chattr;
+package com.example.david.chattr.start_activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.david.chattr.R;
 
 
 public class MainActivity extends AppCompatActivity {

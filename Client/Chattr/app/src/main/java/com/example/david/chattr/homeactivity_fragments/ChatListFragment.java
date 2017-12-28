@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.david.chattr.ChatActivity;
+import com.example.david.chattr.mqtt_chat.ChatActivity;
 import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;
 

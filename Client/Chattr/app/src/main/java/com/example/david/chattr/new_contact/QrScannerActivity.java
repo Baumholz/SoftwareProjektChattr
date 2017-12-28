@@ -1,11 +1,10 @@
-package com.example.david.chattr.QrCode;
+package com.example.david.chattr.new_contact;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.david.chattr.NewManuallContactActivity;
 import com.example.david.chattr.R;
 
 public class QrScannerActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.david.chattr;
+package com.example.david.chattr.mqtt_chat;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,12 +15,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 
+import com.example.david.chattr.R;
 import com.example.david.chattr.entities.messaging.Message;
-import com.example.david.chattr.mqtt_chat.MyMqttService;
 
 import com.example.david.chattr.mqtt_chat.MyMqttService.MyLocalBinder;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ChatActivity extends AppCompatActivity {

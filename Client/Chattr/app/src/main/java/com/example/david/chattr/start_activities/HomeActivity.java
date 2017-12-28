@@ -1,10 +1,9 @@
-package com.example.david.chattr;
+package com.example.david.chattr.start_activities;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.TabLayout;
@@ -12,8 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.Toast;
 
+import com.example.david.chattr.R;
 import com.example.david.chattr.homeactivity_fragments.PagerAdapter;
 import com.example.david.chattr.mqtt_chat.MyMqttService;
 
@@ -28,17 +27,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        //if no phone number is save, an activity to sign up is started thirst
-        SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
-        String phoneNumber = sharedPreferences.getString("phoneNumber", "default");
-        if (phoneNumber.equals("default")) {
-            Intent intent = new Intent(this, SignUpActivity.class);
-            startActivity(intent);
-        }
-
-        Toast.makeText(this, phoneNumber, Toast.LENGTH_SHORT).show();
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

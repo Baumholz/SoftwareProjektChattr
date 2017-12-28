@@ -10,11 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.david.chattr.NewManuallContactActivity;
+import com.example.david.chattr.new_contact.NewManuallContactActivity;
 import com.example.david.chattr.R;
-import com.example.david.chattr.QrCode.ShowQrActivity;
+import com.example.david.chattr.new_contact.ShowQrActivity;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;

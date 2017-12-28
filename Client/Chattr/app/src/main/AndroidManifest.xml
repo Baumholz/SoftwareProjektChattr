@@ -53,8 +53,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".new_contact.QrScannerActivity" />
-        <activity android:name=".new_contact.NfcBeamActivity"></activity>
+        <activity android:name=".new_contact.NfcBeamActivity" />
+        <activity
+            android:name=".menu_activities.FaqActivity"
+            android:label="@string/title_activity_faq"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

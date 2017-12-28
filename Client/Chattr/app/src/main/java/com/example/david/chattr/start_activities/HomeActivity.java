@@ -11,9 +11,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.david.chattr.R;
 import com.example.david.chattr.homeactivity_fragments.PagerAdapter;
+import com.example.david.chattr.menu_activities.FaqActivity;
 import com.example.david.chattr.mqtt_chat.MyMqttService;
 
 
@@ -59,6 +61,19 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         //Going back to the  main activity should not be possible
         //super.onBackPressed();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.faq_entry:
+                Intent intent = new Intent(this, FaqActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private ServiceConnection mConnection = new ServiceConnection() {

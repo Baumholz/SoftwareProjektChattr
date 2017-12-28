@@ -10,6 +10,7 @@ import android.nfc.NfcEvent;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.example.david.chattr.R;
@@ -25,6 +26,11 @@ public class NfcBeamActivity extends AppCompatActivity implements NfcAdapter.Cre
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc_beam);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("New Contact with NFC");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         // Check for available NFC Adapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
@@ -33,6 +39,7 @@ public class NfcBeamActivity extends AppCompatActivity implements NfcAdapter.Cre
             finish();
             return;
         }
+        Toast.makeText(this, "NFC is available", Toast.LENGTH_LONG).show();
         // Register callback
         mNfcAdapter.setNdefPushMessageCallback(this, this);
     }
@@ -73,12 +80,20 @@ public class NfcBeamActivity extends AppCompatActivity implements NfcAdapter.Cre
     /**
      * Parses the NDEF Message from the intent and prints to the TextView
      */
-    void processIntent(Intent intent) {
-        Parcelable[] rawMsgs = intent.getParcelableArrayExtra(
-                NfcAdapter.EXTRA_NDEF_MESSAGES);
+    public void processIntent(Intent intent) {
+        Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
         // only one message sent during the beam
         NdefMessage msg = (NdefMessage) rawMsgs[0];
         // record 0 contains the MIME type, record 1 is the AAR, if present
-        new String(msg.getRecords()[0].getPayload());
+        String content = new String(msg.getRecords()[0].getPayload());
+        intent.putExtra("SCAN_RESULT", content);
+        setResult(RESULT_OK, intent);
+    }
+
+    //for the back button
+    @Override
+    public  boolean onSupportNavigateUp(){
+        onBackPressed();
+        return true;
     }
 }

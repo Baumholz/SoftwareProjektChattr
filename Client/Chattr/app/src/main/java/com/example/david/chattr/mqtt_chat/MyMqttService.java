@@ -27,7 +27,7 @@ import static android.content.ContentValues.TAG;
 
 public class MyMqttService extends Service implements MqttCallback{
 
-    private final IBinder myBinder = new MyLocalBinder();
+    private final MyLocalBinder myBinder = new MyLocalBinder();
 
     private final static String Broker = "tcp://iluhotcopvh4gnmu.myfritz.net:1883";
 //    private final static String Broker = "tcp://broker.hivemq.com:1883";
@@ -41,8 +41,21 @@ public class MyMqttService extends Service implements MqttCallback{
 
     // Returns this instance of MyMqttService, so that other clients/Activities can call its methods
     public class MyLocalBinder extends Binder {
+
+        private MessageArrivedListener listener;
+
         public MyMqttService getService() {
             return MyMqttService.this;
+        }
+
+        public void setMessageArrivedListener(MessageArrivedListener listener) {
+            this.listener = listener;
+        }
+
+        public void messageArrived(String topic, MqttMessage message) {
+            if (listener != null) {
+                listener.messageArrived(topic, message);
+            }
         }
     }
 
@@ -141,6 +154,8 @@ public class MyMqttService extends Service implements MqttCallback{
         String mMessage = message.getPayload().toString();
         Log.d(TAG, "\nMessage arrived on topic: " + topic + "\n" + message + "\n");
 //        Toast.makeText(MyMqttService.this, "Message arrived: " + message, Toast.LENGTH_SHORT).show();
+
+        myBinder.messageArrived(topic, message);
     }
 
     @Override

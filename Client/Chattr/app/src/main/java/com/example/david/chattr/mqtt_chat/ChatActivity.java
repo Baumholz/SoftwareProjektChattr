@@ -28,11 +28,13 @@ import com.example.david.chattr.entities.messaging.Message;
 import com.example.david.chattr.mqtt_chat.MyMqttService.MyLocalBinder;
 import com.example.david.chattr.mqtt_chat.MySQLiteHelper;
 
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity implements MessageArrivedListener {
 
     MyMqttService mqttService;
     ArrayList<Message> messages;
@@ -148,6 +150,7 @@ public class ChatActivity extends AppCompatActivity {
             // Bound to MyMqttService
             MyLocalBinder binder = (MyLocalBinder) iBinder;
             mqttService = binder.getService();
+            binder.setMessageArrivedListener(ChatActivity.this);
 
 
             //Start Service
@@ -170,4 +173,8 @@ public class ChatActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    public void messageArrived(String topic, MqttMessage message) {
+        // TODO: Save message into database
+    }
 }

@@ -28,15 +28,36 @@
         android:layout_marginTop="-50dp"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/profile_image"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+        <RelativeLayout
             android:layout_gravity="center"
-            android:text="Add Profile Picture"
-            android:background="@android:color/transparent"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/profileText" />
+            android:layout_width="96dp"
+            android:layout_height="96dp">
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:onClick="profileImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent" />
+
+            <TextView
+                android:id="@+id/profileHintTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignLeft="@+id/profile_image"
+                android:layout_alignTop="@+id/profile_image"
+                android:layout_alignRight="@+id/profile_image"
+                android:layout_alignBottom="@+id/profile_image"
+                android:layout_gravity="center"
+                android:layout_margin="1dp"
+                android:gravity="center"
+                android:text="Add Profile Picture"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/profileText"
+                android:background="@android:color/transparent"/>
+
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/firstNameEdit"

@@ -16,22 +16,27 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profilePicutreChat"
                 android:layout_width="50dp"
-                android:layout_height="50dp"/>
+                android:layout_height="50dp" />
+
+            <TextView
+                android:id="@+id/chatActivityTitle"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25dp"
+                android:text="test" />
 
     </android.support.v7.widget.Toolbar>
-
-
 
     <ListView
         android:id="@+id/chat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="top"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

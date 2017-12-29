@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -28,6 +29,8 @@ import com.example.david.chattr.mqtt_chat.MyMqttService.MyLocalBinder;
 import com.example.david.chattr.mqtt_chat.MySQLiteHelper;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -60,17 +63,13 @@ public class ChatActivity extends AppCompatActivity {
 
         giveInput = (EditText)findViewById(R.id.chatInput);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(name);
-        ImageView profilPicture = (ImageView) findViewById(R.id.profilePicutreChat);
         ListView chatListView = (ListView) findViewById(R.id.chat);
 
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-//        Intent intentToAdapter = new Intent(ChatActivity.this,ChatActivityListViewAdapter.class);
-//        intentToAdapter.putExtra("me",name);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         messages = new ArrayList<Message>();
 
@@ -94,7 +93,10 @@ public class ChatActivity extends AppCompatActivity {
         myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages);
         chatListView.setAdapter(myChatActivityListViewAdapter);
 
-
+        // Set Toolbar Title and Profile Picture
+        CircleImageView profilPicture = (CircleImageView) findViewById(R.id.profilePicutreChat);
+        TextView chatActivityTitle = (TextView) findViewById(R.id.chatActivityTitle);
+        chatActivityTitle.setText(name);
         int pic = (int)getIntent().getSerializableExtra("picture");
         profilPicture.setImageResource(pic);
     }

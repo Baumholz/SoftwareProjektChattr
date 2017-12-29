@@ -14,6 +14,8 @@ import com.example.david.chattr.entities.users.UserProfile;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class ChatListAdapter extends BaseAdapter {
 
@@ -49,7 +51,7 @@ public class ChatListAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.chat_list_entry,null,false); //Use our Layout
         }
 
-        ImageView profilePicture = view.findViewById(R.id.profilePicture);
+        CircleImageView profilePicture = view.findViewById(R.id.profilePicture);
 
         TextView profileName = view.findViewById(R.id.profilName);
 

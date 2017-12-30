@@ -3,6 +3,7 @@
     <color name="colorPrimary">#e1de00</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="notificationColor">#ffff00</color>
 
     <color name="buttonColor">#FFFFFF</color>
     <color name="profileText">#303F9F</color>

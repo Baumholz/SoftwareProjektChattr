@@ -156,6 +156,10 @@ public class MyMqttService extends Service implements MqttCallback{
 //        Toast.makeText(MyMqttService.this, "Message arrived: " + message, Toast.LENGTH_SHORT).show();
 
         myBinder.messageArrived(topic, message);
+
+        //TODO: Make notification with real content
+        MessageNotifier notifier = new MessageNotifier(this);
+        notifier.showOrUpdateNotification("Message arrived");
     }
 
     @Override

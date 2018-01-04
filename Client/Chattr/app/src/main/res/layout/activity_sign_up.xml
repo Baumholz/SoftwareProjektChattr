@@ -14,30 +14,100 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Welcome to Chattr! Please fill out the fields bellow."
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
             android:textColor="@color/profileText"
-            android:text="Enter your phone number in the field bellow:" />
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_gravity="center"
+            android:layout_width="96dp"
+            android:layout_height="96dp">
+
+            <ImageView
+                android:id="@+id/profileImageSignUp"
+                android:onClick="profileImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent" />
+
+            <TextView
+                android:id="@+id/profileHintTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignLeft="@+id/profileImageSignUp"
+                android:layout_alignTop="@+id/profileImageSignUp"
+                android:layout_alignRight="@+id/profileImageSignUp"
+                android:layout_alignBottom="@+id/profileImageSignUp"
+                android:layout_gravity="center"
+                android:layout_margin="1dp"
+                android:gravity="center"
+                android:text="Add Profile Picture"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/profileText"
+                android:background="@android:color/transparent"/>
+
+        </RelativeLayout>
 
         <EditText
-            android:id="@+id/phoneNumberEditText"
-            android:inputType="number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:onClick="onSignUpButtonClicked"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:background="@android:color/transparent"
-            android:textStyle="bold"
-            android:textColor="@color/profileText"
+            android:id="@+id/firstNameSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign Up!" />
-    </LinearLayout>
+            android:gravity="center"
+            android:hint="First Name"
+            android:inputType="textPersonName"
+            android:nextFocusDown="@+id/.."
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/profileText"
+            android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/nameSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:nextFocusDown="@+id/.."
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/profileText"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/phoneNumberSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:nextFocusDown="@+id/.."
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/profileText"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/statusSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Status"
+            android:inputType="text"
+            android:nextFocusDown="@+id/.."
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/profileText"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/round_pink"
+            android:text="Save"
+            android:onClick="onSignUpButtonClicked"
+            android:textColor="@color/buttonColor" />
+    </LinearLayout>
 </FrameLayout>

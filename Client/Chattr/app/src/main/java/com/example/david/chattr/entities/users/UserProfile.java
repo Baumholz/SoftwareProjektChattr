@@ -9,11 +9,11 @@ public class UserProfile extends  Profile{
     private String phoneNumber;
     private String status;
 
-    public UserProfile(String phoneNumber, String status, String firstName, String surName,int profilePicture) {
+    public UserProfile(String phoneNumber, String status, String firstName, String name,int profilePicture) {
         this.phoneNumber = phoneNumber;
         this.status = status;
         this.firstName = firstName;
-        this.name = surName;
+        this.name = name;
         this.profilePicture = profilePicture;
     }
 

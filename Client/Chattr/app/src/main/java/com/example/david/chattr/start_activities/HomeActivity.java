@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import com.example.david.chattr.R;
 import com.example.david.chattr.homeactivity_fragments.PagerAdapter;
 import com.example.david.chattr.menu_activities.FaqActivity;
+import com.example.david.chattr.menu_activities.PersonalProfileActivity;
 import com.example.david.chattr.mqtt_chat.MyMqttService;
 
 
@@ -67,9 +68,14 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+
             case R.id.faq_entry:
-                Intent intent = new Intent(this, FaqActivity.class);
-                startActivity(intent);
+                Intent intentFaq = new Intent(this, FaqActivity.class);
+                startActivity(intentFaq);
+                return true;
+            case R.id.personal_profile:
+                Intent intentPp = new Intent(this, PersonalProfileActivity.class);
+                startActivity(intentPp);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

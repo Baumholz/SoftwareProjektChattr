@@ -14,48 +14,40 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
-    <ImageView
-        android:id="@+id/cover_image"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:adjustViewBounds="false"
-        android:cropToPadding="false"
-        android:scaleType="centerCrop" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="-50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_gravity="center"
             android:layout_width="96dp"
-            android:layout_height="96dp">
+            android:layout_height="96dp"
+            android:layout_gravity="center">
 
             <ImageView
                 android:id="@+id/profile_image"
-                android:onClick="profileImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:onClick="profileImageView" />
 
             <TextView
                 android:id="@+id/profileHintTextView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignLeft="@+id/profile_image"
-                android:layout_alignTop="@+id/profile_image"
-                android:layout_alignRight="@+id/profile_image"
                 android:layout_alignBottom="@+id/profile_image"
+                android:layout_alignLeft="@+id/profile_image"
+                android:layout_alignRight="@+id/profile_image"
+                android:layout_alignTop="@+id/profile_image"
                 android:layout_gravity="center"
                 android:layout_margin="1dp"
+                android:background="@android:color/transparent"
                 android:gravity="center"
                 android:text="Add Profile Picture"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/profileText"
-                android:background="@android:color/transparent"/>
+                android:textColor="@color/profileText" />
 
         </RelativeLayout>
 
@@ -64,7 +56,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="First Name"
+            android:hint="First Name"
+            android:inputType="textPersonName"
+            android:nextFocusDown="@+id/.."
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/profileText"
             android:textStyle="bold" />
@@ -74,7 +68,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Name"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:nextFocusDown="@+id/.."
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/profileText"
             android:textStyle="bold" />
@@ -84,7 +80,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Phone Number"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:nextFocusDown="@+id/.."
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/profileText"
             android:textStyle="bold" />
@@ -94,8 +92,8 @@
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/round_pink"
-            android:text="Save"
             android:onClick="onSaveButtonClicked"
+            android:text="Save"
             android:textColor="@color/buttonColor" />
     </LinearLayout>
 

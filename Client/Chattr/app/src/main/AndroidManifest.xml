@@ -59,7 +59,8 @@
         <activity
             android:name=".menu_activities.FaqActivity"
             android:label="@string/title_activity_faq"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".menu_activities.PersonalProfileActivity"></activity>
     </application>
 
 </manifest>

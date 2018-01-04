@@ -18,8 +18,11 @@ public class MainActivity extends AppCompatActivity {
 
         //if no phone number is save, an activity to sign up is started thirst
         SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
+        String firstName = sharedPreferences.getString("firstName", "default");
+        String name = sharedPreferences.getString("name", "default");
         String phoneNumber = sharedPreferences.getString("phoneNumber", "default");
-        if (phoneNumber.equals("default")) {
+
+        if (firstName.equals("default") || name.equals("default") || phoneNumber.equals("default")) {
             Intent intent = new Intent(this, SignUpActivity.class);
             startActivity(intent);
         } else {

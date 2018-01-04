@@ -5,4 +5,8 @@
     <item android:title="FAQ"
         android:id="@+id/faq_entry"
         app:showAsAction="never" />
+
+    <item android:title="Personal Profile"
+        android:id="@+id/personal_profile"
+        app:showAsAction="never" />
 </menu>

@@ -97,7 +97,7 @@ public class MyMqttService extends Service implements MqttCallback{
             public void onSuccess(IMqttToken asyncActionToken) {
                 // We are connected
                 Log.d(TAG, "\nonSuccess\n");
-                Toast.makeText(MyMqttService.this, "Connected with clienID" + clientId, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyMqttService.this, "Connected with Broker", Toast.LENGTH_SHORT).show();
                 client.setCallback(MyMqttService.this);
             }
 
@@ -105,7 +105,7 @@ public class MyMqttService extends Service implements MqttCallback{
             public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                 // Something went wrong e.g. connection timeout or firewall problems
                 Log.d(TAG, "onFailure");
-                Toast.makeText(MyMqttService.this, "Not connected with clienID" + clientId, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyMqttService.this, "Not connected", Toast.LENGTH_SHORT).show();
             }
         });
     }

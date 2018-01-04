@@ -35,9 +35,12 @@ public class ShowQrActivity extends AppCompatActivity {
         //Todo: Get all the data from the internal Storage
         SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
         String phoneNumber = sharedPreferences.getString("phoneNumber", "0");
-        UserProfile user = new UserProfile(phoneNumber, "", "David","Hierholz", -1);
+        String firstName = sharedPreferences.getString("firstName", "default");
+        String name = sharedPreferences.getString("name", "default");
+        String status = sharedPreferences.getString("status", "default");
+
+        UserProfile user = new UserProfile(phoneNumber, status, firstName, name, -1);
         String text2Qr = user.toJson().toString();
-        Toast.makeText(this, text2Qr, Toast.LENGTH_LONG).show();
         Log.i("Json Content", text2Qr);
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try {

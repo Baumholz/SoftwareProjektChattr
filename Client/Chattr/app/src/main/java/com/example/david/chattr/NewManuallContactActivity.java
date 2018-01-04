@@ -77,6 +77,7 @@ public class NewManuallContactActivity extends AppCompatActivity {
         return true;
     }
 
+    //Todo: Functionality to Save Contact
     public void onSaveButtonClicked(View view) {
 
         EditText firstNameEdit = (EditText) findViewById(R.id.firstNameEdit);
@@ -87,7 +88,7 @@ public class NewManuallContactActivity extends AppCompatActivity {
         String nameDB = nameEdit.getText().toString();
         String phoneNumberDB = phoneNumberEdit.getText().toString();
 
-        if( false == firstNameDB.isEmpty() && nameDB.isEmpty() == false && phoneNumberDB.isEmpty() == false){
+        if( !firstNameDB.isEmpty() && !nameDB.isEmpty()&& !phoneNumberDB.isEmpty()){
 
             dbProfile = myDbProfile.getWritableDatabase();
             ContentValues values = new ContentValues();
@@ -114,7 +115,6 @@ public class NewManuallContactActivity extends AppCompatActivity {
             ArrayList<UserProfile> temp = new ArrayList<UserProfile>(readDB());
         }
         z++;
-        //Todo: Functionality to Save Contact
     }
 
     public ArrayList <UserProfile> readDB(){

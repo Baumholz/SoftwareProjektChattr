@@ -1,10 +1,7 @@
 package com.example.david.chattr.homeactivity_fragments;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.david.chattr.NewManuallContactActivity;
 import com.example.david.chattr.mqtt_chat.ChatActivity;
 import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;

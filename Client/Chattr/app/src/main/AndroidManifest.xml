@@ -37,8 +37,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".homeactivity_fragments.NewManuallContactActivity"
+            android:label="NewManuallContactActivity">
+        </activity>
         <activity
-            android:name=".new_contact.NewManuallContactActivity"
+            android:name=".new_contact.LogInNewManuallContactActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,11 +1,9 @@
-package com.example.david.chattr;
+package com.example.david.chattr.homeactivity_fragments;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.provider.BaseColumns;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;
 import com.example.david.chattr.mqtt_chat.MySQLiteHelper;
 
@@ -27,7 +26,7 @@ public class NewManuallContactActivity extends AppCompatActivity {
     private MySQLiteHelper myDbProfile = new MySQLiteHelper(this);
     private SQLiteDatabase dbProfile;
     public String sqlPath;
-    int z = 0;
+    int z = -5;
 
     public NewManuallContactActivity(){
         myDbProfile = new MySQLiteHelper(this);

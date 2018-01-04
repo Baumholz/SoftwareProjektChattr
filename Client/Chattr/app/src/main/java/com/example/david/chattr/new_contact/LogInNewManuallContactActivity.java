@@ -24,12 +24,12 @@ import org.json.JSONObject;
 import java.io.FileNotFoundException;
 
 
-public class NewManuallContactActivity extends AppCompatActivity {
+public class LogInNewManuallContactActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_manuall_contact);
+        setContentView(R.layout.login_new_manuall_contact);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("New Contact");
         setSupportActionBar(toolbar);
@@ -67,7 +67,7 @@ public class NewManuallContactActivity extends AppCompatActivity {
     }
 
     public void onSaveButtonClicked(View view) {
-        //Todo: Functionality to Save Contact
+
     }
 
     public void profileImageView(View view) {

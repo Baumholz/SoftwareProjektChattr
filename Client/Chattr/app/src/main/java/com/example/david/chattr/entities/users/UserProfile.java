@@ -1,6 +1,10 @@
 package com.example.david.chattr.entities.users;
 
 
+import android.database.sqlite.SQLiteDatabase;
+
+import com.example.david.chattr.mqtt_chat.MySQLiteHelper;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 

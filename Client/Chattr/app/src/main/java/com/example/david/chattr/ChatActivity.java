@@ -75,6 +75,7 @@ public class ChatActivity extends AppCompatActivity {
 
         messages = new ArrayList<Message>();
 
+        //Read out the Database
         db = myDb.getReadableDatabase();
         String [] projection = {
 
@@ -91,6 +92,7 @@ public class ChatActivity extends AppCompatActivity {
             Message oldMessage = new Message(name,2004,"me",false,temp);
             messages.add(oldMessage);
         }
+        //finish DB
 
         myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages);
         chatListView.setAdapter(myChatActivityListViewAdapter);

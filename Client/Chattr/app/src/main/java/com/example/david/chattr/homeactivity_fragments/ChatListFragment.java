@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.example.david.chattr.mqtt_chat.ChatActivity;
 import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;
+import com.example.david.chattr.new_contact.NewManuallContactActivity;
 
 
 import java.util.ArrayList;

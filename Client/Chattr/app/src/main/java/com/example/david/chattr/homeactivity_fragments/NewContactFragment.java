@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.david.chattr.new_contact.LogInNewManuallContactActivity;
 import com.example.david.chattr.R;
+import com.example.david.chattr.new_contact.NewManuallContactActivity;
 import com.example.david.chattr.new_contact.NfcBeamActivity;
 import com.example.david.chattr.new_contact.ShowQrActivity;
 
@@ -90,7 +90,7 @@ public class NewContactFragment extends Fragment{
         // Should work the same for NFC and QR. TODO: Test for NFC
         if ((requestCode == 0 || resultCode == 1) && resultCode == RESULT_OK) {
             String contents = data.getStringExtra("SCAN_RESULT");
-            Intent intent = new Intent(getActivity(), LogInNewManuallContactActivity.class);
+            Intent intent = new Intent(getActivity(), NewManuallContactActivity.class);
             intent.putExtra("Contact", contents);
             startActivity(intent);
         }

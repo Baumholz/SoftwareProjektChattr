@@ -37,7 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".homeactivity_fragments.NewManuallContactActivity"
+        <activity android:name=".new_contact.NewManuallContactActivity"
             android:label="NewManuallContactActivity">
         </activity>
         <activity

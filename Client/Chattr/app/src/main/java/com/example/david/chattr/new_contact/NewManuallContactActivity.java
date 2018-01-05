@@ -1,14 +1,21 @@
-package com.example.david.chattr.homeactivity_fragments;
+package com.example.david.chattr.new_contact;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.david.chattr.R;
@@ -18,6 +25,7 @@ import com.example.david.chattr.mqtt_chat.MySQLiteHelper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 
@@ -27,13 +35,6 @@ public class NewManuallContactActivity extends AppCompatActivity {
     private SQLiteDatabase dbProfile;
     public String sqlPath;
     int z = -5;
-
-    public NewManuallContactActivity(){
-        myDbProfile = new MySQLiteHelper(this);
-        SQLiteDatabase dbProfile;
-    }
-
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +68,30 @@ public class NewManuallContactActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void profileImageView(View view) {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            ImageView profile_image = (ImageView) findViewById(R.id.profile_image);
+            TextView profileHintTextView = (TextView) findViewById(R.id.profileHintTextView);
+            Uri targetUri = data.getData();
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                profile_image.setImageBitmap(bitmap);
+                profileHintTextView.setText("");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     //for the back button
@@ -115,7 +140,6 @@ public class NewManuallContactActivity extends AppCompatActivity {
         }
         z++;
     }
-
     public ArrayList <UserProfile> readDB(){
 
         dbProfile = myDbProfile.getReadableDatabase();
@@ -138,6 +162,9 @@ public class NewManuallContactActivity extends AppCompatActivity {
     public String getSqlPath(){
         return dbProfile.getPath();
     }
+
+
+
     public void setSqlPath(){
         sqlPath = dbProfile.getPath();
     }

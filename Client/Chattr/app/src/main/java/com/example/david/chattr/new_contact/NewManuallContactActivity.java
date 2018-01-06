@@ -91,7 +91,6 @@ public class NewManuallContactActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
     }
 
     //for the back button

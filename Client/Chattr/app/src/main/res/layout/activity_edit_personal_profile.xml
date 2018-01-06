@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.david.chattr.menu_activities.EditPersonalProfileActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/cover_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:scaleType="centerCrop"
+            android:onClick="onClickCoverImage" />
+
+        <TextView
+            android:id="@+id/coverImageHintTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/cover_image"
+            android:layout_alignLeft="@+id/cover_image"
+            android:layout_alignRight="@+id/cover_image"
+            android:layout_alignTop="@+id/cover_image"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text="Change Cover Image"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/profileText" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-50dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:onClick="onClickProfileImage"
+                app:civ_border_color="@color/colorPrimaryDark"
+                app:civ_border_width="3dp" />
+
+            <TextView
+                android:id="@+id/profileHintTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@+id/profile_image"
+                android:layout_alignLeft="@+id/profile_image"
+                android:layout_alignRight="@+id/profile_image"
+                android:layout_alignTop="@+id/profile_image"
+                android:layout_gravity="center"
+                android:layout_margin="1dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="Change Profile Picture"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/profileText" />
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/firstNameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="First Name"
+            android:inputType="textPersonName"
+            android:nextFocusDown="@+id/.."
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/profileText"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/nameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:nextFocusDown="@+id/.."
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/profileText"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/statusEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Status"
+            android:inputType="text"
+            android:nextFocusDown="@+id/.."
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/profileText"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="wrap_content"
+
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/round_pink"
+            android:onClick="onSaveButtonClicked"
+            android:text="Save"
+            android:textColor="@color/buttonColor" />
+    </LinearLayout>
+
+</LinearLayout>

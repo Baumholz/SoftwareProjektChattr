@@ -1,12 +1,13 @@
 package com.example.david.chattr.menu_activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,13 @@ import com.example.david.chattr.R;
 import java.io.FileNotFoundException;
 
 public class EditPersonalProfileActivity extends AppCompatActivity {
+
+    // Resultcode for Activity result
+    private static final int PROFILEIMAGE = 0;
+    private static final int COVERIMAGE = 1;
+    // To differentiate betwenn the gallery or the cover image being chosen
+    // (Can't do this with the result code because it is needed to differentiate bith images)
+    private static boolean isGalleryChosen = false;
 
     EditText firstNameEdit;
     EditText nameEdit;
@@ -72,34 +80,68 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
     }
 
     public void onClickProfileImage(View view) {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, 0);
+        startDialog(PROFILEIMAGE);
     }
 
     public void onClickCoverImage(View view) {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, 1);
+        startDialog(COVERIMAGE);
+    }
+
+    // Start Dialog to chose between Galery and Camera
+    public void startDialog(final int requestCode) {
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+        pictureDialog.setTitle("Select Action");
+        pictureDialog.setItems(R.array.gallery_or_camera,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                isGalleryChosen = true;
+                                Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                startActivityForResult(galleryIntent, requestCode);
+                                break;
+                            case 1:
+                                isGalleryChosen = false;
+                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                                startActivityForResult(intent, requestCode);
+                                break;
+                        }
+                    }
+                });
+        pictureDialog.show();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         try {
-            if (resultCode == RESULT_OK && requestCode == 0) {
+            if (resultCode == RESULT_OK && requestCode == PROFILEIMAGE) {
                 ImageView profile_image = (ImageView) findViewById(R.id.profile_image);
                 TextView profileHintTextView = (TextView) findViewById(R.id.profileHintTextView);
                 Uri targetUri = data.getData();
 
-                Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                Bitmap bitmap;
+                if (isGalleryChosen)
+                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                else
+                    bitmap = (Bitmap) data.getExtras().get("data");
+
                 profile_image.setImageBitmap(bitmap);
                 profileHintTextView.setText("");
 
-            } else if (resultCode == RESULT_OK && requestCode == 1) {
+            } else if (resultCode == RESULT_OK && requestCode == COVERIMAGE) {
                 ImageView cover_image = (ImageView) findViewById(R.id.cover_image);
                 TextView coverImageHintTextView = (TextView) findViewById(R.id.coverImageHintTextView);
                 Uri targetUri = data.getData();
 
-                Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                Bitmap bitmap;
+                if (isGalleryChosen)
+                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                else
+                    bitmap = (Bitmap) data.getExtras().get("data");
+
                 cover_image.setImageBitmap(bitmap);
                 coverImageHintTextView.setText("");
             }

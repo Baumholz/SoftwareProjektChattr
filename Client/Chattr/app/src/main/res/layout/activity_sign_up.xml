@@ -22,36 +22,7 @@
             android:textColor="@color/profileText"
             android:textStyle="bold" />
 
-        <RelativeLayout
-            android:layout_gravity="center"
-            android:layout_width="96dp"
-            android:layout_height="96dp">
-
-            <ImageView
-                android:id="@+id/profileImageSignUp"
-                android:onClick="profileImageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent" />
-
-            <TextView
-                android:id="@+id/profileHintTextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignLeft="@+id/profileImageSignUp"
-                android:layout_alignTop="@+id/profileImageSignUp"
-                android:layout_alignRight="@+id/profileImageSignUp"
-                android:layout_alignBottom="@+id/profileImageSignUp"
-                android:layout_gravity="center"
-                android:layout_margin="1dp"
-                android:gravity="center"
-                android:text="Add Profile Picture"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/profileText"
-                android:background="@android:color/transparent"/>
-
-        </RelativeLayout>
+        <include layout="@layout/edit_contact_head" />
 
         <EditText
             android:id="@+id/firstNameSignUp"

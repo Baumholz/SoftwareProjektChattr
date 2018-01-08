@@ -20,7 +20,6 @@ public class ImageSaver {
 
     private Context context;
     private String fileName;
-    private boolean external;
     private String directoryName;
 
     public ImageSaver(Context context) {
@@ -29,11 +28,6 @@ public class ImageSaver {
 
     public ImageSaver setFileName(String fileName) {
         this.fileName = fileName;
-        return this;
-    }
-
-    public ImageSaver setExternal(boolean external) {
-        this.external = external;
         return this;
     }
 
@@ -63,12 +57,8 @@ public class ImageSaver {
     @NonNull
     private File createFile() {
         File directory;
-        if(external){
-            directory = getAlbumStorageDir(directoryName);
-        }
-        else {
-            directory = context.getDir(directoryName, Context.MODE_PRIVATE);
-        }
+        directory = context.getDir(directoryName, Context.MODE_PRIVATE);
+
         if(!directory.exists() && !directory.mkdirs()){
             Log.e("ImageSaver","Error creating directory " + directory);
         }

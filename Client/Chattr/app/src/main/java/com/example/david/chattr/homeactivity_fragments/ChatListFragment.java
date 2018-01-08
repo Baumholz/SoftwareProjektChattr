@@ -33,7 +33,8 @@ public class ChatListFragment extends Fragment {
         myDbProfile = new MySQLiteHelper(getContext());
         View view = inflater.inflate(R.layout.fragment_chatlist, container, false);
 
-        final ArrayList<UserProfile> recipients = new ArrayList<UserProfile>(myDbProfile.getProfiles());
+        //TODO: I commented the argument out because of the error: no such table: userProfile --> MySQLiteHelper line 82
+        final ArrayList<UserProfile> recipients = new ArrayList<UserProfile>(/*myDbProfile.getProfiles()*/);
 
         UserProfile user1 = new UserProfile("0340442323", "none", "0", "Olaf", R.drawable.hund);
         UserProfile user2 = new UserProfile("0340446364", "none", "1", "Harald", R.drawable.hund2);

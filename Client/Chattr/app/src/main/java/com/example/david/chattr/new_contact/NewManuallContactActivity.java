@@ -3,6 +3,7 @@ package com.example.david.chattr.new_contact;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -41,7 +42,6 @@ public class NewManuallContactActivity extends AppCompatActivity {
     private MySQLiteHelper myDbProfile = new MySQLiteHelper(this);
     private SQLiteDatabase dbProfile;
     public String sqlPath;
-    int z = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -166,6 +166,11 @@ public class NewManuallContactActivity extends AppCompatActivity {
         String nameDB = nameEdit.getText().toString();
         String phoneNumberDB = phoneNumberEdit.getText().toString();
 
+        if(alreadyInserted(phoneNumberDB)){
+            Toast.makeText(NewManuallContactActivity.this,"Phone Number already exists!",Toast.LENGTH_LONG);
+            return;
+        }
+
         if( !firstNameDB.isEmpty() && !nameDB.isEmpty()&& !phoneNumberDB.isEmpty()){
 
             dbProfile = myDbProfile.getWritableDatabase();
@@ -189,10 +194,24 @@ public class NewManuallContactActivity extends AppCompatActivity {
         }
         dbProfile.close();
 
-        if(z > 0) {
             ArrayList<UserProfile> temp = new ArrayList<UserProfile>(myDbProfile.getProfiles());
+
+    }
+
+    public boolean alreadyInserted (String phoneNumber){
+
+        SQLiteDatabase db = myDbProfile.getReadableDatabase();
+
+        String query = "select * from " + MySQLiteHelper.TABLE_PROFILE;
+        Cursor cursor = db.rawQuery(query, null);
+
+        while (cursor.moveToNext()) {
+            String tempPhoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.PHONE_NUMBER));
+            if(tempPhoneNumber.equals(phoneNumber)){
+                return true;
+            }
         }
-        z++;
+        return false;
     }
 
     public String getSqlPath(){

@@ -1,11 +1,13 @@
 package com.example.david.chattr.mqtt_chat;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;
@@ -19,8 +21,6 @@ import java.util.List;
  */
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
-
-
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "ChatDataBase.db";
@@ -44,6 +44,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + TABLE + " ("
             + BaseColumns._ID+" INTEGER PRIMARY KEY,"
             + COL_1 + " TEXT,"
+            + COL_3 + " TEXT,"
             + COL_5 + " TEXT)";
 
     public static final String SQL_CREATE_TABLE_PROFILE = "CREATE TABLE " + TABLE_PROFILE + " ("
@@ -59,8 +60,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         super(context,DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
@@ -72,24 +71,24 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_ENTRIES);
         db.execSQL(SQL_DELETE_PROFILE_ENTRIES);
         onCreate(db);
+
     }
 
     public ArrayList<UserProfile> getProfiles(){
         ArrayList<UserProfile> recipients = new ArrayList<UserProfile>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor c = db.rawQuery(MySQLiteHelper.TABLE_PROFILE, null);
+        String query = "select * from " + MySQLiteHelper.TABLE_PROFILE;
+        Cursor cursor = db.rawQuery(query, null);
 
-        while (!c.isAfterLast()) {
-            String tempFirstName = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.FIRST_NAME));
-            String tempName = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.FIRST_NAME));
-            String tempPhoneNumber = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.FIRST_NAME));
+        while (cursor.moveToNext()) {
+            String tempFirstName = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.FIRST_NAME));
+            String tempName = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.NAME));
+            String tempPhoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.PHONE_NUMBER));
 
             UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName, R.drawable.hund);
             recipients.add(user);
         }
-
         return recipients;
     }
-
 }

@@ -30,9 +30,6 @@ import org.json.JSONObject;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
-
 public class NewManuallContactActivity extends AppCompatActivity {
 
     // Resultcode for Activity result
@@ -45,7 +42,6 @@ public class NewManuallContactActivity extends AppCompatActivity {
     private MySQLiteHelper myDbProfile = new MySQLiteHelper(this);
     private SQLiteDatabase dbProfile;
     public String sqlPath;
-    int z = -5;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -170,6 +166,11 @@ public class NewManuallContactActivity extends AppCompatActivity {
         String nameDB = nameEdit.getText().toString();
         String phoneNumberDB = phoneNumberEdit.getText().toString();
 
+        if(alreadyInserted(phoneNumberDB)){
+            Toast.makeText(NewManuallContactActivity.this,"Phone Number already exists!",Toast.LENGTH_LONG);
+            return;
+        }
+
         if( !firstNameDB.isEmpty() && !nameDB.isEmpty()&& !phoneNumberDB.isEmpty()){
 
             dbProfile = myDbProfile.getWritableDatabase();
@@ -193,30 +194,26 @@ public class NewManuallContactActivity extends AppCompatActivity {
         }
         dbProfile.close();
 
-        if(z > 0) {
-            ArrayList<UserProfile> temp = new ArrayList<UserProfile>(readDB());
-        }
-        z++;
+            ArrayList<UserProfile> temp = new ArrayList<UserProfile>(myDbProfile.getProfiles());
+
     }
-    public ArrayList <UserProfile> readDB(){
 
-        dbProfile = myDbProfile.getReadableDatabase();
+    public boolean alreadyInserted (String phoneNumber){
 
-        ArrayList<UserProfile> recipients = new ArrayList<UserProfile>();
+        SQLiteDatabase db = myDbProfile.getReadableDatabase();
 
-        Cursor c = dbProfile.rawQuery(MySQLiteHelper.TABLE_PROFILE, null);
+        String query = "select * from " + MySQLiteHelper.TABLE_PROFILE;
+        Cursor cursor = db.rawQuery(query, null);
 
-
-        while (!c.isAfterLast()) {
-            String tempFirstName = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.FIRST_NAME));
-            String tempName = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.FIRST_NAME));
-            String tempPhoneNumber = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.FIRST_NAME));
-
-            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName, R.drawable.hund);
-            recipients.add(user);
+        while (cursor.moveToNext()) {
+            String tempPhoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.PHONE_NUMBER));
+            if(tempPhoneNumber.equals(phoneNumber)){
+                return true;
+            }
         }
-    return recipients;
+        return false;
     }
+
     public String getSqlPath(){
         return dbProfile.getPath();
     }

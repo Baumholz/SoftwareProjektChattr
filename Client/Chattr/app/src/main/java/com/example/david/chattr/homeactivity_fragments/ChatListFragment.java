@@ -11,11 +11,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.david.chattr.mqtt_chat.ChatActivity;
 import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;
+import com.example.david.chattr.mqtt_chat.ChatActivity;
 import com.example.david.chattr.new_contact.NewManuallContactActivity;
-
 
 import java.util.ArrayList;
 
@@ -23,8 +22,7 @@ import java.util.ArrayList;
  * Created by david on 15.11.17.
  */
 
-public class ChatListFragment extends Fragment{
-
+public class ChatListFragment extends Fragment {
 
 
     @Nullable
@@ -33,15 +31,14 @@ public class ChatListFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_chatlist, container, false);
 
         NewManuallContactActivity temp;
-       // final ArrayList<UserProfile> recipients = new ArrayList<UserProfile>(temp.readDB());
-        final ArrayList<UserProfile> recipients = new ArrayList<UserProfile>();
+      //   final ArrayList<UserProfile> recipients = new ArrayList<UserProfile>(temp.readDB());
+       final ArrayList<UserProfile> recipients = new ArrayList<UserProfile>();
 
-       UserProfile user1 = new UserProfile("0340442323","none","0","Olaf",R.drawable.hund);
-       UserProfile user2 = new UserProfile("0340446364","none","1","Harald",R.drawable.hund2);
-    // Read DB
+        UserProfile user1 = new UserProfile("0340442323", "none", "0", "Olaf", R.drawable.hund);
+        UserProfile user2 = new UserProfile("0340446364", "none", "1", "Harald", R.drawable.hund2);
 
-
-       recipients.add(user1);
+        // Read DB
+        recipients.add(user1);
         recipients.add(user2);
 
         final ChatListAdapter myChatListAdapter = new ChatListAdapter(recipients);
@@ -55,15 +52,14 @@ public class ChatListFragment extends Fragment{
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
 
-
                 int pos = chatListView.getSelectedItemPosition();
-            //this.getActivity needed cause of Fragments
-              Intent intent = new Intent(ChatListFragment.this.getActivity(),ChatActivity.class);
-             //intent.putExtra("position",pos);
-              intent.putExtra("picture",recipients.get(i).getProfilePicture());
-              intent.putExtra("name",recipients.get(i).getName());
-              intent.putExtra("phoneNumber",recipients.get(i).getName());
-              startActivity(intent);
+                //this.getActivity needed cause of Fragments
+                Intent intent = new Intent(ChatListFragment.this.getActivity(), ChatActivity.class);
+                //intent.putExtra("position",pos);
+                intent.putExtra("picture", recipients.get(i).getProfilePicture());
+                intent.putExtra("name", recipients.get(i).getName());
+                intent.putExtra("phoneNumber", recipients.get(i).getName());
+                startActivity(intent);
             }
         });
 

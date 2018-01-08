@@ -20,7 +20,16 @@ import java.util.List;
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
+    // protected class ContactTablerHandler()
+//    {
+//      void readDB()
+//    }
 
+    // private ContactTableHandler contactHandler = new ContactTableHandler();
+    // void readContacts()
+    // {
+    //  contactHandler.readDB();
+    // }
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "ChatDataBase.db";
@@ -88,7 +97,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName, R.drawable.hund);
             recipients.add(user);
         }
-
         return recipients;
     }
 

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.david.chattr.R;
+import com.example.david.chattr.new_contact.ImageSaver;
 
 import java.io.FileNotFoundException;
 
@@ -131,6 +132,8 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
                 profile_image.setImageBitmap(bitmap);
                 profileHintTextView.setText("");
 
+                new ImageSaver(getApplicationContext()).setFileName("profile_image.png").setDirectoryName("images").save(bitmap);
+
             } else if (resultCode == RESULT_OK && requestCode == COVERIMAGE) {
                 ImageView cover_image = (ImageView) findViewById(R.id.cover_image);
                 TextView coverImageHintTextView = (TextView) findViewById(R.id.coverImageHintTextView);
@@ -144,6 +147,8 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
 
                 cover_image.setImageBitmap(bitmap);
                 coverImageHintTextView.setText("");
+
+                new ImageSaver(getApplicationContext()).setFileName("cover_image.png").setDirectoryName("images").save(bitmap);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

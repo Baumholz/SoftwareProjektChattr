@@ -2,7 +2,6 @@ package com.example.david.chattr.new_contact;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,7 +11,6 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,7 +26,6 @@ import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-
 
 public class NewManuallContactActivity extends AppCompatActivity {
 
@@ -137,36 +134,14 @@ public class NewManuallContactActivity extends AppCompatActivity {
         dbProfile.close();
 
         if(z > 0) {
-            ArrayList<UserProfile> temp = new ArrayList<UserProfile>(readDB());
+            ArrayList<UserProfile> temp = new ArrayList<UserProfile>(myDbProfile.getProfiles());
         }
         z++;
     }
-    public ArrayList <UserProfile> readDB(){
-        // NULL PTR
-        Log.w("New Contact Manual Add", "About to read the db.");
-        dbProfile = myDbProfile.getReadableDatabase();
 
-        ArrayList<UserProfile> recipients = new ArrayList<UserProfile>();
-
-        // Select SQL
-        String query = "select * from " + MySQLiteHelper.TABLE_PROFILE;
-        Cursor cursor = dbProfile.rawQuery(query, null);
-
-        while (cursor.moveToNext()) {
-            String tempFirstName = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.FIRST_NAME));
-            String tempName = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.NAME));
-            String tempPhoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.PHONE_NUMBER));
-
-            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName, R.drawable.hund);
-            recipients.add(user);
-        }
-    return recipients;
-    }
     public String getSqlPath(){
         return dbProfile.getPath();
     }
-
-
 
     public void setSqlPath(){
         sqlPath = dbProfile.getPath();

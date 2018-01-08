@@ -62,6 +62,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
 
 
         name = (String)getIntent().getSerializableExtra("name");
+        phoneNumber = (String)getIntent().getSerializableExtra("phoneNumber");
 
         giveInput = (EditText)findViewById(R.id.chatInput);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -81,10 +82,12 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
 
                 BaseColumns._ID,
                 MySQLiteHelper.COL_1,
+                MySQLiteHelper.COL_3,
                 MySQLiteHelper.COL_5
         };
-        String selection = MySQLiteHelper.COL_1 + " = ?";
-        String [] selectionArgs = {name};
+        String selection = MySQLiteHelper.COL_3 + " = ?";
+        String [] selectionArgs = {phoneNumber};
+        Log.e("Number",phoneNumber);
         Cursor c = db.query(MySQLiteHelper.TABLE, projection, selection, selectionArgs,null,null,null);
 
         while (c.moveToNext()){
@@ -118,6 +121,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
             db = myDb.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(MySQLiteHelper.COL_1,name);
+            values.put(MySQLiteHelper.COL_3,phoneNumber);
             values.put(MySQLiteHelper.COL_5,message);
             long result = db.insert(MySQLiteHelper.TABLE, null, values);
            // boolean isInserted =  myDb.insertData(message);

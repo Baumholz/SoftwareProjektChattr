@@ -10,7 +10,9 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -37,15 +39,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".new_contact.NewManuallContactActivity"
-            android:label="NewManuallContactActivity">
-        </activity>
         <activity
-            android:name=".new_contact.LogInNewManuallContactActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".new_contact.NewManuallContactActivity"
+            android:label="NewManuallContactActivity">
         </activity>
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
@@ -63,7 +59,8 @@
             android:name=".menu_activities.FaqActivity"
             android:label="@string/title_activity_faq"
             android:theme="@style/AppTheme" />
-        <activity android:name=".menu_activities.PersonalProfileActivity"></activity>
+        <activity android:name=".menu_activities.PersonalProfileActivity" />
+        <activity android:name=".menu_activities.EditPersonalProfileActivity"></activity>
     </application>
 
 </manifest>

@@ -1,35 +1,26 @@
-package com.example.david.chattr.new_contact;
+package com.example.david.chattr.menu_activities;
 
-import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.david.chattr.R;
-import com.example.david.chattr.entities.users.UserProfile;
-import com.example.david.chattr.mqtt_chat.MySQLiteHelper;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
-public class NewManuallContactActivity extends AppCompatActivity {
+public class EditPersonalProfileActivity extends AppCompatActivity {
 
     // Resultcode for Activity result
     private static final int PROFILEIMAGE = 0;
@@ -38,43 +29,54 @@ public class NewManuallContactActivity extends AppCompatActivity {
     // (Can't do this with the result code because it is needed to differentiate bith images)
     private static boolean isGalleryChosen = false;
 
-    private MySQLiteHelper myDbProfile = new MySQLiteHelper(this);
-    private SQLiteDatabase dbProfile;
-    public String sqlPath;
-    int z = 0;
+    EditText firstNameEdit;
+    EditText nameEdit;
+    EditText statusEdit;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_manuall_contact);
-
+        setContentView(R.layout.activity_edit_personal_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("New Contact");
+        toolbar.setTitle("Edit your Profile");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        EditText firstNameEdit = (EditText) findViewById(R.id.firstNameEdit);
-        EditText nameEdit = (EditText) findViewById(R.id.nameEdit);
-        EditText phoneNumberEdit = (EditText) findViewById(R.id.phoneNumberEdit);
+        firstNameEdit = (EditText) findViewById(R.id.firstNameEdit);
+        nameEdit = (EditText) findViewById(R.id.nameEdit);
+        statusEdit = (EditText) findViewById(R.id.statusEdit);
 
-        if (getIntent().hasExtra("Contact")) {
-            String contact = (String)getIntent().getSerializableExtra("Contact");
-            try {
-                JSONObject json = new JSONObject(contact);
-                String phoneNumber = json.getString("phoneNumber");
-                String status = json.getString("status");
-                String firstName = json.getString("firstName");
-                String name = json.getString("name");
-                String profilePicure = json.getString("profilePicture");
+        SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
+        String firstName = sharedPreferences.getString("firstName", "default");
+        String name = sharedPreferences.getString("name", "default");
+        String status = sharedPreferences.getString("status", "default");
 
-                firstNameEdit.setText(firstName);
-                nameEdit.setText(name);
-                phoneNumberEdit.setText(phoneNumber);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+        firstNameEdit.setHint(firstName);
+        nameEdit.setHint(name);
+        statusEdit.setHint(status);
+    }
+
+    public void onSaveButtonClicked(View view) {
+
+        String firstName = firstNameEdit.getText().toString().equals("") ? firstNameEdit.getHint().toString() : firstNameEdit.getText().toString();
+        String name = nameEdit.getText().toString().equals("") ? nameEdit.getHint().toString() : nameEdit.getText().toString();
+        String status = statusEdit.getText().toString().equals("") ? statusEdit.getHint().toString() : statusEdit.getText().toString();;
+
+        SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("firstName", firstName);
+        editor.putString("name", name);
+        editor.putString("status", status);
+        editor.apply();
+        finish();
+    }
+
+    //for the back button
+    @Override
+    public  boolean onSupportNavigateUp(){
+        onBackPressed();
+        return true;
     }
 
     public void onClickProfileImage(View view) {
@@ -146,60 +148,5 @@ public class NewManuallContactActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    //for the back button
-    @Override
-    public  boolean onSupportNavigateUp(){
-        onBackPressed();
-        return true;
-    }
-
-    //Todo: Functionality to Save Contact
-    public void onSaveButtonClicked(View view) {
-
-        EditText firstNameEdit = (EditText) findViewById(R.id.firstNameEdit);
-        EditText nameEdit = (EditText) findViewById(R.id.nameEdit);
-        EditText phoneNumberEdit = (EditText) findViewById(R.id.phoneNumberEdit);
-
-        String firstNameDB = firstNameEdit.getText().toString();
-        String nameDB = nameEdit.getText().toString();
-        String phoneNumberDB = phoneNumberEdit.getText().toString();
-
-        if( !firstNameDB.isEmpty() && !nameDB.isEmpty()&& !phoneNumberDB.isEmpty()){
-
-            dbProfile = myDbProfile.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put(MySQLiteHelper.FIRST_NAME,firstNameDB);
-            values.put(MySQLiteHelper.NAME,nameDB);
-            values.put(MySQLiteHelper.PHONE_NUMBER,phoneNumberDB);
-            long result = dbProfile.insert(MySQLiteHelper.TABLE_PROFILE, null, values);
-
-            setSqlPath();
-
-            if(result != -1) {
-                Toast.makeText(NewManuallContactActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
-            }else{
-                Toast.makeText(NewManuallContactActivity.this, "Data not Inserted", Toast.LENGTH_SHORT).show();
-            }
-
-        }else{
-            Toast.makeText(NewManuallContactActivity.this, "No Input!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        dbProfile.close();
-
-        if(z > 0) {
-            ArrayList<UserProfile> temp = new ArrayList<UserProfile>(myDbProfile.getProfiles());
-        }
-        z++;
-    }
-
-    public String getSqlPath(){
-        return dbProfile.getPath();
-    }
-
-    public void setSqlPath(){
-        sqlPath = dbProfile.getPath();
     }
 }

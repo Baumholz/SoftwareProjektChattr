@@ -166,9 +166,12 @@ public class NewManuallContactActivity extends AppCompatActivity {
         String nameDB = nameEdit.getText().toString();
         String phoneNumberDB = phoneNumberEdit.getText().toString();
 
-        if(alreadyInserted(phoneNumberDB)){
-            Toast.makeText(NewManuallContactActivity.this,"Phone Number already exists!",Toast.LENGTH_LONG);
-            return;
+        try {
+            if (alreadyInserted(phoneNumberDB)) {
+                Toast.makeText(NewManuallContactActivity.this, "Phone Number already exists!", Toast.LENGTH_LONG).show();
+                return;
+            }
+        } catch (Exception e){
         }
 
         if( !firstNameDB.isEmpty() && !nameDB.isEmpty()&& !phoneNumberDB.isEmpty()){

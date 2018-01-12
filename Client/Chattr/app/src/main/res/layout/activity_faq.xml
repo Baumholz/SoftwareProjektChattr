@@ -5,20 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.david.chattr.new_contact.ShowQrActivity">
+    tools:context="com.example.david.chattr.menu_activities.FaqActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <ImageView
-        android:id="@+id/qrImageView"
-        android:background="#ffffff"
+    <ListView
+        android:id="@+id/faqListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="20dp">
+
+    </ListView>
 
 </LinearLayout>

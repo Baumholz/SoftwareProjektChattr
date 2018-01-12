@@ -1,28 +1,27 @@
-package com.example.david.chattr.chatting;
+package com.example.david.chattr.mqtt_chat;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.example.david.chattr.R;
-import com.example.david.chattr.entities.users.UserProfile;
+import com.example.david.chattr.entities.messaging.Message;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+/**
+ * Created by manu on 17.11.2017.
+ */
+
+public class ChatActivityListViewAdapter extends BaseAdapter{
 
 
-public class ChatListAdapter extends BaseAdapter {
 
-    private ArrayList<UserProfile> recipients ;
-
-    public ChatListAdapter(ArrayList<UserProfile> recipients) {
-        this.recipients = recipients;
+    private ArrayList<Message> recipients ;
+    public ChatActivityListViewAdapter(ArrayList<Message> messages) {this.recipients = messages;
     }
 
     @Override
@@ -44,21 +43,16 @@ public class ChatListAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         Context context = viewGroup.getContext();
-        UserProfile user = recipients.get(i);
+        Message message = recipients.get(i);
 
         if(view == null){
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.chat_list_entry,null,false); //Use our Layout
+            view = inflater.inflate(R.layout.activity_chat_list_view,null,false); //Use our Layout
         }
 
-        CircleImageView profilePicture = view.findViewById(R.id.profilePicture);
-
-        TextView profileName = view.findViewById(R.id.profilName);
-
-
-        profilePicture.setImageResource(user.getProfilePicture());
-        profileName.setText(user.getName());
-
+        TextView chatInput = view.findViewById(R.id.listViewText);
+        chatInput.setText(message.getContent());
+       // chatInput.setBackgroundColor(Color.GREEN);
         return view;
     }
 }

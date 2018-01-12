@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gallery_or_camera">
+        <item>Select photo from gallery</item>
+        <item>Capture photo from camera</item>
+    </string-array>
+
+</resources>

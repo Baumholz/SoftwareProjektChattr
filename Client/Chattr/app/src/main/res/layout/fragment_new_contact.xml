@@ -52,7 +52,7 @@
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:gravity="center"
-            android:text="Add Contact with QR"
+            android:text="Add contact with QR"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"

@@ -10,6 +10,7 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
     <string name="dummy_club1">International Dog Lovers</string>
     <string name="dummy_club2">Pretty Princesses</string>
 
@@ -46,4 +47,6 @@
     <string name="action_play">Play Video</string>
     <string name="action_profile">Profile</string>
     <string name="hello_world">Hello world!</string>
+
+    <string name="title_activity_faq">FaqActivity</string>
 </resources>

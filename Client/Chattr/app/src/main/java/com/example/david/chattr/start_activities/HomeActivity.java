@@ -1,15 +1,18 @@
-package com.example.david.chattr;
+package com.example.david.chattr.start_activities;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,8 +22,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.david.chattr.PagerAdapter;
+import com.example.david.chattr.R;
 import com.example.david.chattr.Utils.AppMenuView;
 import com.example.david.chattr.Utils.SlidingMenuLayout;
+import com.example.david.chattr.menu_activities.FaqActivity;
 import com.example.david.chattr.mqtt_chat.MyMqttService;
 import com.example.david.chattr.profiles.personal.PersonalProfileActivity;
 
@@ -89,6 +95,10 @@ public class HomeActivity extends AppCompatActivity {
     {
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(pager);
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, 100);
+        }
     }
 
     @Override
@@ -116,6 +126,24 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.faq_entry:
+                Intent intentFaq = new Intent(this, FaqActivity.class);
+                startActivity(intentFaq);
+                return true;
+            case R.id.personal_profile:
+                Intent intentPp = new Intent(this, PersonalProfileActivity.class);
+                startActivity(intentPp);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private ServiceConnection mConnection = new ServiceConnection() {

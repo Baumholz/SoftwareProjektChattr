@@ -212,7 +212,6 @@
         android:layout_height="fill_parent">
 
         <RelativeLayout
-            android:id="@+id/edit_profile"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:gravity="end|center_vertical"
@@ -225,6 +224,7 @@
                 android:background="@drawable/gradient_secondary" />
 
             <Button
+                android:id="@+id/edit_profile"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/ic_edit"

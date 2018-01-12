@@ -4,6 +4,7 @@
     android:id="@+id/user_profile"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/palePrimary"
     android:orientation="vertical">
 
     <include layout="@layout/profile_header" />
@@ -14,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/gradient_secondary"
         android:orientation="vertical"
         android:padding="5dp">
 
@@ -33,9 +35,10 @@
                     android:id="@+id/badge_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
                     android:text="@string/badges_contact_header"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/palePrimary"
                     android:textStyle="bold|italic" />
             </RelativeLayout>
 
@@ -71,7 +74,7 @@
                 android:paddingEnd="2dp"
                 android:paddingStart="2dp"
                 android:src="@drawable/ic_launcher"
-                app:civ_border_color="@color/colorPrimaryDark"
+                app:civ_border_color="@color/palePrimary"
                 app:civ_border_width="1dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -81,7 +84,7 @@
                 android:paddingEnd="2dp"
                 android:paddingStart="2dp"
                 android:src="@drawable/hund2"
-                app:civ_border_color="@color/colorPrimaryDark"
+                app:civ_border_color="@color/palePrimary"
                 app:civ_border_width="1dp" />
         </LinearLayout>
     </LinearLayout>
@@ -97,6 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:background="@drawable/gradient_secondary"
         android:orientation="vertical"
         android:padding="5dp">
 
@@ -116,9 +120,10 @@
                     android:id="@+id/groups_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
                     android:text="@string/groups_contact_header"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/palePrimary"
                     android:textStyle="bold|italic" />
             </RelativeLayout>
 
@@ -136,7 +141,7 @@
                     android:layout_gravity="end"
                     android:background="@drawable/ic_see_more"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/palePrimary" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -160,7 +165,7 @@
                     android:paddingEnd="2dp"
                     android:paddingStart="2dp"
                     android:src="@drawable/hund"
-                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_color="@color/palePrimary"
                     app:civ_border_width="1dp" />
 
                 <TextView
@@ -170,7 +175,7 @@
                     android:padding="2dp"
                     android:text="@string/dummy_club1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/palePrimary" />
             </LinearLayout>
 
             <LinearLayout
@@ -185,7 +190,7 @@
                     android:paddingEnd="2dp"
                     android:paddingStart="2dp"
                     android:src="@drawable/princess"
-                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_color="@color/palePrimary"
                     app:civ_border_width="1dp" />
 
                 <TextView
@@ -195,7 +200,7 @@
                     android:padding="2dp"
                     android:text="@string/dummy_club2"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:textColor="@color/palePrimary" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -212,6 +217,7 @@
         android:layout_height="fill_parent">
 
         <RelativeLayout
+            android:id="@+id/edit_profile_bar"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:gravity="end|center_vertical"
@@ -232,6 +238,7 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/contact_bar"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:gravity="center"
@@ -239,6 +246,7 @@
             android:baselineAligned="false">
 
             <RelativeLayout
+                android:id="@+id/add_contact_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -252,7 +260,7 @@
                     android:background="@drawable/gradient_primary" />
 
                 <Button
-                    android:id="@+id/add_user"
+                    android:id="@+id/add_contact"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
@@ -261,6 +269,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/send_message_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -268,7 +277,6 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:id="@+id/add_contact"
                     android:contentDescription="@string/new_msg_icon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"

@@ -11,8 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.david.chattr.R;
-import com.example.david.chattr.entities.users.UserProfile;
 import com.example.david.chattr.chatting.ChatListAdapter;
+import com.example.david.chattr.entities.users.UserProfile;
+import com.example.david.chattr.mqtt_chat.MySQLiteHelper;
 
 import java.util.ArrayList;
 
@@ -20,16 +21,19 @@ import java.util.ArrayList;
  * Created by david on 15.11.17.
  */
 
-public class ContactListFragment extends Fragment{
+public class ContactListFragment extends Fragment {
+    private MySQLiteHelper myDbProfile;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_contactlist, container, false);
+        myDbProfile = new MySQLiteHelper(getContext());
+        View view = inflater.inflate(R.layout.fragment_contactlist, container, false);
 
-        UserProfile user1 = new UserProfile("0340442323","none","0","Olaf",R.drawable.hund);
-        UserProfile user2 = new UserProfile("0340446364","none","1","Harald",R.drawable.hund2);
+        UserProfile user1 = new UserProfile("0340442323", "none", "0", "Olaf", R.drawable.hund);
+        UserProfile user2 = new UserProfile("0340446364", "none", "1", "Harald", R.drawable.hund2);
 
-        final ArrayList<UserProfile> contacts = new ArrayList<UserProfile>();
+        final ArrayList<UserProfile> contacts = new ArrayList<>(myDbProfile.getProfiles());
 
         contacts.add(user1);
         contacts.add(user2);
@@ -44,7 +48,7 @@ public class ContactListFragment extends Fragment{
                 //TODO: Set Intent to Profile View
             }
         });
-        
+
         return view;
     }
 }

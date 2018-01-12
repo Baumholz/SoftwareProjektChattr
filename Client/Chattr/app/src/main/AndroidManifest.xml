@@ -48,9 +48,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".profiles.personal.PersonalProfileActivity"
-            android:label="@string/personal_profile_title" />
         <activity android:name=".mqtt_chat.ChatActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity android:name=".new_contact.NewManuallContactActivity"

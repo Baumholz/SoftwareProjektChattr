@@ -17,18 +17,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.david.chattr.PagerAdapter;
+import com.example.david.chattr.Utils.PagerAdapter;
 import com.example.david.chattr.R;
-import com.example.david.chattr.Utils.AppMenuView;
-import com.example.david.chattr.Utils.SlidingMenuLayout;
 import com.example.david.chattr.menu_activities.FaqActivity;
+import com.example.david.chattr.menu_activities.PersonalProfileActivity;
 import com.example.david.chattr.mqtt_chat.MyMqttService;
-import com.example.david.chattr.profiles.personal.PersonalProfileActivity;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -51,18 +46,18 @@ public class HomeActivity extends AppCompatActivity {
         setUpTabs();
     }
 
-    @Override
-    public void setContentView(View view) {
-
-        SlidingMenuLayout layout = new SlidingMenuLayout(this);
-        layout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
-
-        layout.addView(new AppMenuView());
-        layout.addView(view);
-
-        super.setContentView(layout);
-    }
+//    @Override
+//    public void setContentView(View view) {
+//
+//        SlidingMenuLayout layout = new SlidingMenuLayout(this);
+//        layout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
+//
+//        layout.addView(new AppMenuView());
+//        layout.addView(view);
+//
+//        super.setContentView(layout);
+//    }
 
     public void toastUserNumber()
     {

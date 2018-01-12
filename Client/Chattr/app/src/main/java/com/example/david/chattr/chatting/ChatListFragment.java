@@ -16,7 +16,6 @@ import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;
 import com.example.david.chattr.mqtt_chat.ChatActivity;
 import com.example.david.chattr.mqtt_chat.MySQLiteHelper;
-import com.example.david.chattr.new_contact.NewManuallContactActivity;
 
 import java.util.ArrayList;
 
@@ -33,8 +32,7 @@ public class ChatListFragment extends Fragment {
         myDbProfile = new MySQLiteHelper(getContext());
         View view = inflater.inflate(R.layout.fragment_chatlist, container, false);
 
-        //TODO: I commented the argument out because of the error: no such table: userProfile --> MySQLiteHelper line 82
-        final ArrayList<UserProfile> recipients = new ArrayList<UserProfile>(/*myDbProfile.getProfiles()*/);
+        final ArrayList<UserProfile> recipients = new ArrayList<>(myDbProfile.getProfiles());
 
         UserProfile user1 = new UserProfile("0340442323", "none", "0", "Olaf", R.drawable.hund);
         UserProfile user2 = new UserProfile("0340446364", "none", "1", "Harald", R.drawable.hund2);

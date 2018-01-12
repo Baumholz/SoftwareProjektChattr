@@ -59,8 +59,6 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-
-
         name = (String)getIntent().getSerializableExtra("name");
         phoneNumber = (String)getIntent().getSerializableExtra("phoneNumber");
 
@@ -106,6 +104,13 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
         chatActivityTitle.setText(name);
         int pic = (int)getIntent().getSerializableExtra("picture");
         profilPicture.setImageResource(pic);
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        unbindService(mConnection);
+        super.onDestroy();
     }
 
     //Here is where the Button Click is handled

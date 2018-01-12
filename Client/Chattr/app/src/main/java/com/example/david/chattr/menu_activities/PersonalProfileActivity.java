@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -33,13 +33,13 @@ public class PersonalProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_profile);
+        findViewById(R.id.contact_bar).setVisibility(View.INVISIBLE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Personal Profile");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         Button edit = findViewById(R.id.edit_profile);
-        edit.setText("Edit");
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,11 +54,11 @@ public class PersonalProfileActivity extends AppCompatActivity {
         name = sharedPreferences.getString("name", "default");
         status = sharedPreferences.getString("status", "default");
 
-        cover_image = (ImageView) findViewById(R.id.cover_image);
-        profile_image = (ImageView) findViewById(R.id.profile_image);
-        user_name = (TextView) findViewById(R.id.user_name);
-        phone_number = (TextView) findViewById(R.id.phone_number);
-        personal_status = (TextView) findViewById(R.id.biography);
+        cover_image = findViewById(R.id.cover_image);
+        profile_image = findViewById(R.id.profile_image);
+        user_name = findViewById(R.id.username);
+        phone_number = findViewById(R.id.phone_number);
+        personal_status = findViewById(R.id.biography);
 
         user_name.setText(firstName + " " + name);
         phone_number.setText(phoneNumber);
@@ -72,7 +72,7 @@ public class PersonalProfileActivity extends AppCompatActivity {
 
     //for the back button
     @Override
-    public  boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
@@ -88,10 +88,10 @@ public class PersonalProfileActivity extends AppCompatActivity {
         status = sharedPreferences.getString("status", "default");
 
         //      ImageView cover_image = (ImageView) findViewById(R.id.cover_image);
-        profile_image = (ImageView) findViewById(R.id.profile_image);
-        user_name = (TextView) findViewById(R.id.user_name);
-        phone_number = (TextView) findViewById(R.id.phone_number);
-        personal_status = (TextView) findViewById(R.id.biography);
+        profile_image = findViewById(R.id.profile_image);
+        user_name = findViewById(R.id.username);
+        phone_number = findViewById(R.id.phone_number);
+        personal_status = findViewById(R.id.biography);
 
         user_name.setText(firstName + " " + name);
         phone_number.setText(phoneNumber);

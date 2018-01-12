@@ -1,79 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:gravity="center">
+    <!--android:background="@color/white">-->
 
-    <TableRow
-        android:id="@+id/rowManually"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.25" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/manuallButton"
+        <TableRow
+            android:id="@+id/rowManually"
             android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:textColor="@color/profileText"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textStyle="bold"
-            android:text="Add contact manually" />
-    </TableRow>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.25">
 
-    <TableRow
-        android:id="@+id/rowNfc"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.25" >
+            <Button
+                android:id="@+id/manuallButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_secondary"
+                android:gravity="center"
+                android:text="Add contact manually"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </TableRow>
 
-        <Button
-            android:id="@+id/nfcButton"
+        <TableRow
+            android:id="@+id/rowNfc"
             android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:textColor="@color/profileText"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textStyle="bold"
-            android:text="Add contact with NFC" />
-    </TableRow>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
 
-    <TableRow
-        android:id="@+id/rowNewQr"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.25" >
+            android:layout_weight="0.25">
 
-        <Button
-            android:id="@+id/qrButton"
+            <Button
+                android:id="@+id/nfcButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_secondary"
+                android:gravity="center"
+                android:text="Add contact with NFC"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/rowNewQr"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:text="Add contact with QR"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/profileText"
-            android:textStyle="bold"
-            android:visibility="visible" />
-    </TableRow>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.25">
 
-    <TableRow
-        android:id="@+id/rowShowQr"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.25" >
+            <Button
+                android:id="@+id/qrButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_secondary"
+                android:gravity="center"
+                android:text="Add contact with QR"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="visible" />
+        </TableRow>
 
-        <Button
-            android:id="@+id/showQrButton"
+        <TableRow
+            android:id="@+id/rowShowQr"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:text="Show own QR-Code"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/profileText"
-            android:textStyle="bold" />
-    </TableRow>
-</LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25">
+
+            <Button
+                android:id="@+id/showQrButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_secondary"
+                android:gravity="center"
+                android:text="Display Your QR"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </TableRow>
+    </LinearLayout>
+</RelativeLayout>

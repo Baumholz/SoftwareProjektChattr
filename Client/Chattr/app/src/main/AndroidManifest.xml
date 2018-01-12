@@ -16,51 +16,51 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/chattr_icon"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!--SERVICES-->
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
+        <service android:name=".messaging.MyMqttService" />
+
+        <!--ACTIVITIES-->
         <activity
-            android:name=".start_activities.MainActivity"
+            android:name=".startup.MainActivity"
+            android:label="@string/app_name"
             android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".mqtt_chat.ChatActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
 
-            <!-- for the second activity -->
+        <activity android:name=".startup.HomeActivity"
+            android:label="@string/home_title"
+            android:uiOptions="splitActionBarWhenNarrow">
+            <meta-data
+                android:name="android.support.UI_OPTIONS"
+                android:value="splitActionBarWhenNarrow" />
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".new_contact.NewManuallContactActivity"
-            android:label="NewManuallContactActivity">
-        </activity>
 
-        <service android:name="org.eclipse.paho.android.service.MqttService" />
-        <service android:name=".mqtt_chat.MyMqttService" />
+        <activity android:name=".messaging.ChatActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:name=".editing.add_contacts.NewManualContactActivity"
+            android:label="NewManuallContactActivity" />
+        <activity android:name=".menu.FaqActivity"
+            android:label="@string/title_activity_faq" />
+        <activity android:name=".editing.EditContactActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
 
-        <activity android:name=".new_contact.ShowQrActivity" />
-        <activity android:name=".start_activities.SignUpActivity" />
-        <activity android:name=".start_activities.HomeActivity">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".new_contact.NfcBeamActivity" />
-        <activity
-            android:name=".menu_activities.FaqActivity"
-            android:label="@string/title_activity_faq"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".menu_activities.PersonalProfileActivity" />
-        <activity android:name=".menu_activities.EditPersonalProfileActivity"></activity>
+        <activity android:name=".startup.SignUpActivity" />
+        <activity android:name=".editing.add_contacts.ShowQrActivity" />
+        <activity android:name=".editing.add_contacts.NfcBeamActivity" />
+        <activity android:name=".menu.PersonalProfileActivity" />
+        <activity android:name=".editing.EditPersonalProfileActivity" />
     </application>
-
 </manifest>

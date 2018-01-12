@@ -30,11 +30,11 @@
             android:layout_alignTop="@+id/cover_image"
             android:layout_gravity="center"
             android:layout_margin="1dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/gradient_primary"
             android:gravity="center"
             android:text="Change Cover Image"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/profileText" />
+            android:textColor="@color/black" />
 
     </RelativeLayout>
 
@@ -58,17 +58,14 @@
             android:id="@+id/profileHintTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/profile_image"
-            android:layout_alignLeft="@+id/profile_image"
-            android:layout_alignRight="@+id/profile_image"
-            android:layout_alignTop="@+id/profile_image"
+            android:layout_alignWithParentIfMissing="true"
             android:layout_gravity="center"
             android:layout_margin="1dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/gradient_accent"
             android:gravity="center"
             android:text="Change Profile Picture"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/profileText" />
+            android:textColor="@color/black" />
 
     </RelativeLayout>
 

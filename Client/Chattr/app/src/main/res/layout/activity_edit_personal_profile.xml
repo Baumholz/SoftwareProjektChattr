@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.david.chattr.menu_activities.EditPersonalProfileActivity">
+    tools:context="com.example.david.chattr.editing.EditPersonalProfileActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -27,7 +27,7 @@
         android:inputType="textPersonName"
         android:nextFocusDown="@+id/.."
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/profileText"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold" />
 
     <EditText
@@ -39,7 +39,7 @@
         android:inputType="textPersonName"
         android:nextFocusDown="@+id/.."
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/profileText"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold" />
 
     <EditText
@@ -51,16 +51,16 @@
         android:inputType="text"
         android:nextFocusDown="@+id/.."
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/profileText"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/round_pink"
+        android:background="@drawable/gradient_accent"
         android:onClick="onSaveButtonClicked"
         android:text="Save"
-        android:textColor="@color/buttonColor" />
+        android:textColor="@color/white" />
 
 </LinearLayout>

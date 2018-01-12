@@ -50,7 +50,7 @@ public class NfcBeamActivity extends AppCompatActivity implements NfcAdapter.Cre
         //TODO: Get all the data from internal storage
         SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
         String phoneNumber = sharedPreferences.getString("phoneNumber", "0");
-        UserProfile user = new UserProfile(phoneNumber, "", "David","Hierholz", -1);
+        UserProfile user = new UserProfile(phoneNumber, "", "David","Hierholz", "".getBytes(), "".getBytes());
         String text2Nfc = user.toJson().toString();
         Toast.makeText(this, text2Nfc, Toast.LENGTH_LONG).show();
 

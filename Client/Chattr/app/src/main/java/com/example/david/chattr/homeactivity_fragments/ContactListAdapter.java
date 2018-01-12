@@ -1,6 +1,7 @@
 package com.example.david.chattr.homeactivity_fragments;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class ContactListAdapter extends BaseAdapter {
@@ -51,9 +53,11 @@ public class ContactListAdapter extends BaseAdapter {
         ImageView profilePicture = view.findViewById(R.id.profilePicture);
 
         TextView profileName = view.findViewById(R.id.profilName);
-
-
-        profilePicture.setImageResource(user.getProfilePicture());
+        if(Arrays.equals(user.getProfilePicture(), "-1".getBytes())){
+                profilePicture.setImageResource(R.drawable.profil_picture);
+        }else {
+            profilePicture.setImageBitmap(BitmapFactory.decodeByteArray(user.getProfilePicture(), 0, user.getProfilePicture().length));
+        }
         profileName.setText(user.getName());
 
         return view;

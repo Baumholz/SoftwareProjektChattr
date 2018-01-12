@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;
+import com.example.david.chattr.mqtt_chat.MySQLiteHelper;
 
 import java.util.ArrayList;
 
@@ -20,20 +21,16 @@ import java.util.ArrayList;
  */
 
 public class ContactListFragment extends Fragment{
+    private MySQLiteHelper myDbProfile;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_contactlist, container, false);
+        myDbProfile = new MySQLiteHelper(getContext());
 
-        UserProfile user1 = new UserProfile("0340442323","none","0","Olaf",R.drawable.hund);
-        UserProfile user2 = new UserProfile("0340446364","none","1","Harald",R.drawable.hund2);
-
-        final ArrayList<UserProfile> contacts = new ArrayList<UserProfile>();
-
-        contacts.add(user1);
-        contacts.add(user2);
-
-        final ChatListAdapter myContactListAdapter = new ChatListAdapter(contacts);
+        final ContactListAdapter myContactListAdapter = new ContactListAdapter(myDbProfile.getProfiles());
         final ListView contactListView = (ListView) view.findViewById(R.id.contactList);
         contactListView.setAdapter(myContactListAdapter);
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.BaseColumns;
@@ -25,12 +26,14 @@ import android.widget.Toast;
 import com.example.david.chattr.R;
 import com.example.david.chattr.entities.messaging.Message;
 
+import com.example.david.chattr.entities.users.UserProfile;
 import com.example.david.chattr.mqtt_chat.MyMqttService.MyLocalBinder;
 import com.example.david.chattr.mqtt_chat.MySQLiteHelper;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -42,6 +45,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
     String name;
     String phoneNumber;
     ChatActivityListViewAdapter myChatActivityListViewAdapter;
+    UserProfile temp;
 
     MySQLiteHelper myDb = new MySQLiteHelper(this);
     SQLiteDatabase db;
@@ -61,7 +65,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
 
 
 
-        name = (String)getIntent().getSerializableExtra("name");
+        //name = (String)getIntent().getSerializableExtra("name");
         phoneNumber = (String)getIntent().getSerializableExtra("phoneNumber");
 
         giveInput = (EditText)findViewById(R.id.chatInput);
@@ -92,10 +96,20 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
 
         while (c.moveToNext()){
             String temp = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.COL_5));
+            //name = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.COL_1));
             Message oldMessage = new Message(name,2004,"me",false,temp);
             messages.add(oldMessage);
         }
+        ArrayList<UserProfile> recipients = new ArrayList<UserProfile>(myDb.getProfiles());
+
+        for(int i=0; i < recipients.size(); i++){
+           if(recipients.get(i).getPhoneNumber().equals(phoneNumber)){
+                temp = recipients.get(i);
+           }
+        }
+
         //finish DB
+
 
         myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages);
         chatListView.setAdapter(myChatActivityListViewAdapter);
@@ -103,9 +117,14 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
         // Set Toolbar Title and Profile Picture
         CircleImageView profilPicture = (CircleImageView) findViewById(R.id.profilePicutreChat);
         TextView chatActivityTitle = (TextView) findViewById(R.id.chatActivityTitle);
-        chatActivityTitle.setText(name);
-        int pic = (int)getIntent().getSerializableExtra("picture");
-        profilPicture.setImageResource(pic);
+
+        chatActivityTitle.setText(temp.getFirstName() + " " + temp.getName());
+        if(Arrays.equals(temp.getProfilePicture(), "-1".getBytes())){
+            profilPicture.setImageResource(R.drawable.profil_picture    );
+        }else {
+            profilPicture.setImageBitmap(BitmapFactory.decodeByteArray(temp.getProfilePicture(), 0, temp.getProfilePicture().length));
+        }
+        //todo: hier muss das ProfilPicture rein /dB
     }
 
     //Here is where the Button Click is handled

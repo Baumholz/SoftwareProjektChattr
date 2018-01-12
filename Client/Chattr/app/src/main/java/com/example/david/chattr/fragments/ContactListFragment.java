@@ -1,5 +1,6 @@
 package com.example.david.chattr.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.david.chattr.ContactActivity;
 import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;
 import com.example.david.chattr.utils.MySQLiteHelper;
@@ -38,7 +40,12 @@ public class ContactListFragment extends Fragment {
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO: Set Intent to Profile View
+                Intent intent = new Intent(ContactListFragment.this.getActivity(), ContactActivity.class);
+                intent.putExtra("phoneNumber", contacts.get(i).getPhoneNumber());
+                intent.putExtra("firstName", contacts.get(i).getFirstName());
+                intent.putExtra("name", contacts.get(i).getName());
+                intent.putExtra("status", contacts.get(i).getStatus());
+                startActivity(intent);
             }
         });
 

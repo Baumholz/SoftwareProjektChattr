@@ -42,7 +42,6 @@ public class ChatListFragment extends Fragment {
         chatListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                int pos = chatListView.getSelectedItemPosition();
                 Intent intent = new Intent(ChatListFragment.this.getActivity(), ChatActivity.class);
                 intent.putExtra("phoneNumber", recipients.get(i).getPhoneNumber());
                 startActivity(intent);

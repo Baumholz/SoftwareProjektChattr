@@ -39,7 +39,7 @@ public class ShowQrActivity extends AppCompatActivity {
         String name = sharedPreferences.getString("name", "default");
         String status = sharedPreferences.getString("status", "default");
 
-        UserProfile user = new UserProfile(phoneNumber, status, firstName, name, -1);
+        UserProfile user = new UserProfile(phoneNumber, status, firstName, name, "".getBytes(), "".getBytes());
         String text2Qr = user.toJson().toString();
         Log.i("Json Content", text2Qr);
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();

@@ -6,7 +6,7 @@ public abstract class Profile {
     protected String id;
     protected String firstName;
     protected String name;
-    protected int profilePicture;
+    protected byte[] profilePicture;
 
     public String getId() {
         return id;
@@ -19,7 +19,7 @@ public abstract class Profile {
         return name;
     }
 
-    public int getProfilePicture() {
+    public byte[] getProfilePicture() {
         return profilePicture;
     }
 }

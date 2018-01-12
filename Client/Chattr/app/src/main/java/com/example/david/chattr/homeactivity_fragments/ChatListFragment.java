@@ -34,16 +34,9 @@ public class ChatListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_chatlist, container, false);
 
         //TODO: I commented the argument out because of the error: no such table: userProfile --> MySQLiteHelper line 82
-        final ArrayList<UserProfile> recipients = new ArrayList<UserProfile>(/*myDbProfile.getProfiles()*/);
+        final ArrayList<UserProfile> recipients = new ArrayList<UserProfile>(myDbProfile.getProfiles());
 
-        UserProfile user1 = new UserProfile("0340442323", "none", "0", "Olaf", R.drawable.hund);
-        UserProfile user2 = new UserProfile("0340446364", "none", "1", "Harald", R.drawable.hund2);
 
-        // Read DB
-        recipients.add(user1);
-        recipients.add(user2);
-
-        Log.e("Number",recipients.get(1).getPhoneNumber());
 
         final ChatListAdapter myChatListAdapter = new ChatListAdapter(recipients);
         final ListView chatListView = (ListView) view.findViewById(R.id.chatListView);
@@ -57,9 +50,6 @@ public class ChatListFragment extends Fragment {
                 int pos = chatListView.getSelectedItemPosition();
                 //this.getActivity needed cause of Fragments
                 Intent intent = new Intent(ChatListFragment.this.getActivity(), ChatActivity.class);
-                //intent.putExtra("position",pos);
-                intent.putExtra("picture", recipients.get(i).getProfilePicture());
-                intent.putExtra("name", recipients.get(i).getName());
                 intent.putExtra("phoneNumber", recipients.get(i).getPhoneNumber());
                 startActivity(intent);
             }

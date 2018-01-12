@@ -12,13 +12,15 @@ public class UserProfile extends  Profile{
 
     private String phoneNumber;
     private String status;
+    private byte[] coverImage;
 
-    public UserProfile(String phoneNumber, String status, String firstName, String name,int profilePicture) {
+    public UserProfile(String phoneNumber, String status, String firstName, String name,byte[] profilePicture,byte[] coverImage) {
         this.phoneNumber = phoneNumber;
         this.status = status;
         this.firstName = firstName;
         this.name = name;
         this.profilePicture = profilePicture;
+        this.coverImage = this.coverImage;
     }
 
     public String getPhoneNumber() {

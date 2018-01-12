@@ -6,7 +6,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.provider.BaseColumns;
+import android.util.Base64;
 import android.util.Log;
 
 import com.example.david.chattr.R;
@@ -39,6 +42,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String FIRST_NAME = "firstName";
     public static final String NAME = "name";
     public static final String PROFILE_PICTURE = "profilePicture";
+    public static final String COVER_IMAGE = "coverImage";
 
     //   public static final String SQL_ENTRIES = TABLE+COL_1 + COL_2 + COL_3 + COL_4 + COL_5 ;
     public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + TABLE + " ("
@@ -51,7 +55,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + BaseColumns._ID + " INTEGER PRIMARY KEY,"
             + FIRST_NAME  + " TEXT,"
             + NAME + " TEXT,"
-            + PHONE_NUMBER + " TEXT)";
+            + PHONE_NUMBER + " TEXT,"
+            + PROFILE_PICTURE + " TEXT,"
+            + COVER_IMAGE + " TEXT)";
 
     public static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXIST " + TABLE;
     public static final String SQL_DELETE_PROFILE_ENTRIES = "DROP TABLE IF EXIST " + TABLE_PROFILE;
@@ -85,8 +91,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             String tempFirstName = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.FIRST_NAME));
             String tempName = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.NAME));
             String tempPhoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.PHONE_NUMBER));
+            byte[] tempProfilePicture = cursor.getBlob(cursor.getColumnIndexOrThrow(MySQLiteHelper.PROFILE_PICTURE));
+            byte[] tempCoverImage = cursor.getBlob(cursor.getColumnIndexOrThrow(MySQLiteHelper.COVER_IMAGE));
 
-            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName, R.drawable.hund);
+         //   byte[] profilePicture = Base64.decode(tempProfilePicture, Base64.DEFAULT);
+          //  byte[] coverImage = Base64.decode(tempCoverImage, Base64.DEFAULT);
+
+            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName,tempProfilePicture,tempCoverImage);
             recipients.add(user);
         }
         return recipients;

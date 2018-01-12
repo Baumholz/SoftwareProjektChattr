@@ -3,10 +3,13 @@ package com.example.david.chattr.new_contact;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,6 +30,7 @@ import com.example.david.chattr.mqtt_chat.MySQLiteHelper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -42,6 +46,9 @@ public class NewManuallContactActivity extends AppCompatActivity {
     private MySQLiteHelper myDbProfile = new MySQLiteHelper(this);
     private SQLiteDatabase dbProfile;
     public String sqlPath;
+
+    private Bitmap bitmapProfileImage;
+    private Bitmap bitmapCoverImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -120,13 +127,12 @@ public class NewManuallContactActivity extends AppCompatActivity {
                 TextView profileHintTextView = (TextView) findViewById(R.id.profileHintTextView);
                 Uri targetUri = data.getData();
 
-                Bitmap bitmap;
                 if (isGalleryChosen)
-                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                    bitmapProfileImage = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
                 else
-                    bitmap = (Bitmap) data.getExtras().get("data");
+                    bitmapProfileImage = (Bitmap) data.getExtras().get("data");
 
-                profile_image.setImageBitmap(bitmap);
+                profile_image.setImageBitmap(bitmapProfileImage);
                 profileHintTextView.setText("");
 
             } else if (resultCode == RESULT_OK && requestCode == COVERIMAGE) {
@@ -134,13 +140,12 @@ public class NewManuallContactActivity extends AppCompatActivity {
                 TextView coverImageHintTextView = (TextView) findViewById(R.id.coverImageHintTextView);
                 Uri targetUri = data.getData();
 
-                Bitmap bitmap;
                 if (isGalleryChosen)
-                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                    bitmapCoverImage = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
                 else
-                    bitmap = (Bitmap) data.getExtras().get("data");
+                    bitmapCoverImage = (Bitmap) data.getExtras().get("data");
 
-                cover_image.setImageBitmap(bitmap);
+                cover_image.setImageBitmap(bitmapCoverImage);
                 coverImageHintTextView.setText("");
             }
         } catch (FileNotFoundException e) {
@@ -171,8 +176,7 @@ public class NewManuallContactActivity extends AppCompatActivity {
                 Toast.makeText(NewManuallContactActivity.this, "Phone Number already exists!", Toast.LENGTH_LONG).show();
                 return;
             }
-        } catch (Exception e){
-        }
+        } catch (Exception e){}
 
         if( !firstNameDB.isEmpty() && !nameDB.isEmpty()&& !phoneNumberDB.isEmpty()){
 
@@ -181,6 +185,22 @@ public class NewManuallContactActivity extends AppCompatActivity {
             values.put(MySQLiteHelper.FIRST_NAME,firstNameDB);
             values.put(MySQLiteHelper.NAME,nameDB);
             values.put(MySQLiteHelper.PHONE_NUMBER,phoneNumberDB);
+
+            if(bitmapProfileImage != null){
+              byte[] tempByteArray = getBytes(bitmapProfileImage);                                                                 
+              values.put(MySQLiteHelper.PROFILE_PICTURE,tempByteArray);
+            }else{
+                byte[] tempByteArray = "-1".getBytes();
+                values.put(MySQLiteHelper.PROFILE_PICTURE,tempByteArray);
+            }
+            if(bitmapProfileImage != null){
+                byte[] tempByteArray = getBytes(bitmapCoverImage);
+                values.put(MySQLiteHelper.COVER_IMAGE,tempByteArray);
+            }else{
+                byte[] tempByteArray = "-1".getBytes();
+                values.put(MySQLiteHelper.PROFILE_PICTURE,tempByteArray);
+            }
+
             long result = dbProfile.insert(MySQLiteHelper.TABLE_PROFILE, null, values);
 
             setSqlPath();
@@ -197,7 +217,7 @@ public class NewManuallContactActivity extends AppCompatActivity {
         }
         dbProfile.close();
 
-            ArrayList<UserProfile> temp = new ArrayList<UserProfile>(myDbProfile.getProfiles());
+            //ArrayList<UserProfile> temp = new ArrayList<UserProfile>(myDbProfile.getProfiles());
 
     }
 
@@ -223,5 +243,17 @@ public class NewManuallContactActivity extends AppCompatActivity {
 
     public void setSqlPath(){
         sqlPath = dbProfile.getPath();
+    }
+
+    // convert from bitmap to byte array
+    public static byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
+    }
+
+    // convert from byte array to bitmap
+    public static Bitmap getImage(byte[] image) {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
 }

@@ -1,6 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/action_profile"
+        android:icon="@drawable/default_profile"
+        android:title="@string/action_profile"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
 
     <item android:title="FAQ"
         android:id="@+id/faq_entry"

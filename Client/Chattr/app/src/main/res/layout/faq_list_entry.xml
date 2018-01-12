@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/profileText"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold" />
 
     <TextView
@@ -16,6 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/profileText" />
+        android:textColor="@color/colorPrimaryDark" />
 
 </LinearLayout>

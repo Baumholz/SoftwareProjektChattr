@@ -1,9 +1,11 @@
 package com.example.david.chattr.mqtt_chat;
 
 import android.app.Service;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -18,6 +20,9 @@ import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONObject;
+
+import java.util.Arrays;
 
 import static android.content.ContentValues.TAG;
 
@@ -29,7 +34,7 @@ public class MyMqttService extends Service implements MqttCallback{
 
     private final MyLocalBinder myBinder = new MyLocalBinder();
 
-    private final static String Broker = "tcp://iluhotcopvh4gnmu.myfritz.net:1883";
+    private final static String Broker = "tcp://7ofie4f20pn09gmt.myfritz.net";
 //    private final static String Broker = "tcp://broker.hivemq.com:1883";
     private final static int Quos = 2;
 
@@ -151,7 +156,7 @@ public class MyMqttService extends Service implements MqttCallback{
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         //Todo: Find out why messages do not arrive
-        String mMessage = message.getPayload().toString();
+        String mMessage = message.toString();
         Log.d(TAG, "\nMessage arrived on topic: " + topic + "\n" + message + "\n");
 //        Toast.makeText(MyMqttService.this, "Message arrived: " + message, Toast.LENGTH_SHORT).show();
 
@@ -159,7 +164,28 @@ public class MyMqttService extends Service implements MqttCallback{
 
         //TODO: Make notification with real content
         MessageNotifier notifier = new MessageNotifier(this);
-        notifier.showOrUpdateNotification("Message arrived");
+        notifier.showOrUpdateNotification(mMessage);
+//        Toast.makeText(this, "Arived: "+ mMessage, Toast.LENGTH_SHORT).show();
+
+        JSONObject json = new JSONObject(mMessage);
+        String senderNr = json.getString("senderNr");
+        String recipientNR = json.getString("recipientNr");
+        String content = json.getString("content");
+//        String id = json.getString("id");
+
+        MySQLiteHelper myDb = new MySQLiteHelper(this);
+        SQLiteDatabase db = myDb.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COL_3,senderNr);
+        values.put(MySQLiteHelper.COL_4,recipientNR);
+        values.put(MySQLiteHelper.COL_5,content);
+        long result = db.insert(MySQLiteHelper.TABLE, null, values);
+
+        if(result != -1) {
+           Toast.makeText(this, "Data Inserted", Toast.LENGTH_LONG).show();
+        }else{
+           Toast.makeText(this, "Data not Inserted", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

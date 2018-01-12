@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
@@ -31,6 +32,8 @@ import com.example.david.chattr.mqtt_chat.MyMqttService.MyLocalBinder;
 import com.example.david.chattr.mqtt_chat.MySQLiteHelper;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,7 +46,8 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
     ArrayList<Message> messages;
     EditText giveInput;
     String name;
-    String phoneNumber;
+    String recipientNR;
+    String senderNr;
     ChatActivityListViewAdapter myChatActivityListViewAdapter;
     UserProfile temp;
 
@@ -63,10 +67,8 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-
-
         //name = (String)getIntent().getSerializableExtra("name");
-        phoneNumber = (String)getIntent().getSerializableExtra("phoneNumber");
+        recipientNR = (String)getIntent().getSerializableExtra("phoneNumber");
 
         giveInput = (EditText)findViewById(R.id.chatInput);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -78,6 +80,9 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
+        senderNr = sharedPreferences.getString("phoneNumber", "default");
+
         messages = new ArrayList<Message>();
 
         //Read out the Database
@@ -87,23 +92,28 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
                 BaseColumns._ID,
                 MySQLiteHelper.COL_1,
                 MySQLiteHelper.COL_3,
+                MySQLiteHelper.COL_4,
                 MySQLiteHelper.COL_5
         };
-        String selection = MySQLiteHelper.COL_3 + " = ?";
-        String [] selectionArgs = {phoneNumber};
-        Log.e("Number",phoneNumber);
-        Cursor c = db.query(MySQLiteHelper.TABLE, projection, selection, selectionArgs,null,null,null);
+        String selection = MySQLiteHelper.COL_4 + " = ?";
+        String [] selectionArgs = {recipientNR};
+        Log.e("Number",recipientNR);
+        String query ="select * from " + MySQLiteHelper.TABLE + " where " + MySQLiteHelper.COL_3 +
+                "='" + recipientNR + "' or " + MySQLiteHelper.COL_4 + "='" + recipientNR + "';";
+
+        Cursor c = db.rawQuery(query, null);
+//        Cursor c = db.query(MySQLiteHelper.TABLE, projection, selection, selectionArgs,null,null,null);
 
         while (c.moveToNext()){
             String temp = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.COL_5));
             //name = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.COL_1));
-            Message oldMessage = new Message(name,2004,"me",false,temp);
+            Message oldMessage = new Message(name,2004,"me",recipientNR,temp);
             messages.add(oldMessage);
         }
         ArrayList<UserProfile> recipients = new ArrayList<UserProfile>(myDb.getProfiles());
 
         for(int i=0; i < recipients.size(); i++){
-           if(recipients.get(i).getPhoneNumber().equals(phoneNumber)){
+           if(recipients.get(i).getPhoneNumber().equals(recipientNR)){
                 temp = recipients.get(i);
            }
         }
@@ -131,26 +141,26 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
     public void onEditTextButtonClicked(View v) {
         String message = giveInput.getText().toString();
         if (!message.isEmpty()) {
-            Message myMessage = new Message(name, 2004, "me", false, message);
+            Message myMessage = new Message(name, 2004, senderNr, recipientNR, message);
             messages.add(myMessage);
             myChatActivityListViewAdapter.notifyDataSetChanged();
             //Todo: Do the topic timestamp thing
-            mqttService.sendMessage("all/pub/trainID/camID/", myMessage.getContent());
+            mqttService.sendMessage("all/pub/trainID/camID/", myMessage.toString());
 
             db = myDb.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(MySQLiteHelper.COL_1,name);
-            values.put(MySQLiteHelper.COL_3,phoneNumber);
+            values.put(MySQLiteHelper.COL_3,senderNr);
+            values.put(MySQLiteHelper.COL_4,recipientNR);
             values.put(MySQLiteHelper.COL_5,message);
             long result = db.insert(MySQLiteHelper.TABLE, null, values);
            // boolean isInserted =  myDb.insertData(message);
 
-            if(result != -1) {
-               Toast.makeText(ChatActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
-            }else{
-               Toast.makeText(ChatActivity.this, "Data not Inserted", Toast.LENGTH_SHORT).show();
-            }
-
+//            if(result != -1) {
+//               Toast.makeText(ChatActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
+//            }else{
+//               Toast.makeText(ChatActivity.this, "Data not Inserted", Toast.LENGTH_SHORT).show();
+//            }
         }
         giveInput.setText("");
     }
@@ -185,7 +195,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
             // Step 1: Creates New Chat by sending a hidden message to:
             // topic: “receiver_number” with palyloud: Sender “sender_nr” ChatTopic “rand_nummer_timestamp”
 
-            phoneNumber = (String)getIntent().getSerializableExtra("phoneNumber");
+            recipientNR = (String)getIntent().getSerializableExtra("phoneNumber");
             //Todo: Systax for hidden message (JSON?)
             mqttService.sendMessage("all/pub/trainID/camID/", "message");
             //Subscribe to newly created topic Todo: Real timestamp as topic
@@ -201,5 +211,20 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
     @Override
     public void messageArrived(String topic, MqttMessage message) {
         // TODO: Save message into database
+//        Toast.makeText(this, "Arived: "+ message.toString(), Toast.LENGTH_SHORT).show();
+
+//        String content = "";
+//
+//        JSONObject json = null;
+//        try {
+//            json = new JSONObject(message.toString());
+//            String content = json.getString("content");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        if (!content.equals("")) {
+//            messages.add(content);
+//            myChatActivityListViewAdapter.notifyDataSetChanged();
+//        }
     }
 }

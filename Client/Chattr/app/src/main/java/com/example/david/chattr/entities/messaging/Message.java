@@ -14,7 +14,7 @@ public class Message {
     protected String id;
     protected int timestamp;
     protected String senderNr;
-    protected boolean recipientNr;
+    protected String recipientNr;
     protected String content;
 
     @Override
@@ -33,7 +33,7 @@ public class Message {
         return null;
     }
 
-    public Message(String id, int timestamp, String senderNr, boolean recipientNr, String content) {
+    public Message(String id, int timestamp, String senderNr, String recipientNr, String content) {
 
         this.id = id;
         this.timestamp = timestamp;
@@ -66,11 +66,11 @@ public class Message {
         this.senderNr = senderNr;
     }
 
-    public boolean isRecipientNr() {
+    public String isRecipientNr() {
         return recipientNr;
     }
 
-    public void setRecipientNr(boolean recipientNr) {
+    public void setRecipientNr(String recipientNr) {
         this.recipientNr = recipientNr;
     }
 

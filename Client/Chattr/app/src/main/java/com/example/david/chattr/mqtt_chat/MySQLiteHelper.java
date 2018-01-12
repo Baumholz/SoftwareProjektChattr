@@ -49,6 +49,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + BaseColumns._ID+" INTEGER PRIMARY KEY,"
             + COL_1 + " TEXT,"
             + COL_3 + " TEXT,"
+            + COL_4 + " TEXT,"
             + COL_5 + " TEXT)";
 
     public static final String SQL_CREATE_TABLE_PROFILE = "CREATE TABLE " + TABLE_PROFILE + " ("

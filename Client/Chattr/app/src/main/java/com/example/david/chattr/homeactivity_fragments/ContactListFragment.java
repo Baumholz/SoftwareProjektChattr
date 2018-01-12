@@ -27,12 +27,16 @@ public class ContactListFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_contactlist, container, false);
         myDbProfile = new MySQLiteHelper(getContext());
+        View view =  inflater.inflate(R.layout.fragment_contactlist, container, false);
 
-        final ContactListAdapter myContactListAdapter = new ContactListAdapter(myDbProfile.getProfiles());
+        final ArrayList<UserProfile> contacts = new ArrayList<UserProfile>(myDbProfile.getProfiles());
+
+
+        final ContactListAdapter myContactListAdapter = new ContactListAdapter(contacts);
         final ListView contactListView = (ListView) view.findViewById(R.id.contactList);
         contactListView.setAdapter(myContactListAdapter);
+        myContactListAdapter.notifyDataSetChanged();
 
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

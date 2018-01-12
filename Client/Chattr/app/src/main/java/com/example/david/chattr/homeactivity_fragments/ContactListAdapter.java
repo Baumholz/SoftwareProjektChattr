@@ -47,7 +47,7 @@ public class ContactListAdapter extends BaseAdapter {
 
         if(view == null){
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.chat_list_entry,null,false); //Use our Layout
+            view = inflater.inflate(R.layout.contact_list_entry,null,false); //Use our Layout
         }
 
         ImageView profilePicture = view.findViewById(R.id.profilePicture);

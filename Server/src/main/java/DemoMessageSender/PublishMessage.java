@@ -30,12 +30,12 @@ public class PublishMessage {
      * @param qos
      * @return
      */
-        public boolean sendTestMessage(Message tmp, int qos) {
+        public boolean sendTestMessage(String tmp, String topic,int qos) {
 
             //String topic = "/receiver";
-            ObjectMapper mapper = new ObjectMapper();
+            //ObjectMapper mapper = new ObjectMapper();
 
-            String broker = "tcp://iluhotcopvh4gnmu.myfritz.net:1883"; //91.250.113.207
+            String broker = "tcp://7ofie4f20pn09gmt.myfritz.net:1883"; //91.250.113.207
             String clientId = "ServerPublish";
             MemoryPersistence persistence = new MemoryPersistence();
 
@@ -47,12 +47,13 @@ public class PublishMessage {
                 sampleClient.connect(connOpts);
                 System.out.println("Connected");
 
-                String msg = mapper.writeValueAsString(tmp);
+              //  String msg = mapper.writeValueAsString(tmp);
+                String msg = tmp;
                 System.out.println("Publishing message: " + msg);
 
                 MqttMessage message = new MqttMessage(msg.getBytes());
                 message.setQos(qos); // Sets the quality of service for this message
-                sampleClient.publish(tmp.getTopic(), message);
+                sampleClient.publish(topic, message);
                 System.out.println("Message published");
                 sampleClient.disconnect();
                 System.out.println("Disconnected" + "\n");
@@ -66,9 +67,6 @@ public class PublishMessage {
                 System.out.println("cause " + me.getCause());
                 System.out.println("excep " + me);
                 me.printStackTrace();
-            } catch (JsonProcessingException e) {
-                System.out.println("Json Exception happend");
-                e.printStackTrace();
             }
             return false;
         }

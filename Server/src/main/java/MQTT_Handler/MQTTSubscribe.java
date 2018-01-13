@@ -29,7 +29,7 @@ public class MQTTSubscribe implements MqttCallback {
         // Topic auf das gehört wird!
         String topic = "all/#";
         int qos = 2;
-        String broker = "tcp://iluhotcopvh4gnmu.myfritz.net:1883"; // Hostadresse, für Testzwecke
+        String broker = "tcp://7ofie4f20pn09gmt.myfritz.net:1883"; // Hostadresse, für Testzwecke
         String clientId = "ServerMessageReceiver";
         MemoryPersistence persistence = new MemoryPersistence();
 
@@ -68,7 +68,7 @@ public class MQTTSubscribe implements MqttCallback {
 
     /**
      * hier kommt die Datenbank anbindung, aktuell
-     * nur Demonstration des message empfangs
+     * nur Demonstration des message Empfangs
      */
     public void messageArrived(String topic, MqttMessage message) throws Exception {
 

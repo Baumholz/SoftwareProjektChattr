@@ -8,6 +8,7 @@ public class Person {
     private String sureName;
     private String lastName;
     private String pictureURL;
+    private String coverImage;
 
 
 
@@ -36,25 +37,37 @@ public class Person {
     public void setStatus(String status) {
         this.status = status;
     }
-    public String getlastName() {
-        return lastName;
-    }
 
-    public void setlastName(String lastName) {
-        this.lastName = lastName;
-    }
-    public String getsureName() {
+    public String getSureName() {
         return sureName;
     }
 
-    public void setsureName(String sureName) {
+    public void setSureName(String sureName) {
         this.sureName = sureName;
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+
+
     public String getPictureURL(){
         return pictureURL;
     }
     public void setPictureURL(String pictureURL){
         this.pictureURL = pictureURL;
+    }
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
     }
 
     @Override
@@ -65,6 +78,7 @@ public class Person {
                 ", sureName='" + sureName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", pictureURL='" + pictureURL + '\'' +
+                ", coverImage='" + coverImage + '\'' +
                 '}';
     }
 }

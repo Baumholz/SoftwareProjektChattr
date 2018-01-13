@@ -9,7 +9,7 @@ public class Message {
 
 
     private String id;
-    private String timestamp;
+    private String timestampSender;
     private String senderNr;
     private String recipientNr;
     private String content;
@@ -37,7 +37,7 @@ public class Message {
         message = new JSONObject();
         try {
             message.put("id" , id);
-            message.put("timestamp" , timestamp);
+            message.put("timestampSender" , timestampSender);
             message.put("senderNr" , senderNr);
             message.put("recipientNr" , recipientNr);
             message.put("content" , content);
@@ -49,20 +49,20 @@ public class Message {
         }
     }
 
-    public Message(String id, String timestamp, String senderNr, String recipientNr, String content, String topic) {
+    public Message(String id, String timestampSender, String senderNr, String recipientNr, String content, String topic) {
 
         this.id = id;
-        this.timestamp = timestamp;
+        this.timestampSender = timestampSender;
         this.senderNr = senderNr;
         this.recipientNr = recipientNr;
         this.content = content;
         this.topic = topic;
     }
 
-    public Message(String id, String timestamp, String senderNr, String recipientNr, String content) {
+    public Message(String id, String timestampSender, String senderNr, String recipientNr, String content) {
 
         this.id = id;
-        this.timestamp = timestamp;
+        this.timestampSender = timestampSender;
         this.senderNr = senderNr;
         this.recipientNr = recipientNr;
         this.content = content;
@@ -86,12 +86,12 @@ public class Message {
         this.id = id;
     }
 
-    public String getTimestamp() {
-        return timestamp;
+    public String getTimestampSender() {
+        return timestampSender;
     }
 
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+    public void settimestampSender(String timestampSender) {
+        this.timestampSender = timestampSender;
     }
 
     public String getSenderNr() {

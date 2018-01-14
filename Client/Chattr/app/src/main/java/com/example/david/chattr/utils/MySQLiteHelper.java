@@ -43,6 +43,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String NAME = "name";
     public static final String PROFILE_PICTURE = "profilePicture";
     public static final String COVER_IMAGE = "coverImage";
+    public static final String WRITEABLE = "writeabel";
 
     //   public static final String SQL_ENTRIES = TABLE+COL_1 + COL_2 + COL_3 + COL_4 + COL_5 ;
     public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + TABLE + " ("
@@ -58,7 +59,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + NAME + " TEXT,"
             + PHONE_NUMBER + " TEXT,"
             + PROFILE_PICTURE + " TEXT,"
-            + COVER_IMAGE + " TEXT)";
+            + COVER_IMAGE + " TEXT,"
+            + WRITEABLE + " TEXT)";
 
     public static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXIST " + TABLE;
     public static final String SQL_DELETE_PROFILE_ENTRIES = "DROP TABLE IF EXIST " + TABLE_PROFILE;
@@ -94,12 +96,33 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             String tempPhoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.PHONE_NUMBER));
             byte[] tempProfilePicture = cursor.getBlob(cursor.getColumnIndexOrThrow(MySQLiteHelper.PROFILE_PICTURE));
             byte[] tempCoverImage = cursor.getBlob(cursor.getColumnIndexOrThrow(MySQLiteHelper.COVER_IMAGE));
+            String tempWriteable = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.WRITEABLE));
 
-         //   byte[] profilePicture = Base64.decode(tempProfilePicture, Base64.DEFAULT);
-          //  byte[] coverImage = Base64.decode(tempCoverImage, Base64.DEFAULT);
-
-            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName,tempProfilePicture,tempCoverImage);
+            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName,tempProfilePicture,tempCoverImage,tempWriteable);
             recipients.add(user);
+        }
+        return recipients;
+    }
+
+    public ArrayList<UserProfile> getProfilesWritable(){
+        ArrayList<UserProfile> recipients = new ArrayList<UserProfile>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "select * from " + MySQLiteHelper.TABLE_PROFILE;
+        Cursor cursor = db.rawQuery(query, null);
+
+        while (cursor.moveToNext()) {
+            String tempFirstName = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.FIRST_NAME));
+            String tempName = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.NAME));
+            String tempPhoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.PHONE_NUMBER));
+            byte[] tempProfilePicture = cursor.getBlob(cursor.getColumnIndexOrThrow(MySQLiteHelper.PROFILE_PICTURE));
+            byte[] tempCoverImage = cursor.getBlob(cursor.getColumnIndexOrThrow(MySQLiteHelper.COVER_IMAGE));
+            String tempWriteable = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.WRITEABLE));
+
+            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName,tempProfilePicture,tempCoverImage,tempWriteable);
+            if(user.getWriteable().equals("true")) {
+                recipients.add(user);
+            }
         }
         return recipients;
     }

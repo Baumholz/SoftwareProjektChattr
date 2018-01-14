@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.david.chattr.adapters.PagerAdapter;
 import com.example.david.chattr.R;
+import com.example.david.chattr.fragments.ContactListFragment;
 import com.example.david.chattr.menu.FaqActivity;
 import com.example.david.chattr.menu.PersonalProfileActivity;
 import com.example.david.chattr.messaging.MyMqttService;

@@ -24,6 +24,8 @@ import java.util.ArrayList;
  */
 public class ContactListFragment extends Fragment {
 
+    ContactListAdapter myContactListAdapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class ContactListFragment extends Fragment {
 
         final ArrayList<UserProfile> contacts = new ArrayList<>(myDbProfile.getProfiles());
 
-        final ContactListAdapter myContactListAdapter = new ContactListAdapter(contacts);
+        myContactListAdapter = new ContactListAdapter(contacts);
         final ListView contactListView = view.findViewById(R.id.contactList);
         contactListView.setAdapter(myContactListAdapter);
         myContactListAdapter.notifyDataSetChanged();
@@ -45,6 +47,8 @@ public class ContactListFragment extends Fragment {
                 intent.putExtra("firstName", contacts.get(i).getFirstName());
                 intent.putExtra("name", contacts.get(i).getName());
                 intent.putExtra("status", contacts.get(i).getStatus());
+                intent.putExtra("profilePicture", contacts.get(i).getProfilePicture());
+                intent.putExtra("coverImage", contacts.get(i).getCoverImage());
                 startActivity(intent);
             }
         });

@@ -1,20 +1,31 @@
 package com.example.david.chattr;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.david.chattr.entities.users.UserProfile;
+import com.example.david.chattr.fragments.ChatListFragment;
+import com.example.david.chattr.fragments.ContactListFragment;
 import com.example.david.chattr.menu.FaqActivity;
 import com.example.david.chattr.menu.PersonalProfileActivity;
+import com.example.david.chattr.messaging.ChatActivity;
+import com.example.david.chattr.startup.HomeActivity;
+import com.example.david.chattr.utils.MySQLiteHelper;
 
 public class ContactActivity extends AppCompatActivity {
+
+    MySQLiteHelper myDbProfile = new MySQLiteHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +75,42 @@ public class ContactActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.delete_contact:
                 // TODO: Here is where the logic to delete a contact needs to be implemented
+                //Sollte fertig sein
+                SQLiteDatabase db =  myDbProfile.getWritableDatabase();
+                String phoneNumber = (String)getIntent().getSerializableExtra("phoneNumber");
+                db.delete(MySQLiteHelper.TABLE_PROFILE, MySQLiteHelper.PHONE_NUMBER + "=" + phoneNumber,null );
+
+                Intent intent = new Intent(ContactActivity.this, HomeActivity.class);
+                startActivity(intent);
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void onNewMessageClicked(View v) {
+
+        String phoneNumber = (String)getIntent().getSerializableExtra("phoneNumber");
+        String firstName = (String)getIntent().getSerializableExtra("firstName");
+        String name = (String)getIntent().getSerializableExtra("name");
+        Bundle extras = getIntent().getExtras();
+        byte[] profilePicture = extras.getByteArray("profilePicture");
+        byte[] coverImage = extras.getByteArray("coverImage");
+
+        SQLiteDatabase db =  myDbProfile.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(MySQLiteHelper.FIRST_NAME,firstName);
+        cv.put(MySQLiteHelper.NAME,name);
+        cv.put(MySQLiteHelper.WRITEABLE,"true");
+        cv.put(MySQLiteHelper.PHONE_NUMBER,phoneNumber);
+        cv.put(MySQLiteHelper.PROFILE_PICTURE,profilePicture);
+        cv.put(MySQLiteHelper.COVER_IMAGE,coverImage);
+        db.update(MySQLiteHelper.TABLE_PROFILE, cv, MySQLiteHelper.PHONE_NUMBER+"=" +phoneNumber, null);
+
+        Intent intent = new Intent(ContactActivity.this, ChatActivity.class);
+        intent.putExtra("phoneNumber", phoneNumber);
+        startActivity(intent);
     }
 }

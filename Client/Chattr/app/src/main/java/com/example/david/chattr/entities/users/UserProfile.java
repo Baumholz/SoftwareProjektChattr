@@ -9,14 +9,41 @@ public class UserProfile extends  Profile{
     private String phoneNumber;
     private String status;
     private byte[] coverImage;
+    private String writeable;
 
-    public UserProfile(String phoneNumber, String status, String firstName, String name,byte[] profilePicture,byte[] coverImage) {
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setCoverImage(byte[] coverImage) {
+        this.coverImage = coverImage;
+    }
+
+    public void setWriteable(String writeable) {
+        this.writeable = writeable;
+    }
+
+    public byte[] getCoverImage() {
+
+        return coverImage;
+    }
+
+    public String getWriteable() {
+        return writeable;
+    }
+
+    public UserProfile(String phoneNumber, String status, String firstName, String name, byte[] profilePicture, byte[] coverImage, String writeable) {
         this.phoneNumber = phoneNumber;
         this.status = status;
         this.firstName = firstName;
         this.name = name;
         this.profilePicture = profilePicture;
-        this.coverImage = this.coverImage;
+        this.coverImage = coverImage;
+        this.writeable = writeable;
     }
 
     public String getPhoneNumber() {

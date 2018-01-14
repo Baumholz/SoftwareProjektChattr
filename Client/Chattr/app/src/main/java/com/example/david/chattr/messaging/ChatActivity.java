@@ -67,7 +67,6 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        //name = (String)getIntent().getSerializableExtra("name");
         recipientNR = (String)getIntent().getSerializableExtra("phoneNumber");
 
         giveInput = (EditText)findViewById(R.id.chatInput);

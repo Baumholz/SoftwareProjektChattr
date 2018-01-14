@@ -49,16 +49,6 @@ public class Message {
         }
     }
 
-    public Message(String id, String timestampSender, String senderNr, String recipientNr, String content, String topic) {
-
-        this.id = id;
-        this.timestampSender = timestampSender;
-        this.senderNr = senderNr;
-        this.recipientNr = recipientNr;
-        this.content = content;
-        this.topic = topic;
-    }
-
     public Message(String id, String timestampSender, String senderNr, String recipientNr, String content) {
 
         this.id = id;
@@ -74,7 +64,8 @@ public class Message {
     public void sendMessage() {
         dm = new PublishMessage();
         wrapMessage();
-        dm.sendTestMessage(message.toString(), getTopic(),2);
+        dm.run(message.toString(), getTopic(),2);
+      //  dm.sendTestMessage(message.toString(), getTopic(),2);
 
 
     }

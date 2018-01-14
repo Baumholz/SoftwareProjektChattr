@@ -1,24 +1,23 @@
 package Daba;
 
-import Entities.Person;
-import Entities.PersonDB;
-
+import Entities.Message;
+import Entities.MessageDB;
+import org.json.JSONObject;
 import java.sql.*;
-import java.util.List;
 
-public class PersonDBImpl implements PersonDB {
+public class MessageDBImpl implements MessageDB {
 
     Connection c = null;
     Statement stmt = null;
     PreparedStatement preStmt;
     ResultSet resSet;
 
-    public void createPersonTable() {
+    public void createMessageTable() {
         try {
             c = DriverManager.getConnection("jdbc:sqlite:datenbank.db"); //im Root Ordner auf datenbank.db zugreifen
             stmt = c.createStatement(); //manipulation der DB
-            stmt.execute("CREATE TABLE IF NOT EXISTS person (cellphoneNumber VARCHAR(50)PRIMARY KEY unique NOT NULL, status VARCHAR(55), sureName VARCHAR(55), lastName VARCHAR(55), pictureURL VARCHAR(255), coverImage VARCHAR(255))");
-            System.out.println("Person Table created! in dir:\n" + System.getProperty("user.dir"));
+            stmt.execute("CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY, recipientNr VARCHAR(50), senderNr VARCHAR(50), timeStampSender VARCHAR(255) ,content TEXT, topic VARCHAR(255), idM VARCHAR(255))");
+            System.out.println("Message Table created! in dir:\n" + System.getProperty("user.dir"));
 
 
         } catch (SQLException e) {
@@ -36,23 +35,23 @@ public class PersonDBImpl implements PersonDB {
             }
 
         }
+
     }
 
-    public void insert(Person person) {
-
+    public void insert(Message message) {
 
         try {
             c = DriverManager.getConnection("jdbc:sqlite:datenbank.db");
-            preStmt = c.prepareStatement("INSERT INTO person (cellphoneNumber,status , sureName , lastName, pictureURL, coverImage)" +
+            preStmt = c.prepareStatement("INSERT INTO messages (recipientNr, senderNr, timeStampSender ,content, topic, idM)" +
                     "VALUES (?,?,?,?,?,?)"); //in the brackets mqsl statement syntax protects from sql inject.
-            preStmt.setString(1, person.getCellphoneNumber());
-            preStmt.setString(2, person.getStatus());
-            preStmt.setString(3, person.getSureName());
-            preStmt.setString(4, person.getLastName());
-            preStmt.setString(5, person.getPictureURL());
-            preStmt.setString(6, person.getCoverImage());
+            preStmt.setString(1, message.getRecipientNr());
+            preStmt.setString(2, message.getSenderNr());
+            preStmt.setString(3, message.getTimestampSender());
+            preStmt.setString(4, message.getContent());
+            preStmt.setString(5, message.getTopic());
+            preStmt.setString(6, message.getId());
             preStmt.executeUpdate();
-            System.out.println("INSERT INTO person (cellphoneNumber as PRIMARY KEY,status , sureName , lastName, pictureURL, coverImage)" +
+            System.out.println("INSERT INTO messages (recipientNr, senderNr, timeStampSender, content, topic, idM)" +
                     "VALUES (?,?,?,?,?,?)");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,28 +71,33 @@ public class PersonDBImpl implements PersonDB {
         }
 
 
+
     }
 
+
     /**
-     * Kreiert mit Hilfe der cellphoneNumber als unique identifier einer Person aus der Datenbank diese Person.
-     *
-     * @param cellphoneNumber
+     * Liefert den chat Verlauf eines Chates zurueck (Mit Hilfe des Topic).
+     * @param topic
      * @return
      */
-    public Person selectById(String cellphoneNumber) {
-        Person person = new Person();
+    public JSONObject getAllFromTopic(String topic) {
+
+JSONObject tmpJsonObj = new JSONObject();
+
         try {
             c = DriverManager.getConnection("jdbc:sqlite:datenbank.db");
-            preStmt = c.prepareStatement("SELECT * FROM person WHERE cellphoneNumber = ?");
-            preStmt.setString(1, cellphoneNumber);
+            preStmt = c.prepareStatement("SELECT * FROM messages WHERE topic = ?");
+            preStmt.setString(1, topic);
             resSet = preStmt.executeQuery();
 
             while (resSet.next()) {
-                person.setStatus(resSet.getString("status"));
-                person.setSureName(resSet.getString("sureName"));
-                person.setLastName(resSet.getString("lastName"));
-                person.setPictureURL(resSet.getString("pictureURL"));
-                person.setCoverImage(resSet.getString("coverImage"));
+
+                tmpJsonObj.accumulate("recipientNr",   resSet.getString("recipientNr"));
+                tmpJsonObj.accumulate("senderNr", resSet.getString("senderNr"));
+                tmpJsonObj.accumulate("timeStampSender",  resSet.getString("timeStampSender"));
+                tmpJsonObj.accumulate("content", resSet.getString("content"));
+                tmpJsonObj.accumulate("idM",  resSet.getString("idM"));
+                tmpJsonObj.accumulate("topic", topic);
 
             }
 
@@ -116,18 +120,9 @@ public class PersonDBImpl implements PersonDB {
             }
 
         }
-        return person;
+        return tmpJsonObj;
     }
 
-    public List<Person> selectAll() {
-        return null;
-    }
 
-    public void delete(String id) {
 
-    }
-
-    public void update(Person person, String id) {
-
-    }
 }

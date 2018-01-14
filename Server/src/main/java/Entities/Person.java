@@ -1,5 +1,8 @@
 package Entities;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Person {
 
 
@@ -12,12 +15,13 @@ public class Person {
 
 
 
-    public Person(String cellphoneNumber, String status, String sureName, String lastName, String pictureURL) {
+    public Person(String cellphoneNumber, String status, String sureName, String lastName, String pictureURL, String coverImage) {
         this.cellphoneNumber = cellphoneNumber;
         this.status = status;
         this.sureName = sureName;
         this.lastName = lastName;
         this.pictureURL = pictureURL;
+        this.coverImage = coverImage;
     }
 
     public Person(){};
@@ -80,5 +84,30 @@ public class Person {
                 ", pictureURL='" + pictureURL + '\'' +
                 ", coverImage='" + coverImage + '\'' +
                 '}';
+    }
+
+    public JSONObject personToJSON (){
+
+
+     JSONObject message = new JSONObject();
+        try {
+            message.put("id" , "10");
+            message.put("cellphoneNumber" , cellphoneNumber);
+            message.put("status" , status);
+            message.put("sureName" , sureName);
+            message.put("lastName" , lastName);
+            message.put("pictureURL", pictureURL);
+            message.put("coverImage", coverImage);
+            System.out.println("Created a Profil JSON:"+message.toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        return message;
+
     }
 }

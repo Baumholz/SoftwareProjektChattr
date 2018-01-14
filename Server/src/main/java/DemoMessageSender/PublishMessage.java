@@ -17,10 +17,13 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
  * @author mkurras
  *
  */
-public class PublishMessage {
+public class PublishMessage extends Thread{
 
 
+    public void run(String message, String topic, int qos) {
+        sendTestMessage(message, topic, qos);
 
+    }
     /**
      * Das Objekt wird beim Ausführen der Methode übergeben.
      * qos --> message get delivered at most once (0)

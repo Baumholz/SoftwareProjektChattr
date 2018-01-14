@@ -1,5 +1,10 @@
 package MQTT_Handler;
 
+
+import Daba.MessageDBImpl;
+import Daba.PersonDBImpl;
+import Entities.Message;
+import Entities.Person;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -10,6 +15,10 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Startet einen Testlauf zum verschicken und gleichzeitigen Empfangen eines
  * test Objektes. Was diese Klasse noch könnte: Direkt eine neue Instanz von
@@ -18,10 +27,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * versendet wird über die Publish Klasse und dann hier wieder empfangen wird.
  *
  * @author mkurras
- *
  */
 
-public class MQTTSubscribe implements MqttCallback {
+public class MQTTSubscribe extends Thread implements MqttCallback {
+
+    int count = 0;
+    PersonDBImpl pdi = new PersonDBImpl();
+    MessageDBImpl mdi = new MessageDBImpl();
+
+
+    public void run() {
+        mdi.createMessageTable();
+        System.out.println("MessageDatabase initiated");
+        pdi.createPersonTable();
+        System.out.println("Person initiated");
+        subscribe();
+    }
 
 
     public void subscribe() {
@@ -47,9 +68,9 @@ public class MQTTSubscribe implements MqttCallback {
         } catch (Exception me) {
             if (me instanceof MqttException) {
 
-        MQTTErrorFileHandler errFilehandler = new MQTTErrorFileHandler();
-               String error = errFilehandler.getErrorCode(((MqttException) me).getReasonCode());
-                System.out.println("ERROR: "+error);
+                MQTTErrorFileHandler errFilehandler = new MQTTErrorFileHandler();
+                String error = errFilehandler.getErrorCode(((MqttException) me).getReasonCode());
+                System.out.println("ERROR: " + error);
             }
             System.out.println("msg " + me.getMessage());
             System.out.println("loc " + me.getLocalizedMessage());
@@ -61,7 +82,7 @@ public class MQTTSubscribe implements MqttCallback {
 
     public void connectionLost(Throwable arg0) {
         System.out.println(arg0.getMessage());
-      arg0.printStackTrace();
+        arg0.printStackTrace();
         System.err.println("connection lost");
 
     }
@@ -71,20 +92,51 @@ public class MQTTSubscribe implements MqttCallback {
      * nur Demonstration des message Empfangs
      */
     public void messageArrived(String topic, MqttMessage message) throws Exception {
-
-        ObjectMapper mapper = new ObjectMapper();
+        String messageID ="";
+        //ObjectMapper mapper = new ObjectMapper();
         String tmp = new String(message.getPayload());
-      //  Message obj = mapper.readValue(tmp, Message.class);
-       // System.out.println(obj.toString() + "\n");
-        System.out.println(tmp);
+        //  Message obj = mapper.readValue(tmp, Message.class);
+        // System.out.println(obj.toString() + "\n");
+        System.out.println("NEW MESSAGE: " + tmp);
 
+        //JSONParser parser = new JSONParser(tmp, Person, true);
+
+        Map<String, String> myMap = new HashMap<String, String>();
+        if (count != 0) {
+            byte[] mapData = tmp.getBytes();
+            ObjectMapper objectMapper = new ObjectMapper();
+            myMap = objectMapper.readValue(mapData, HashMap.class);
+            messageID = myMap.get("id");
+            System.out.println("Map is: " + myMap);
+        }
+
+/**
+ * If a Profil Arrives --> Save it in the Profil Database.
+ */
+        if (messageID.equals("10")) {
+            Person person = new Person(myMap.get("cellphoneNumber"), myMap.get("status"), myMap.get("sureName"), myMap.get("lastName"), myMap.get("pictureURL"), myMap.get("coverImage"));
+            pdi.insert(person);
+        }
+
+
+        /**
+         * If a normal message arrives --> Save it in the Message Database.
+         */
+        if (messageID.equals("1")) {
+            Message m1 = new Message(myMap.get("id"), myMap.get("timestampSender"), myMap.get("senderNr"), myMap.get("recipientNr"), myMap.get("content"));
+            mdi.insert(m1);
+        }
+        //  ObjectMapper objectMapper = new ObjectMapper();
+        //   objectMapper.        parser.parse();
+        // JSONObject arrivedMsgJSON = (JSONObject) parser.parse(tmp);
+        count++;
+        System.out.println("Count " + count);
     }
 
 
     public void deliveryComplete(IMqttDeliveryToken arg0) {
         System.err.println("delivery complete");
     }
-
 
 
 }

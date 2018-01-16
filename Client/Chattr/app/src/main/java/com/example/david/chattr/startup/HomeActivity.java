@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -133,7 +134,7 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intentFaq = new Intent(this, FaqActivity.class);
                 startActivity(intentFaq);
                 return true;
-            case R.id.personal_profile:
+            case R.id.action_profile:
                 Intent intentPp = new Intent(this, PersonalProfileActivity.class);
                 startActivity(intentPp);
                 return true;
@@ -152,9 +153,12 @@ public class HomeActivity extends AppCompatActivity {
             Intent startServiceIntent = new Intent(HomeActivity.this, MyMqttService.class);
             startService(startServiceIntent);
 
-//            mqttService.sendMessage("/pub/trainID/camID/", "message");
-            //Subscribe to newly created topic Todo: Real timestamp as topic
-//            mqttService.subscribe("/pub/trainID/camID/");
+            /*
+            * Every User subscribes to the topic of his or her own phoneNumber
+            * */
+            SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
+            String phoneNumber = sharedPreferences.getString("phoneNumber", "0");
+            mqttService.subscribe("all/"+ phoneNumber);
         }
 
         @Override

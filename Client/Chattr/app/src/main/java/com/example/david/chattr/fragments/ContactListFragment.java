@@ -42,13 +42,14 @@ public class ContactListFragment extends Fragment {
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(ContactListFragment.this.getActivity(), ContactActivity.class);
+                Intent intent = new Intent(getActivity(), ContactActivity.class);
                 intent.putExtra("phoneNumber", contacts.get(i).getPhoneNumber());
                 intent.putExtra("firstName", contacts.get(i).getFirstName());
                 intent.putExtra("name", contacts.get(i).getName());
                 intent.putExtra("status", contacts.get(i).getStatus());
                 intent.putExtra("profilePicture", contacts.get(i).getProfilePicture());
                 intent.putExtra("coverImage", contacts.get(i).getCoverImage());
+                intent.putExtra("topic", contacts.get(i).getTopic());
                 startActivity(intent);
             }
         });

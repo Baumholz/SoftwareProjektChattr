@@ -64,7 +64,7 @@ public class startServer {
          */
 
         //Person(String cellphoneNumber, String status, String sureName, String lastName, String pictureURL)
-        int i = 0;
+        /*int i = 0;
         while(i < 2000) {
 
             Person person4 = new Person(Integer.toString(i), "meinStatus!", "Manuella", "Stratz", "c/data/pictures/profilepicture", "c/data/pictures/profilepicture");
@@ -77,7 +77,7 @@ public class startServer {
             m2.sendMessage();
 
             i++;
-        }
+        } */
         /**Test der Message DB
          */
 /*

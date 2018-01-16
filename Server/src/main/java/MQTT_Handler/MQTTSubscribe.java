@@ -14,6 +14,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 
 
 import java.util.HashMap;
@@ -92,12 +93,23 @@ public class MQTTSubscribe extends Thread implements MqttCallback {
      * nur Demonstration des message Empfangs
      */
     public void messageArrived(String topic, MqttMessage message) throws Exception {
+        /**
+         * ICH MUSS DAS TOPIC AUTOMATISCH RAUSZIEHEN!
+         */
         String messageID ="";
+
+        System.out.println("BYTE ARRAY: "+message);
         //ObjectMapper mapper = new ObjectMapper();
         String tmp = new String(message.getPayload());
         //  Message obj = mapper.readValue(tmp, Message.class);
         // System.out.println(obj.toString() + "\n");
-        System.out.println("NEW MESSAGE: " + tmp);
+        System.out.println("NEW MESSAGE: " + tmp +" Under TOPIC: "+topic);
+
+
+
+
+        //JSONObject jsn = new JSONObject(tmp);
+       /* System.out.println("Testausgabe Content"+ jsn.get("content"));
 
         //JSONParser parser = new JSONParser(tmp, Person, true);
 
@@ -109,20 +121,21 @@ public class MQTTSubscribe extends Thread implements MqttCallback {
             messageID = myMap.get("id");
             System.out.println("Map is: " + myMap);
         }
-
+*/
 /**
  * If a Profil Arrives --> Save it in the Profil Database.
  */
+/*
         if (messageID.equals("10")) {
             Person person = new Person(myMap.get("cellphoneNumber"), myMap.get("status"), myMap.get("sureName"), myMap.get("lastName"), myMap.get("pictureURL"), myMap.get("coverImage"));
             pdi.insert(person);
         }
-
+*/
 
         /**
          * If a normal message arrives --> Save it in the Message Database.
          */
-        if (messageID.equals("1")) {
+      /*  if (messageID.equals("1")) {
             Message m1 = new Message(myMap.get("id"), myMap.get("timestampSender"), myMap.get("senderNr"), myMap.get("recipientNr"), myMap.get("content"));
             mdi.insert(m1);
         }
@@ -131,6 +144,7 @@ public class MQTTSubscribe extends Thread implements MqttCallback {
         // JSONObject arrivedMsgJSON = (JSONObject) parser.parse(tmp);
         count++;
         System.out.println("Count " + count);
+    */
     }
 
 

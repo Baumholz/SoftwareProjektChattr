@@ -68,8 +68,6 @@ public class MyMqttService extends Service implements MqttCallback{
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-//        topic = intent.getStringExtra("topic");
-
         SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
         String phoneNumber = sharedPreferences.getString("phoneNumber", "default");
         if (phoneNumber.equals("default")) {
@@ -77,13 +75,6 @@ public class MyMqttService extends Service implements MqttCallback{
         } else {
             clientId = phoneNumber;
         }
-
-//        if (clientId != null) {
-//            clientId = intent.getStringExtra("clientId");
-//        } else {
-//            clientId = "SampleMessageReceiver";
-//        }
-
         try {
             connect();
         } catch (MqttException e) {
@@ -167,14 +158,12 @@ public class MyMqttService extends Service implements MqttCallback{
 
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
-        //Todo: Find out why messages do not arrive
         String mMessage = message.toString();
         Log.d(TAG, "\nMessage arrived on topic: " + topic + "\n" + message + "\n");
 //        Toast.makeText(MyMqttService.this, "Message arrived: " + message, Toast.LENGTH_SHORT).show();
 
         myBinder.messageArrived(topic, message);
 
-        //TODO: Make notification with real content
         MessageNotifier notifier = new MessageNotifier(this);
         notifier.showOrUpdateNotification(mMessage);
 //        Toast.makeText(this, "Arived: "+ mMessage, Toast.LENGTH_SHORT).show();

@@ -63,6 +63,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
     private ChatActivityListViewAdapter myChatActivityListViewAdapter;
     private UserProfile temp;
     private Bitmap bitmap;
+    private String topic;
 
     private MySQLiteHelper myDb = new MySQLiteHelper(this);
     private SQLiteDatabase db;
@@ -103,16 +104,16 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
 
         //Read out the Database
         db = myDb.getReadableDatabase();
-        String [] projection = {
-
-                BaseColumns._ID,
-                MySQLiteHelper.COL_1,
-                MySQLiteHelper.COL_3,
-                MySQLiteHelper.COL_4,
-                MySQLiteHelper.COL_5
-        };
-        String selection = MySQLiteHelper.COL_4 + " = ?";
-        String [] selectionArgs = {recipientNR};
+//        String [] projection = {
+//
+//                BaseColumns._ID,
+//                MySQLiteHelper.COL_1,
+//                MySQLiteHelper.COL_3,
+//                MySQLiteHelper.COL_4,
+//                MySQLiteHelper.COL_5
+//        };
+//        String selection = MySQLiteHelper.COL_4 + " = ?";
+//        String [] selectionArgs = {recipientNR};
         Log.e("Number",recipientNR);
         String query ="select * from " + MySQLiteHelper.TABLE + " where " + MySQLiteHelper.COL_3 +
                 "='" + recipientNR + "' or " + MySQLiteHelper.COL_4 + "='" + recipientNR + "';";
@@ -212,6 +213,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
             mqttService = binder.getService();
             binder.setMessageArrivedListener(ChatActivity.this);
 
+            recipientNR = (String)getIntent().getSerializableExtra("phoneNumber");
 
             //Start Service
             Intent startServiceIntent = new Intent(ChatActivity.this, MyMqttService.class);
@@ -219,17 +221,28 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
 
             // Step 1: Creates New Chat by sending a hidden message to:
             // topic: “receiver_number” with palyloud: Sender “sender_nr” ChatTopic “rand_nummer_timestamp”
+            ArrayList<UserProfile> profiles = new ArrayList<>(myDb.getProfiles());
 
-            recipientNR = (String)getIntent().getSerializableExtra("phoneNumber");
-            Random random = new Random();
-            int tmp = random.nextInt(9999999) + 10000000;
-            String randomChatTopic = String.valueOf(tmp);
-            Message message = new Message("12", -1, senderNr, recipientNR, randomChatTopic);
+            for(int i =0; i < profiles.size();i++){
+                if(profiles.get(i).getPhoneNumber().equals(recipientNR)){
+                    topic = profiles.get(i).getTopic();
+                    break;
+                }
+            }
+
+            if (topic.equals("false")) {
+                Random random = new Random();
+                int tmp = random.nextInt(9999999) + 10000000;
+                // Generate new topic
+                topic = "all/" + String.valueOf(tmp);
+                Message message = new Message("12", -1, senderNr, recipientNR, topic);
+                mqttService.sendMessage("all/" + recipientNR, message.toString());
+                myDb.updateTopic(recipientNR,topic);
+            }
 
             //Todo: Save topic in database
-            mqttService.sendMessage("all/" + recipientNR, message.toString());
             //Subscribe to newly created topic Todo: Real timestamp as topic
-            mqttService.subscribe("all/" + randomChatTopic);
+            mqttService.subscribe("all/" + topic);
         }
 
         @Override

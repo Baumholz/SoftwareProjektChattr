@@ -66,7 +66,7 @@ public class Message {
         this.senderNr = senderNr;
     }
 
-    public String isRecipientNr() {
+    public String getRecipientNr() {
         return recipientNr;
     }
 

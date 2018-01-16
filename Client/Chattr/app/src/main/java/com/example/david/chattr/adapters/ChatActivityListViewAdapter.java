@@ -19,9 +19,12 @@ import java.util.ArrayList;
 public class ChatActivityListViewAdapter extends BaseAdapter{
 
 
-
     private ArrayList<Message> recipients ;
-    public ChatActivityListViewAdapter(ArrayList<Message> messages) {this.recipients = messages;
+    private String myNumber;
+
+    public ChatActivityListViewAdapter(ArrayList<Message> messages, String recipientNR) {
+        this.recipients = messages;
+        this.myNumber = recipientNR;
     }
 
     @Override
@@ -41,18 +44,53 @@ public class ChatActivityListViewAdapter extends BaseAdapter{
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
+        ViewHolder holder;
         Context context = viewGroup.getContext();
         Message message = recipients.get(i);
 
-        if(view == null){
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.activity_chat_list_view,null,false); //Use our Layout
+        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        int layoutResource = 0; // determined by view type
+        int viewType = getItemViewType(i);
+
+        if(myNumber.equals(message.getRecipientNr())) {
+            layoutResource = R.layout.item_chat_right;
+        }else{
+            layoutResource = R.layout.item_chat_left;
         }
 
-        TextView chatInput = view.findViewById(R.id.listViewText);
-        chatInput.setText(message.getContent());
-       // chatInput.setBackgroundColor(Color.GREEN);
+        if (view != null) {
+            holder = (ViewHolder) view.getTag();
+        } else {
+           view = inflater.inflate(layoutResource, viewGroup, false);
+            holder = new ViewHolder(view);
+            view.setTag(holder);
+        }
+
+        holder.text.setText(message.getContent());
+
         return view;
     }
+
+    @Override
+    public int getViewTypeCount() {
+        // return the total number of view types. this value should never change
+        // at runtime
+        return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        // return a value between 0 and (getViewTypeCount - 1)
+        return position % 2;
+    }
+
+    private class ViewHolder {
+        private TextView text;
+
+        public ViewHolder(View v) {
+            text = (TextView) v.findViewById(R.id.text);
+        }
+    }
+
 }

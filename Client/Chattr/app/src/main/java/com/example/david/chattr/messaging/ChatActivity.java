@@ -42,6 +42,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatActivity extends AppCompatActivity implements MessageArrivedListener {
 
+
+
     MyMqttService mqttService;
     ArrayList<Message> messages;
     EditText giveInput;
@@ -119,7 +121,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
 
         //finish DB
 
-        myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages);
+        myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages,recipientNR);
         chatListView.setAdapter(myChatActivityListViewAdapter);
 
         // Set Toolbar Title and Profile Picture

@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 
 import com.example.david.chattr.R;
+import com.example.david.chattr.utils.BitmapScaler;
 import com.example.david.chattr.utils.ImageSaver;
 import com.example.david.chattr.utils.MySQLiteHelper;
 import com.example.david.chattr.adapters.ChatActivityListViewAdapter;
@@ -294,8 +295,11 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
                 Uri targetUri = data.getData();
 
 
-                if (requestCode == 0)
+                if (requestCode == 0) {
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                    if (bitmap.getHeight() > 800 || bitmap.getWidth() > 800)
+                        bitmap = BitmapScaler.scaleBitmap(bitmap);
+                }
                 else if (requestCode == 1)
                     bitmap = (Bitmap) data.getExtras().get("data");
 

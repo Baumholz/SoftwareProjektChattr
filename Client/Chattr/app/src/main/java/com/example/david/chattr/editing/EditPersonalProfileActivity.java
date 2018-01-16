@@ -26,6 +26,7 @@ import com.example.david.chattr.entities.messaging.Message;
 import com.example.david.chattr.entities.users.UserProfile;
 import com.example.david.chattr.messaging.MyMqttService;
 import com.example.david.chattr.startup.SignUpActivity;
+import com.example.david.chattr.utils.BitmapScaler;
 import com.example.david.chattr.utils.ImageSaver;
 
 import java.io.ByteArrayOutputStream;
@@ -114,7 +115,7 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
             byteArrayProfile = stream.toByteArray();
         }
         if (bitmapCover != null) {
-            bitmapProfile.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            bitmapCover.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byteArrayCover = stream.toByteArray();
         }
 
@@ -173,8 +174,11 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
                 TextView profileHintTextView = (TextView) findViewById(R.id.profileHintTextView);
                 Uri targetUri = data.getData();
 
-                if (isGalleryChosen)
+                if (isGalleryChosen) {
                     bitmapProfile = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                    if (bitmapProfile.getHeight() > 800 || bitmapProfile.getWidth() > 800)
+                        bitmapProfile = BitmapScaler.scaleBitmap(bitmapProfile);
+                }
                 else
                     bitmapProfile = (Bitmap) data.getExtras().get("data");
 
@@ -189,8 +193,11 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
                 TextView coverImageHintTextView = (TextView) findViewById(R.id.coverImageHintTextView);
                 Uri targetUri = data.getData();
 
-                if (isGalleryChosen)
+                if (isGalleryChosen) {
                     bitmapCover = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                    if (bitmapCover.getHeight() > 800 || bitmapCover.getWidth() > 800)
+                        bitmapCover = BitmapScaler.scaleBitmap(bitmapCover);
+                }
                 else
                     bitmapCover = (Bitmap) data.getExtras().get("data");
 

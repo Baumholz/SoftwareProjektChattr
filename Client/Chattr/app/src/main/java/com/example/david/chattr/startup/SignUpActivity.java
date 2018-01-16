@@ -23,12 +23,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.david.chattr.R;
 import com.example.david.chattr.entities.messaging.Message;
 import com.example.david.chattr.entities.users.UserProfile;
 import com.example.david.chattr.messaging.ChatActivity;
 import com.example.david.chattr.messaging.MyMqttService;
+import com.example.david.chattr.utils.BitmapScaler;
 import com.example.david.chattr.utils.ImageSaver;
 
 import java.io.ByteArrayOutputStream;
@@ -188,14 +190,19 @@ public class SignUpActivity extends AppCompatActivity {
                 TextView profileHintTextView = (TextView) findViewById(R.id.profileHintTextView);
                 Uri targetUri = data.getData();
 
-                if (isGalleryChosen)
+                if (isGalleryChosen) {
                     bitmapProfile = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
-                else
+                    if (bitmapProfile.getHeight() > 800 || bitmapProfile.getWidth() > 800)
+                        bitmapProfile = BitmapScaler.scaleBitmap(bitmapProfile);
+                }
+                else {
                     bitmapProfile = (Bitmap) data.getExtras().get("data");
+                }
 
                 profile_image.setImageBitmap(bitmapProfile);
                 profileHintTextView.setText("");
                 profileHintTextView.setBackgroundColor(Color.TRANSPARENT);
+                Log.i("Bitmap Size", "Width: " + bitmapProfile.getWidth() + "\nHeight: " + bitmapProfile.getHeight());
 
                 new ImageSaver(getApplicationContext()).setFileName("profile_image.png").setDirectoryName("images").save(bitmapProfile);
 
@@ -206,12 +213,15 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if (isGalleryChosen)
                     bitmapCover = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                    if (bitmapCover.getHeight() > 800 || bitmapCover.getWidth() > 800)
+                        bitmapCover = BitmapScaler.scaleBitmap(bitmapCover);
                 else
                     bitmapCover = (Bitmap) data.getExtras().get("data");
 
                 cover_image.setImageBitmap(bitmapCover);
                 coverImageHintTextView.setText("");
                 coverImageHintTextView.setBackgroundColor(Color.TRANSPARENT);
+                Log.i("Bitmap Size", "Width: " + bitmapCover.getWidth() + "\nHeight: " + bitmapCover.getHeight());
 
                 new ImageSaver(getApplicationContext()).setFileName("cover_image.png").setDirectoryName("images").save(bitmapCover);
 

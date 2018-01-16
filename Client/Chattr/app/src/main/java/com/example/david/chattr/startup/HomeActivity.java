@@ -133,7 +133,7 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intentFaq = new Intent(this, FaqActivity.class);
                 startActivity(intentFaq);
                 return true;
-            case R.id.personal_profile:
+            case R.id.action_profile:
                 Intent intentPp = new Intent(this, PersonalProfileActivity.class);
                 startActivity(intentPp);
                 return true;

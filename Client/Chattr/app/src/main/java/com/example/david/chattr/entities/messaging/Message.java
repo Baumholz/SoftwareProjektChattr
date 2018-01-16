@@ -10,7 +10,7 @@ import java.util.Date;
  */
 
 public class Message {
-    // i gave Message a String to test it. I know its wrong so we can delete it later
+
     protected String id;
     protected int timestamp;
     protected String senderNr;

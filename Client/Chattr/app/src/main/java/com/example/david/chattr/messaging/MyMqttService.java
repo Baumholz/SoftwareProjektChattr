@@ -127,6 +127,17 @@ public class MyMqttService extends Service implements MqttCallback{
             e.printStackTrace();
         }
     }
+    public void sendMessage(String topic, byte[] message, int a) {
+        try {
+            MqttMessage mMessage = new MqttMessage(message);
+            mMessage.setRetained(true);
+            client.publish(topic, mMessage);
+            Log.d(TAG, "\nMessage send\n");
+//            Toast.makeText(MyMqttService.this, "Message send on topic: " + topic + "\n" + message, Toast.LENGTH_SHORT).show();
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void subscribe(final String topic) {
         try {

@@ -1,8 +1,13 @@
 package com.example.david.chattr.entities.users;
 
 
+import android.graphics.Bitmap;
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 
 public class UserProfile extends  Profile{
 
@@ -55,13 +60,24 @@ public class UserProfile extends  Profile{
     }
 
     public JSONObject toJson () {
+
+        String profile = "";
+        String cover = "";
+        if (profilePicture != null) {
+            profile = new String(profilePicture);
+        }
+        if (coverImage != null) {
+            cover = new String(coverImage);
+        }
+
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("phoneNumber", phoneNumber);
             jsonObject.put("status", status);
             jsonObject.put("firstName", firstName);
             jsonObject.put("name", name);
-            jsonObject.put("profilePicture", profilePicture);
+            jsonObject.put("profilePicture", profile);
+            jsonObject.put("coverImage", cover);
         } catch (JSONException e) {
             e.printStackTrace();
         }

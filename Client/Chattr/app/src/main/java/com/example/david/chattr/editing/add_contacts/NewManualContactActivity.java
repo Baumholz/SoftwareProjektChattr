@@ -206,6 +206,7 @@ public class NewManualContactActivity extends AppCompatActivity {
             }
 
             values.put(MySQLiteHelper.WRITEABLE,"false");
+            values.put(MySQLiteHelper.WRITEABLE,"false");
 
             long result = dbProfile.insert(MySQLiteHelper.TABLE_PROFILE, null, values);
 

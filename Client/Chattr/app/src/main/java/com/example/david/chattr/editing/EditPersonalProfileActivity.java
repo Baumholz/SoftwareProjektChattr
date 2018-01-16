@@ -119,7 +119,7 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
             byteArrayCover = stream.toByteArray();
         }
 
-        String userProfile = new UserProfile(phoneNumber,status,firstName,name,byteArrayProfile,byteArrayCover,"").toJson().toString();
+        String userProfile = new UserProfile(phoneNumber,status,firstName,name,byteArrayProfile,byteArrayCover,"","-1").toJson().toString();
         Message signUpMessage = new Message("10", 0, phoneNumber, "-1", userProfile);
         Log.i("newProfileMessage", signUpMessage.toString());
         mqttService.sendMessage("/all", signUpMessage.toString());

@@ -116,7 +116,7 @@ public class SignUpActivity extends AppCompatActivity {
             byteArrayCover = stream.toByteArray();
         }
 
-        String userProfile = new UserProfile(phoneNumber,status,firstName,name,byteArrayProfile,byteArrayCover,"").toJson().toString();
+        String userProfile = new UserProfile(phoneNumber,status,firstName,name,byteArrayProfile,byteArrayCover,"false","false").toJson().toString();
         Message signUpMessage = new Message("10", 0, phoneNumber, "-1", userProfile);
         Log.i("signUpMessage", signUpMessage.toString());
         Log.i("userProfile", userProfile);

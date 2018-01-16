@@ -13,6 +13,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.example.david.chattr.R;
+import com.example.david.chattr.entities.messaging.Message;
 import com.example.david.chattr.entities.users.UserProfile;
 import com.example.david.chattr.fragments.ChatListFragment;
 
@@ -44,6 +45,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String PROFILE_PICTURE = "profilePicture";
     public static final String COVER_IMAGE = "coverImage";
     public static final String WRITEABLE = "writeabel";
+    public static final String TOPIC = "topic";
 
     //   public static final String SQL_ENTRIES = TABLE+COL_1 + COL_2 + COL_3 + COL_4 + COL_5 ;
     public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + TABLE + " ("
@@ -60,7 +62,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + PHONE_NUMBER + " TEXT,"
             + PROFILE_PICTURE + " TEXT,"
             + COVER_IMAGE + " TEXT,"
-            + WRITEABLE + " TEXT)";
+            + WRITEABLE + " TEXT,"
+            + TOPIC + " TEXT)";
 
     public static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXIST " + TABLE;
     public static final String SQL_DELETE_PROFILE_ENTRIES = "DROP TABLE IF EXIST " + TABLE_PROFILE;
@@ -97,8 +100,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             byte[] tempProfilePicture = cursor.getBlob(cursor.getColumnIndexOrThrow(MySQLiteHelper.PROFILE_PICTURE));
             byte[] tempCoverImage = cursor.getBlob(cursor.getColumnIndexOrThrow(MySQLiteHelper.COVER_IMAGE));
             String tempWriteable = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.WRITEABLE));
+            String tempTopic = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.TOPIC));
 
-            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName,tempProfilePicture,tempCoverImage,tempWriteable);
+            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName,tempProfilePicture,tempCoverImage,tempWriteable,tempTopic);
             recipients.add(user);
         }
         return recipients;
@@ -118,12 +122,51 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             byte[] tempProfilePicture = cursor.getBlob(cursor.getColumnIndexOrThrow(MySQLiteHelper.PROFILE_PICTURE));
             byte[] tempCoverImage = cursor.getBlob(cursor.getColumnIndexOrThrow(MySQLiteHelper.COVER_IMAGE));
             String tempWriteable = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.WRITEABLE));
+            String tempTopic = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.TOPIC));
 
-            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName,tempProfilePicture,tempCoverImage,tempWriteable);
+            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName,tempProfilePicture,tempCoverImage,tempWriteable,tempTopic);
             if(user.getWriteable().equals("true")) {
                 recipients.add(user);
             }
         }
         return recipients;
+    }
+    public void updateTopic(String phoneNumber,String topic){
+
+        SQLiteDatabase db =  this.getReadableDatabase();
+
+        String query ="select * from " + MySQLiteHelper.TABLE_PROFILE + " where " + MySQLiteHelper.PHONE_NUMBER + "='" + phoneNumber + "';";
+        Cursor c = db.rawQuery(query, null);
+
+        String firstName = "";
+        String name = "";
+        byte[] profilePicture = null;
+        byte[] coverImage = null;
+        String writeable = "";
+
+        while (c.moveToNext()) {
+            firstName = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.FIRST_NAME));
+            name = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.NAME));
+            phoneNumber = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.PHONE_NUMBER));
+            profilePicture = c.getBlob(c.getColumnIndexOrThrow(MySQLiteHelper.PROFILE_PICTURE));
+            coverImage = c.getBlob(c.getColumnIndexOrThrow(MySQLiteHelper.COVER_IMAGE));
+            writeable = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.WRITEABLE));
+        }
+        c.close();
+        db.close();
+
+        db =  this.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(MySQLiteHelper.FIRST_NAME,firstName);
+        cv.put(MySQLiteHelper.NAME,name);
+        cv.put(MySQLiteHelper.WRITEABLE,writeable);
+        cv.put(MySQLiteHelper.PHONE_NUMBER,phoneNumber);
+        cv.put(MySQLiteHelper.PROFILE_PICTURE,profilePicture);
+        cv.put(MySQLiteHelper.COVER_IMAGE,coverImage);
+        cv.put(MySQLiteHelper.TOPIC,topic);
+
+        db.update(MySQLiteHelper.TABLE_PROFILE, cv, MySQLiteHelper.PHONE_NUMBER+"=" +phoneNumber, null);
+
     }
 }

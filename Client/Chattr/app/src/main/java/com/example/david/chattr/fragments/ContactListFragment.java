@@ -49,6 +49,7 @@ public class ContactListFragment extends Fragment {
                 intent.putExtra("status", contacts.get(i).getStatus());
                 intent.putExtra("profilePicture", contacts.get(i).getProfilePicture());
                 intent.putExtra("coverImage", contacts.get(i).getCoverImage());
+                intent.putExtra("topic", contacts.get(i).getTopic());
                 startActivity(intent);
             }
         });

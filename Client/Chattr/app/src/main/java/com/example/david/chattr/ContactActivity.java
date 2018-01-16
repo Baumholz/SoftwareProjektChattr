@@ -97,6 +97,7 @@ public class ContactActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         byte[] profilePicture = extras.getByteArray("profilePicture");
         byte[] coverImage = extras.getByteArray("coverImage");
+        String topic = (String)getIntent().getSerializableExtra("topic");
 
         SQLiteDatabase db =  myDbProfile.getWritableDatabase();
 
@@ -107,6 +108,7 @@ public class ContactActivity extends AppCompatActivity {
         cv.put(MySQLiteHelper.PHONE_NUMBER,phoneNumber);
         cv.put(MySQLiteHelper.PROFILE_PICTURE,profilePicture);
         cv.put(MySQLiteHelper.COVER_IMAGE,coverImage);
+        cv.put(MySQLiteHelper.TOPIC,topic);
         db.update(MySQLiteHelper.TABLE_PROFILE, cv, MySQLiteHelper.PHONE_NUMBER+"=" +phoneNumber, null);
 
         Intent intent = new Intent(ContactActivity.this, ChatActivity.class);

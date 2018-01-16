@@ -15,6 +15,7 @@ public class UserProfile extends  Profile{
     private String status;
     private byte[] coverImage;
     private String writeable;
+    private String topic;
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
@@ -41,7 +42,11 @@ public class UserProfile extends  Profile{
         return writeable;
     }
 
-    public UserProfile(String phoneNumber, String status, String firstName, String name, byte[] profilePicture, byte[] coverImage, String writeable) {
+    public String getTopic() {
+        return topic;
+    }
+
+    public UserProfile(String phoneNumber, String status, String firstName, String name, byte[] profilePicture, byte[] coverImage, String writeable, String topic) {
         this.phoneNumber = phoneNumber;
         this.status = status;
         this.firstName = firstName;
@@ -49,6 +54,7 @@ public class UserProfile extends  Profile{
         this.profilePicture = profilePicture;
         this.coverImage = coverImage;
         this.writeable = writeable;
+        this.topic = topic;
     }
 
     public String getPhoneNumber() {

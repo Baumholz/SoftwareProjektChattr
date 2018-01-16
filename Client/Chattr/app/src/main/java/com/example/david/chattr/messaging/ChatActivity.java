@@ -185,6 +185,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
 //            }else{
 //               Toast.makeText(ChatActivity.this, "Data not Inserted", Toast.LENGTH_SHORT).show();
 //            }
+           // myDb.updateTopic(recipientNR,"teeeest";
         }
         giveInput.setText("");
     }

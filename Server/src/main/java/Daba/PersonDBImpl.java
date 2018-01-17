@@ -13,11 +13,12 @@ public class PersonDBImpl implements PersonDB {
     PreparedStatement preStmt;
     ResultSet resSet;
 
+
     public void createPersonTable() {
         try {
             c = DriverManager.getConnection("jdbc:sqlite:datenbank.db"); //im Root Ordner auf datenbank.db zugreifen
             stmt = c.createStatement(); //manipulation der DB
-            stmt.execute("CREATE TABLE IF NOT EXISTS person (cellphoneNumber VARCHAR(50)PRIMARY KEY unique NOT NULL, status VARCHAR(55), sureName VARCHAR(55), lastName VARCHAR(55), pictureURL VARCHAR(255), coverImage VARCHAR(255))");
+            stmt.execute("CREATE TABLE IF NOT EXISTS person (phoneNumber VARCHAR(50)PRIMARY KEY unique NOT NULL, status VARCHAR(55), firstName VARCHAR(55), name VARCHAR(55), profilePicture TEXT, coverImage TEXT)");
             System.out.println("Person Table created! in dir:\n" + System.getProperty("user.dir"));
 
 
@@ -43,16 +44,16 @@ public class PersonDBImpl implements PersonDB {
 
         try {
             c = DriverManager.getConnection("jdbc:sqlite:datenbank.db");
-            preStmt = c.prepareStatement("INSERT INTO person (cellphoneNumber,status , sureName , lastName, pictureURL, coverImage)" +
+            preStmt = c.prepareStatement("INSERT INTO person (phoneNumber,status , firstName , name, profilePicture, coverImage)" +
                     "VALUES (?,?,?,?,?,?)"); //in the brackets mqsl statement syntax protects from sql inject.
-            preStmt.setString(1, person.getCellphoneNumber());
+            preStmt.setString(1, person.getPhoneNumber());
             preStmt.setString(2, person.getStatus());
-            preStmt.setString(3, person.getSureName());
-            preStmt.setString(4, person.getLastName());
-            preStmt.setString(5, person.getPictureURL());
+            preStmt.setString(3, person.getFirstName());
+            preStmt.setString(4, person.getName());
+            preStmt.setString(5, person.getProfilePicture());
             preStmt.setString(6, person.getCoverImage());
             preStmt.executeUpdate();
-            System.out.println("INSERT INTO person (cellphoneNumber as PRIMARY KEY,status , sureName , lastName, pictureURL, coverImage)" +
+            System.out.println("INSERT INTO person (phoneNumber as PRIMARY KEY,status , firstName , name, profilePicture, coverImage)" +
                     "VALUES (?,?,?,?,?,?)");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,23 +78,24 @@ public class PersonDBImpl implements PersonDB {
     /**
      * Kreiert mit Hilfe der cellphoneNumber als unique identifier einer Person aus der Datenbank diese Person.
      *
-     * @param cellphoneNumber
+     * @param phoneNumber
      * @return
      */
-    public Person selectById(String cellphoneNumber) {
+    public Person selectById(String phoneNumber) {
         Person person = new Person();
         try {
             c = DriverManager.getConnection("jdbc:sqlite:datenbank.db");
-            preStmt = c.prepareStatement("SELECT * FROM person WHERE cellphoneNumber = ?");
-            preStmt.setString(1, cellphoneNumber);
+            preStmt = c.prepareStatement("SELECT * FROM person WHERE phoneNumber = ?");
+            preStmt.setString(1, phoneNumber);
             resSet = preStmt.executeQuery();
 
             while (resSet.next()) {
                 person.setStatus(resSet.getString("status"));
-                person.setSureName(resSet.getString("sureName"));
-                person.setLastName(resSet.getString("lastName"));
-                person.setPictureURL(resSet.getString("pictureURL"));
+                person.setFirstName(resSet.getString("firstName"));
+                person.setName(resSet.getString("name"));
+                person.setProfilePicture(resSet.getString("profilePicture"));
                 person.setCoverImage(resSet.getString("coverImage"));
+                person.setPhoneNumber(resSet.getString("phoneNumber"));
 
             }
 

@@ -33,15 +33,11 @@ import java.util.Map;
 public class MQTTSubscribe extends Thread implements MqttCallback {
 
     int count = 0;
-    PersonDBImpl pdi = new PersonDBImpl();
-    MessageDBImpl mdi = new MessageDBImpl();
+
+    incomingMessageHandler msgHandler = new incomingMessageHandler();
 
 
     public void run() {
-        mdi.createMessageTable();
-        System.out.println("MessageDatabase initiated");
-        pdi.createPersonTable();
-        System.out.println("Person initiated");
         subscribe();
     }
 
@@ -93,24 +89,13 @@ public class MQTTSubscribe extends Thread implements MqttCallback {
      * nur Demonstration des message Empfangs
      */
     public void messageArrived(String topic, MqttMessage message) throws Exception {
-        /**
-         * ICH MUSS DAS TOPIC AUTOMATISCH RAUSZIEHEN!
-         */
-        String messageID ="";
 
-        System.out.println("BYTE ARRAY: "+message);
-        //ObjectMapper mapper = new ObjectMapper();
         String tmp = new String(message.getPayload());
-        //  Message obj = mapper.readValue(tmp, Message.class);
-        // System.out.println(obj.toString() + "\n");
-        System.out.println("NEW MESSAGE: " + tmp +" Under TOPIC: "+topic);
+        System.out.println("NEW MESSAGE: " + tmp + " Under TOPIC: " + topic);
+        JSONObject jsn = new JSONObject(tmp);
+        msgHandler.handleMessage(jsn, topic);
 
-
-
-
-        //JSONObject jsn = new JSONObject(tmp);
-       /* System.out.println("Testausgabe Content"+ jsn.get("content"));
-
+/*
         //JSONParser parser = new JSONParser(tmp, Person, true);
 
         Map<String, String> myMap = new HashMap<String, String>();
@@ -136,7 +121,7 @@ public class MQTTSubscribe extends Thread implements MqttCallback {
          * If a normal message arrives --> Save it in the Message Database.
          */
       /*  if (messageID.equals("1")) {
-            Message m1 = new Message(myMap.get("id"), myMap.get("timestampSender"), myMap.get("senderNr"), myMap.get("recipientNr"), myMap.get("content"));
+            Message m1 = new Message(myMap.get("id"), myMap.get("timestamp"), myMap.get("senderNr"), myMap.get("recipientNr"), myMap.get("content"));
             mdi.insert(m1);
         }
         //  ObjectMapper objectMapper = new ObjectMapper();
@@ -145,6 +130,20 @@ public class MQTTSubscribe extends Thread implements MqttCallback {
         count++;
         System.out.println("Count " + count);
     */
+
+        /**
+         * BYTE ARRAY: {"id":"1","timestamp":2004,"senderNr":"","recipientNr":"22222","content":"h Hg hj"}
+         NEW MESSAGE: {"id":"1","timestamp":2004,"senderNr":"","recipientNr":"22222","content":"h Hg hj"} Under TOPIC: all/pub/trainID/camID/
+         BYTE ARRAY: {"id":"12","timestamp":-1,"senderNr":"015774738436","recipientNr":"466464","content":"11483420"}
+         NEW MESSAGE: {"id":"12","timestamp":-1,"senderNr":"015774738436","recipientNr":"466464","content":"11483420"} Under TOPIC: all/466464
+         BYTE ARRAY: {"id":"12","timestamp":-1,"senderNr":"015774738436","recipientNr":"645454","content":"10931843"}
+         NEW MESSAGE: {"id":"12","timestamp":-1,"senderNr":"015774738436","recipientNr":"645454","content":"10931843"} Under TOPIC: all/645454
+         BYTE ARRAY: {"id":"12","timestamp":-1,"senderNr":"7","recipientNr":"723","content":"10844484"}
+         NEW MESSAGE: {"id":"12","timestamp":-1,"senderNr":"7","recipientNr":"723","content":"10844484"} Under TOPIC: all/723
+         BYTE ARRAY: {"id":"12","timestamp":-1,"senderNr":"","recipientNr":"22222","content":"13804482"}
+         NEW MESSAGE: {"id":"12","timestamp":-1,"senderNr":"","recipientNr":"22222","content":"13804482"} Under TOPIC: all/22222
+
+         */
     }
 
 

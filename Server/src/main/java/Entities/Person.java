@@ -5,33 +5,31 @@ import org.json.JSONObject;
 
 public class Person {
 
-
-    private String cellphoneNumber;
+    private String phoneNumber;
     private String status;
-    private String sureName;
-    private String lastName;
-    private String pictureURL;
+    private String firstName;
+    private String name;
+    private String profilePicture;
     private String coverImage;
+    private String id;
 
-
-
-    public Person(String cellphoneNumber, String status, String sureName, String lastName, String pictureURL, String coverImage) {
-        this.cellphoneNumber = cellphoneNumber;
+    public Person(String phoneNumber, String status, String firstName, String name, String profilePicture, String coverImage) {
+        this.phoneNumber = phoneNumber;
         this.status = status;
-        this.sureName = sureName;
-        this.lastName = lastName;
-        this.pictureURL = pictureURL;
+        this.firstName = firstName;
+        this.name = name;
+        this.profilePicture = profilePicture;
         this.coverImage = coverImage;
     }
 
     public Person(){};
 
-    public String getCellphoneNumber() {
-        return cellphoneNumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setCellphoneNumber(String cellphoneNumber) {
-        this.cellphoneNumber = cellphoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getStatus() {
@@ -42,30 +40,30 @@ public class Person {
         this.status = status;
     }
 
-    public String getSureName() {
-        return sureName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setSureName(String sureName) {
-        this.sureName = sureName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-
-
-    public String getPictureURL(){
-        return pictureURL;
+    public String getProfilePicture() {
+        return profilePicture;
     }
-    public void setPictureURL(String pictureURL){
-        this.pictureURL = pictureURL;
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
+
     public String getCoverImage() {
         return coverImage;
     }
@@ -74,29 +72,37 @@ public class Person {
         this.coverImage = coverImage;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
-                "cellphoneNumber='" + cellphoneNumber + '\'' +
+                "phoneNumber='" + phoneNumber + '\'' +
                 ", status='" + status + '\'' +
-                ", sureName='" + sureName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", pictureURL='" + pictureURL + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", name='" + name + '\'' +
+                ", profilePicture='" + profilePicture + '\'' +
                 ", coverImage='" + coverImage + '\'' +
+                ", id='" + id + '\'' +
                 '}';
     }
 
     public JSONObject personToJSON (){
 
-
      JSONObject message = new JSONObject();
         try {
-            message.put("id" , "10");
-            message.put("cellphoneNumber" , cellphoneNumber);
+            message.put("id" , id);
+            message.put("phoneNumber" , phoneNumber);
             message.put("status" , status);
-            message.put("sureName" , sureName);
-            message.put("lastName" , lastName);
-            message.put("pictureURL", pictureURL);
+            message.put("firstName" , firstName);
+            message.put("name" , name);
+            message.put("profilePicture", profilePicture);
             message.put("coverImage", coverImage);
             System.out.println("Created a Profil JSON:"+message.toString());
 

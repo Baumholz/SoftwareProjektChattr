@@ -139,7 +139,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
 
         image = (ImageView) findViewById(R.id.image);
 
-        myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages);
+        myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages, recipientNR);
         chatListView.setAdapter(myChatActivityListViewAdapter);
 
         // Set Toolbar Title and Profile Picture
@@ -242,7 +242,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
 
             //Todo: Save topic in database
             //Subscribe to newly created topic Todo: Real timestamp as topic
-            mqttService.subscribe("all/" + topic);
+//            mqttService.subscribe("all/" + topic);
         }
 
         @Override

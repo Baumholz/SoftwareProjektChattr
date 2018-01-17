@@ -158,7 +158,7 @@ public class HomeActivity extends AppCompatActivity {
             * */
             SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
             String phoneNumber = sharedPreferences.getString("phoneNumber", "0");
-            mqttService.subscribe("all/"+ phoneNumber);
+//            mqttService.subscribe("all/"+ phoneNumber);
         }
 
         @Override

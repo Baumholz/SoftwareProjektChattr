@@ -17,7 +17,7 @@
     <include layout="@layout/profile_header" />
 
     <LinearLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/user_badges"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,21 +84,11 @@
                 android:src="@drawable/ic_launcher"
                 app:civ_border_color="@color/palePrimary"
                 app:civ_border_width="1dp" />
-
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:paddingEnd="2dp"
-                android:paddingStart="2dp"
-                android:src="@drawable/default_profile"
-                app:civ_border_color="@color/palePrimary"
-                app:civ_border_width="1dp" />
         </LinearLayout>
     </LinearLayout>
 
     <View
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginEnd="20dp"
@@ -106,7 +96,7 @@
         android:background="@color/palePrimaryDark" />
 
     <LinearLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -174,7 +164,7 @@
                     android:layout_gravity="center"
                     android:paddingEnd="2dp"
                     android:paddingStart="2dp"
-                    android:src="@drawable/default_profile"
+                    android:src="@drawable/ic_launcher"
                     app:civ_border_color="@color/palePrimary"
                     app:civ_border_width="1dp" />
 
@@ -184,31 +174,6 @@
                     android:layout_gravity="center_vertical"
                     android:padding="2dp"
                     android:text="@string/dummy_club1"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/palePrimary" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:paddingEnd="2dp"
-                    android:paddingStart="2dp"
-                    android:src="@drawable/default_profile"
-                    app:civ_border_color="@color/palePrimary"
-                    app:civ_border_width="1dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:padding="2dp"
-                    android:text="@string/dummy_club2"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/palePrimary" />
             </LinearLayout>

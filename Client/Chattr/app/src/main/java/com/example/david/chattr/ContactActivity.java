@@ -27,6 +27,7 @@ public class ContactActivity extends AppCompatActivity {
 
     MySQLiteHelper myDbProfile = new MySQLiteHelper(this);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,18 +44,18 @@ public class ContactActivity extends AppCompatActivity {
 
     public void initializeUI (String firstName, String name, String status, String phoneNumber) {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(firstName + " " + name);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        TextView userNameTextView = (TextView) findViewById(R.id.username);
+        TextView userNameTextView = findViewById(R.id.username);
         String fullName = firstName + " " + name;
         userNameTextView.setText(fullName);
-        TextView phoneNumberTextView = (TextView) findViewById(R.id.phone_number);
+        TextView phoneNumberTextView = findViewById(R.id.phone_number);
         phoneNumberTextView.setText(phoneNumber);
-        TextView statusTextView = (TextView) findViewById(R.id.biography);
+        TextView statusTextView = findViewById(R.id.biography);
         statusTextView.setText(status);
     }
 

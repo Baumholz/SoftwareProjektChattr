@@ -1,15 +1,10 @@
 package com.example.david.chattr.entities.users;
 
 
-import android.graphics.Bitmap;
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-
-public class UserProfile extends  Profile{
+public class UserProfile extends Profile {
 
     private String phoneNumber;
     private String status;
@@ -34,7 +29,6 @@ public class UserProfile extends  Profile{
     }
 
     public byte[] getCoverImage() {
-
         return coverImage;
     }
 
@@ -65,7 +59,7 @@ public class UserProfile extends  Profile{
         return status;
     }
 
-    public JSONObject toJson () {
+    public JSONObject toJson() {
 
         String profile = "";
         String cover = "";

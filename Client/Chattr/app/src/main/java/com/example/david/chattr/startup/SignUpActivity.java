@@ -83,9 +83,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void onSignUpButtonClicked (View view) {
-        EditText firstNameSignUp = (EditText) findViewById(R.id.firstNameSignUp);
-        EditText nameSignUp = (EditText) findViewById(R.id.nameSignUp);
-        EditText phoneNumberSignUp = (EditText) findViewById(R.id.phoneNumberSignUp);
+        EditText firstNameSignUp = findViewById(R.id.firstNameSignUp);
+        EditText nameSignUp = findViewById(R.id.nameSignUp);
+        EditText phoneNumberSignUp = findViewById(R.id.phoneNumberSignUp);
 
         String firstName = firstNameSignUp.getText().toString();
         String name = nameSignUp.getText().toString();
@@ -115,6 +115,11 @@ public class SignUpActivity extends AppCompatActivity {
             Log.e("SignUp", "Adding Default Profile");
             Drawable drawable = getResources().getDrawable(R.drawable.default_profile);
             Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+
+            if (bitmap.getHeight() > 800 || bitmap.getWidth() > 800)
+                bitmap = BitmapScaler.scaleBitmap(bitmap);
+
+            new ImageSaver(getApplicationContext()).setFileName("profile_image.png").setDirectoryName("images").save(bitmap);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byteArrayProfile = stream.toByteArray();
         }
@@ -126,6 +131,11 @@ public class SignUpActivity extends AppCompatActivity {
             Log.e("SignUp", "Adding Default Cover");
             Drawable drawable = getResources().getDrawable(R.drawable.default_cover);
             Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+
+            if (bitmap.getHeight() > 800 || bitmap.getWidth() > 800)
+                bitmap = BitmapScaler.scaleBitmap(bitmap);
+
+            new ImageSaver(getApplicationContext()).setFileName("cover_image.png").setDirectoryName("images").save(bitmap);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byteArrayCover = stream.toByteArray();
         }
@@ -138,7 +148,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         /*
         *
-        * Start Homeactivity, which is the 'base' activity of the app
+        * Start Home Activity, which is the 'base' activity of the app
         *
         * */
 
@@ -200,8 +210,10 @@ public class SignUpActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if (resultCode == RESULT_OK && requestCode == PROFILEIMAGE) {
+
                 CircleImageView profile_image = (CircleImageView) findViewById(R.id.profile_image_edit);
                 TextView profileHintTextView = (TextView) findViewById(R.id.profileHintTextView);
+
                 Uri targetUri = data.getData();
 
                 if (isGalleryChosen) {
@@ -221,8 +233,10 @@ public class SignUpActivity extends AppCompatActivity {
                 new ImageSaver(getApplicationContext()).setFileName("profile_image.png").setDirectoryName("images").save(bitmapProfile);
 
             } else if (resultCode == RESULT_OK && requestCode == COVERIMAGE) {
+
                 ImageView cover_image = (ImageView) findViewById(R.id.cover_image_edit);
                 TextView coverImageHintTextView = (TextView) findViewById(R.id.coverImageHintTextView);
+
                 Uri targetUri = data.getData();
 
                 if (isGalleryChosen)

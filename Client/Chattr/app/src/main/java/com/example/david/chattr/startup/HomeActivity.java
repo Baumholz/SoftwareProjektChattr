@@ -48,19 +48,6 @@ public class HomeActivity extends AppCompatActivity {
         setUpTabs();
     }
 
-//    @Override
-//    public void setContentView(View view) {
-//
-//        SlidingMenuLayout layout = new SlidingMenuLayout(this);
-//        layout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
-//
-//        layout.addView(new AppMenuView());
-//        layout.addView(view);
-//
-//        super.setContentView(layout);
-//    }
-
     public void toastUserNumber()
     {
         String phoneNumber = getIntent().getStringExtra("phone_number");

@@ -30,6 +30,9 @@ import com.example.david.chattr.utils.ImageSaver;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 
 public class EditPersonalProfileActivity extends AppCompatActivity {
 
@@ -119,7 +122,10 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
         }
 
         String userProfile = new UserProfile(phoneNumber,status,firstName,name,byteArrayProfile,byteArrayCover,"","-1").toJson().toString();
-        Message signUpMessage = new Message("10", 0, phoneNumber, "-1", userProfile);
+        Calendar calendar = Calendar.getInstance();
+        Date now = calendar.getTime();
+        Timestamp currentTimestamp = new Timestamp(now.getTime());
+        Message signUpMessage = new Message("10", currentTimestamp.getNanos(), phoneNumber, "-1", userProfile);
         Log.i("newProfileMessage", signUpMessage.toString());
         mqttService.sendMessage("all/", signUpMessage.toString());
     }

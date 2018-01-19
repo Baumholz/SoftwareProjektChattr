@@ -93,7 +93,7 @@ public class MyMqttService extends Service implements MqttCallback{
             public void onSuccess(IMqttToken asyncActionToken) {
                 // We are connected
                 Log.d(TAG, "\nonSuccess\n");
-                Toast.makeText(MyMqttService.this, "Connected with Broker", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MyMqttService.this, "Connected with Broker", Toast.LENGTH_SHORT).show();
                 client.setCallback(MyMqttService.this);
                 subscribe();
             }
@@ -102,7 +102,7 @@ public class MyMqttService extends Service implements MqttCallback{
             public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                 // Something went wrong e.g. connection timeout or firewall problems
                 Log.d(TAG, "onFailure");
-                Toast.makeText(MyMqttService.this, "Not connected", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MyMqttService.this, "Not connected", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -161,19 +161,17 @@ public class MyMqttService extends Service implements MqttCallback{
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         String mMessage = message.toString();
         Log.d(TAG, "\nMessage arrived on topic: " + topic + "\n" + message + "\n");
-        Toast.makeText(MyMqttService.this, "Message arrived: " + message, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MyMqttService.this, "Message arrived: " + message, Toast.LENGTH_SHORT).show();
 
         myBinder.messageArrived(topic, message);
-
-        MessageNotifier notifier = new MessageNotifier(this);
-        notifier.showOrUpdateNotification(mMessage);
-//        Toast.makeText(this, "Arived: "+ mMessage, Toast.LENGTH_SHORT).show();
 
         JSONObject json = new JSONObject(mMessage);
         String senderNr = json.getString("senderNr");
         String recipientNR = json.getString("recipientNr");
         String content = json.getString("content");
-//        String id = json.getString("id");
+
+        MessageNotifier notifier = new MessageNotifier(this);
+        notifier.showOrUpdateNotification(content);
 
         MySQLiteHelper myDb = new MySQLiteHelper(this);
         SQLiteDatabase db = myDb.getWritableDatabase();
@@ -184,9 +182,11 @@ public class MyMqttService extends Service implements MqttCallback{
         long result = db.insert(MySQLiteHelper.TABLE, null, values);
 
         if(result != -1) {
-           Toast.makeText(this, "Data Inserted", Toast.LENGTH_LONG).show();
+//           Toast.makeText(this, "Data Inserted", Toast.LENGTH_LONG).show();
+           Log.d(TAG, "Data Inserted");
         }else{
-           Toast.makeText(this, "Data not Inserted", Toast.LENGTH_SHORT).show();
+//           Toast.makeText(this, "Data not Inserted", Toast.LENGTH_SHORT).show();
+           Log.d(TAG, "Data not Inserted");
         }
     }
 

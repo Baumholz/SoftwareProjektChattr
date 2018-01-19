@@ -1,6 +1,7 @@
 package com.example.david.chattr.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +21,11 @@ public class ChatActivityListViewAdapter extends BaseAdapter{
 
 
     private ArrayList<Message> recipients ;
-    private String myNumber;
+    private String recipientNR;
 
     public ChatActivityListViewAdapter(ArrayList<Message> messages, String recipientNR) {
         this.recipients = messages;
-        this.myNumber = recipientNR;
+        this.recipientNR = recipientNR;
     }
 
     @Override
@@ -53,10 +54,12 @@ public class ChatActivityListViewAdapter extends BaseAdapter{
         int layoutResource = 0; // determined by view type
         int viewType = getItemViewType(i);
 
-        if(myNumber.equals(message.getRecipientNr())) {
+        if(recipientNR.equals(message.getRecipientNr())) {
+            Log.e("ChatAdapter", "RecipientNR: "+recipientNR + "message.getRecipientNr(): " + message.getRecipientNr());
             layoutResource = R.layout.item_chat_right;
         }else{
             layoutResource = R.layout.item_chat_left;
+            Log.e("ChatAdapter", "RecipientNR: "+recipientNR + "message.getRecipientNr(): " + message.getRecipientNr());
         }
 
         if (view != null) {

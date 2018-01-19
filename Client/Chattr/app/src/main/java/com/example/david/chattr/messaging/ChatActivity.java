@@ -46,8 +46,11 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -124,7 +127,10 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
         while (c.moveToNext()){
             String temp = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.COL_5));
             //name = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.COL_1));
-            Message oldMessage = new Message(name,2004,"me",recipientNR,temp);
+            Calendar calendar = Calendar.getInstance();
+            Date now = calendar.getTime();
+            Timestamp currentTimestamp = new Timestamp(now.getTime());
+            Message oldMessage = new Message(name,currentTimestamp.getNanos(),"me",recipientNR,temp);
             messages.add(oldMessage);
         }
         ArrayList<UserProfile> recipients = new ArrayList<UserProfile>(myDb.getProfiles());
@@ -166,7 +172,10 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
     public void onEditTextButtonClicked(View v) {
         String message = giveInput.getText().toString();
         if (!message.isEmpty()) {
-            Message myMessage = new Message("1", 2004, senderNr, recipientNR, message);
+            Calendar calendar = Calendar.getInstance();
+            Date now = calendar.getTime();
+            Timestamp currentTimestamp = new Timestamp(now.getTime());
+            Message myMessage = new Message("1", currentTimestamp.getNanos(), senderNr, recipientNR, message);
             messages.add(myMessage);
             myChatActivityListViewAdapter.notifyDataSetChanged();
             //Todo: Set the topic according to the person you are chatting with
@@ -235,7 +244,10 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
                 int tmp = random.nextInt(9999999) + 10000000;
                 // Generate new topic
                 topic = "all/" + String.valueOf(tmp);
-                Message message = new Message("12", -1, senderNr, recipientNR, topic);
+                Calendar calendar = Calendar.getInstance();
+                Date now = calendar.getTime();
+                Timestamp currentTimestamp = new Timestamp(now.getTime());
+                Message message = new Message("12", currentTimestamp.getNanos(), senderNr, recipientNR, topic);
                 mqttService.sendMessage("all/" + recipientNR, message.toString());
                 myDb.updateTopic(recipientNR,topic);
             }
@@ -346,7 +358,10 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
                             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                             byte[] tmp = stream.toByteArray();
                             image = new String(tmp);
-                            Message message = new Message("2", 0, senderNr, recipientNR, image);
+                            Calendar calendar = Calendar.getInstance();
+                            Date now = calendar.getTime();
+                            Timestamp currentTimestamp = new Timestamp(now.getTime());
+                            Message message = new Message("2", currentTimestamp.getNanos(), senderNr, recipientNR, image);
                             mqttService.sendMessage("all/", message.toString());
                             Log.i("pictureSend", message.toString());
                         }

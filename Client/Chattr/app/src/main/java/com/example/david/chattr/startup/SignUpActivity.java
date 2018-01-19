@@ -146,7 +146,7 @@ public class SignUpActivity extends AppCompatActivity {
         PublishMessage pubM = new PublishMessage();
         pubM.start();
         pubM.run(userProfile,"all/server", 2, clientId);
-       // mqttService.sendMessage("/all", "HELLO PROFIL!");
+       // mqttService.sendMessage("all/", "HELLO PROFIL!");
 
         /*
         *

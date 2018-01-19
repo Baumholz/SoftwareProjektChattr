@@ -131,7 +131,7 @@ public class MyMqttService extends Service implements MqttCallback{
     }
 
     public void subscribe() {
-        final String topic = "/all" + phoneNumber;
+        final String topic = "all/" + phoneNumber;
         try {
             IMqttToken token = client.subscribe(topic, Quos);
             token.setActionCallback(new IMqttActionListener() {
@@ -161,7 +161,7 @@ public class MyMqttService extends Service implements MqttCallback{
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         String mMessage = message.toString();
         Log.d(TAG, "\nMessage arrived on topic: " + topic + "\n" + message + "\n");
-//        Toast.makeText(MyMqttService.this, "Message arrived: " + message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(MyMqttService.this, "Message arrived: " + message, Toast.LENGTH_SHORT).show();
 
         myBinder.messageArrived(topic, message);
 

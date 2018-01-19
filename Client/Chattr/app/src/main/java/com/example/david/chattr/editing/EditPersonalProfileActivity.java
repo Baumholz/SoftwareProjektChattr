@@ -121,7 +121,7 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
         String userProfile = new UserProfile(phoneNumber,status,firstName,name,byteArrayProfile,byteArrayCover,"","-1").toJson().toString();
         Message signUpMessage = new Message("10", 0, phoneNumber, "-1", userProfile);
         Log.i("newProfileMessage", signUpMessage.toString());
-        mqttService.sendMessage("/all", signUpMessage.toString());
+        mqttService.sendMessage("all/", signUpMessage.toString());
     }
 
     //for the back button

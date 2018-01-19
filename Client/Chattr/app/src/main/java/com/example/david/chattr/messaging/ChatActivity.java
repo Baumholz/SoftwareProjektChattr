@@ -347,7 +347,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
                             byte[] tmp = stream.toByteArray();
                             image = new String(tmp);
                             Message message = new Message("2", 0, senderNr, recipientNR, image);
-                            mqttService.sendMessage("/all", message.toString());
+                            mqttService.sendMessage("all/", message.toString());
                             Log.i("pictureSend", message.toString());
                         }
                     }

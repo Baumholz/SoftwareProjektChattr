@@ -30,14 +30,14 @@ public class NewContactFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_new_contact, container, false);
 
         // The differennt buttons to chose how to add a new contact
-        Button manuallButton = view.findViewById(R.id.manuallButton);
+        Button manualButton = view.findViewById(R.id.manuallButton);
         Button nfcButton = view.findViewById(R.id.nfcButton);
         Button qrButton = view.findViewById(R.id.qrButton);
         Button showQrButton = view.findViewById(R.id.showQrButton);
 
         // The button click listeners start new Activitys
         // Add Contact manually
-        manuallButton.setOnClickListener(new View.OnClickListener() {
+        manualButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), NewManualContactActivity.class);

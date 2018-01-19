@@ -85,7 +85,7 @@
         <activity android:name=".editing.EditPersonalProfileActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ContactActivity"
+        <activity android:name=".menu.ContactActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
     </application>

@@ -25,7 +25,6 @@ import com.example.david.chattr.R;
 import com.example.david.chattr.entities.messaging.Message;
 import com.example.david.chattr.entities.users.UserProfile;
 import com.example.david.chattr.messaging.MyMqttService;
-import com.example.david.chattr.startup.SignUpActivity;
 import com.example.david.chattr.utils.BitmapScaler;
 import com.example.david.chattr.utils.ImageSaver;
 
@@ -66,7 +65,7 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_personal_profile);
+        setContentView(R.layout.edit_profile);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Edit your Profile");
         setSupportActionBar(toolbar);

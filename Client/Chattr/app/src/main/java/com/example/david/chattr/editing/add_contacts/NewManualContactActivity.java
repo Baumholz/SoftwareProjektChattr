@@ -21,10 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.david.chattr.ContactActivity;
 import com.example.david.chattr.R;
-import com.example.david.chattr.fragments.ContactListFragment;
-import com.example.david.chattr.startup.HomeActivity;
 import com.example.david.chattr.utils.BitmapScaler;
 import com.example.david.chattr.utils.MySQLiteHelper;
 

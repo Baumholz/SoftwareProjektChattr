@@ -60,7 +60,7 @@ public class ChatListAdapter extends BaseAdapter {
         CircleImageView profilePicture = view.findViewById(R.id.profilePicture);
 
 
-        TextView profileName = view.findViewById(R.id.profilName);
+        TextView profileName = view.findViewById(R.id.profileName);
 
             if (Arrays.equals(user.getProfilePicture(), "-1".getBytes())) {
                 profilePicture.setImageResource(R.drawable.default_profile);

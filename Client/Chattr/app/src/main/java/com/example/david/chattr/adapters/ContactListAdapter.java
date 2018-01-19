@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.david.chattr.R;
@@ -58,7 +57,7 @@ public class ContactListAdapter extends BaseAdapter {
 
         CircleImageView profilePicture = view.findViewById(R.id.profilePicture);
 
-        TextView profileName = view.findViewById(R.id.profilName);
+        TextView profileName = view.findViewById(R.id.profileName);
         if(Arrays.equals(user.getProfilePicture(), "-1".getBytes())){
                 profilePicture.setImageResource(R.drawable.default_profile);
         }else {

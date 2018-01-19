@@ -33,11 +33,10 @@ public class ChatListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        recipients = new ArrayList<UserProfile>(myDbProfile.getProfilesWritable());
+        recipients = new ArrayList<>(myDbProfile.getProfilesWritable());
         myChatListAdapter.setRecipients(recipients);
         setRecipientsListeners();
         myChatListAdapter.notifyDataSetChanged();
-
     }
 
     @Nullable

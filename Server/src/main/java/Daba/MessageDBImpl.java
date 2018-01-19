@@ -1,12 +1,12 @@
 package Daba;
 
+
 import Entities.Message;
-import Entities.MessageDB;
 import org.json.JSONObject;
 
 import java.sql.*;
 
-public class MessageDBImpl implements MessageDB {
+public class MessageDBImpl {
 
     Connection c = null;
     Statement stmt = null;

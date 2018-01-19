@@ -47,9 +47,9 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -127,10 +127,8 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
         while (c.moveToNext()){
             String temp = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.COL_5));
             //name = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.COL_1));
-            Calendar calendar = Calendar.getInstance();
-            Date now = calendar.getTime();
-            Timestamp currentTimestamp = new Timestamp(now.getTime());
-            Message oldMessage = new Message(name,currentTimestamp.getNanos(),"me",recipientNR,temp);
+            String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+            Message oldMessage = new Message(name,timeStamp,"me",recipientNR,temp);
             messages.add(oldMessage);
         }
         ArrayList<UserProfile> recipients = new ArrayList<UserProfile>(myDb.getProfiles());
@@ -145,7 +143,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
 
         image = (ImageView) findViewById(R.id.image);
 
-        myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages, recipientNR);
+        myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages, senderNr);
         chatListView.setAdapter(myChatActivityListViewAdapter);
 
         // Set Toolbar Title and Profile Picture
@@ -172,13 +170,10 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
     public void onEditTextButtonClicked(View v) {
         String message = giveInput.getText().toString();
         if (!message.isEmpty()) {
-            Calendar calendar = Calendar.getInstance();
-            Date now = calendar.getTime();
-            Timestamp currentTimestamp = new Timestamp(now.getTime());
-            Message myMessage = new Message("1", currentTimestamp.getNanos(), senderNr, recipientNR, message);
+            String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+            Message myMessage = new Message("1", timeStamp, senderNr, recipientNR, message);
             messages.add(myMessage);
             myChatActivityListViewAdapter.notifyDataSetChanged();
-            //Todo: Set the topic according to the person you are chatting with
             mqttService.sendMessage("all/"+recipientNR, myMessage.toString());
 
             db = myDb.getWritableDatabase();
@@ -244,10 +239,8 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
                 int tmp = random.nextInt(9999999) + 10000000;
                 // Generate new topic
                 topic = "all/" + String.valueOf(tmp);
-                Calendar calendar = Calendar.getInstance();
-                Date now = calendar.getTime();
-                Timestamp currentTimestamp = new Timestamp(now.getTime());
-                Message message = new Message("12", currentTimestamp.getNanos(), senderNr, recipientNR, topic);
+                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                Message message = new Message("12", timeStamp, senderNr, recipientNR, topic);
                 mqttService.sendMessage("all/" + recipientNR, message.toString());
                 myDb.updateTopic(recipientNR,topic);
             }
@@ -279,7 +272,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
-        mqttService.sendMessage("all/pub/trainID/camID/", byteArray, 1);
+        mqttService.sendMessage("all/" + recipientNR, byteArray, 1);
         isWaitingForImage = true;
 
     }
@@ -358,11 +351,9 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
                             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                             byte[] tmp = stream.toByteArray();
                             image = new String(tmp);
-                            Calendar calendar = Calendar.getInstance();
-                            Date now = calendar.getTime();
-                            Timestamp currentTimestamp = new Timestamp(now.getTime());
-                            Message message = new Message("2", currentTimestamp.getNanos(), senderNr, recipientNR, image);
-                            mqttService.sendMessage("all/", message.toString());
+                            String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                            Message message = new Message("2", timeStamp, senderNr, recipientNR, image);
+                            mqttService.sendMessage("all/" + recipientNR, message.toString());
                             Log.i("pictureSend", message.toString());
                         }
                     }

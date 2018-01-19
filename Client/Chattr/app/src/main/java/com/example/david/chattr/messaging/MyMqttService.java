@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -166,12 +168,45 @@ public class MyMqttService extends Service implements MqttCallback{
         myBinder.messageArrived(topic, message);
 
         JSONObject json = new JSONObject(mMessage);
+        String id = json.getString("id");
+        String content = json.getString("content");
+
+        /**
+         *
+         * Different messages are send from the server to the chattr app.
+         * They are differentiated by the id.
+         * id == 1: Text messages
+         * id == 2: Pictures
+         * id == 15: Profile and Cover Picture of Contact
+         *
+         * **/
+        switch (id) {
+            case "1":
+                makeNotification(content);
+                saveMessagetoDB(mMessage);
+                break;
+            case "2":
+                makeNotification("New Picture :)");
+                saveMessagetoDB(mMessage);
+                break;
+            case "15":
+                //Todo: Get the Profile/Cover Picture out of the message and save it the according contact in the DB
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void makeNotification(String content) {
+        MessageNotifier notifier = new MessageNotifier(this);
+        notifier.showOrUpdateNotification(content);
+    }
+
+    private void saveMessagetoDB(String mMessage) throws JSONException {
+        JSONObject json = new JSONObject(mMessage);
         String senderNr = json.getString("senderNr");
         String recipientNR = json.getString("recipientNr");
         String content = json.getString("content");
-
-        MessageNotifier notifier = new MessageNotifier(this);
-        notifier.showOrUpdateNotification(content);
 
         MySQLiteHelper myDb = new MySQLiteHelper(this);
         SQLiteDatabase db = myDb.getWritableDatabase();
@@ -180,13 +215,12 @@ public class MyMqttService extends Service implements MqttCallback{
         values.put(MySQLiteHelper.COL_4,recipientNR);
         values.put(MySQLiteHelper.COL_5,content);
         long result = db.insert(MySQLiteHelper.TABLE, null, values);
-
         if(result != -1) {
 //           Toast.makeText(this, "Data Inserted", Toast.LENGTH_LONG).show();
-           Log.d(TAG, "Data Inserted");
+            Log.d(TAG, "Data Inserted");
         }else{
 //           Toast.makeText(this, "Data not Inserted", Toast.LENGTH_SHORT).show();
-           Log.d(TAG, "Data not Inserted");
+            Log.d(TAG, "Data not Inserted");
         }
     }
 

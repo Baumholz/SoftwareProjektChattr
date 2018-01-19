@@ -14,6 +14,10 @@ import java.io.IOException;
 
 /**
  * Created by david on 08.01.18.
+ *
+ *
+ * This class was made to compress bitmap pictures (Profile/Cover) for better performance
+ *
  */
 
 public class ImageSaver {

@@ -12,7 +12,7 @@ import java.util.Date;
 public class Message {
 
     protected String id;
-    protected int timestamp;
+    protected String timestamp;
     protected String senderNr;
     protected String recipientNr;
     protected String content;
@@ -33,7 +33,7 @@ public class Message {
         return null;
     }
 
-    public Message(String id, int timestamp, String senderNr, String recipientNr, String content) {
+    public Message(String id, String timestamp, String senderNr, String recipientNr, String content) {
 
         this.id = id;
         this.timestamp = timestamp;
@@ -50,11 +50,11 @@ public class Message {
         this.id = id;
     }
 
-    public int getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 

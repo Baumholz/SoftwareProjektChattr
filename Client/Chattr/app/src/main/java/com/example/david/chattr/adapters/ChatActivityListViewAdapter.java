@@ -55,11 +55,11 @@ public class ChatActivityListViewAdapter extends BaseAdapter{
         int viewType = getItemViewType(i);
 
         if(recipientNR.equals(message.getRecipientNr())) {
-            Log.e("ChatAdapter", "RecipientNR: "+recipientNR + "message.getRecipientNr(): " + message.getRecipientNr());
+            Log.e("Option 1", "RecipientNR: "+recipientNR + "message.getRecipientNr(): " + message.getRecipientNr());
             layoutResource = R.layout.item_chat_right;
         }else{
             layoutResource = R.layout.item_chat_left;
-            Log.e("ChatAdapter", "RecipientNR: "+recipientNR + "message.getRecipientNr(): " + message.getRecipientNr());
+            Log.e("Option 2", "RecipientNR: "+recipientNR + "message.getRecipientNr(): " + message.getRecipientNr());
         }
 
         if (view != null) {

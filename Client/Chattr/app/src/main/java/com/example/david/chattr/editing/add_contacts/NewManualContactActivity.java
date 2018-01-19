@@ -36,7 +36,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.sql.Timestamp;
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -188,10 +188,8 @@ public class NewManualContactActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
         String myPhoneNumber = sharedPreferences.getString("phoneNumber", "default");
-        Calendar calendar = Calendar.getInstance();
-        Date now = calendar.getTime();
-        Timestamp currentTimestamp = new Timestamp(now.getTime());
-        Message msg = new Message("13",currentTimestamp.getNanos(),myPhoneNumber, "",phoneNumberEdit.getText().toString());
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        Message msg = new Message("13",timeStamp,myPhoneNumber, "",phoneNumberEdit.getText().toString());
         PublishMessage pubM = new PublishMessage();
         pubM.start();
         pubM.run(msg.toString(),"all/server", 2, myPhoneNumber);

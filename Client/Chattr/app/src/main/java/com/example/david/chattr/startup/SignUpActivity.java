@@ -86,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
         startDialog(COVERIMAGE);
     }
 
-    // Start Dialog to chose between Galery and Camera
+    // Start Dialog to chose between Gallery and Camera
     public void startDialog(final int requestCode) {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
         pictureDialog.setTitle("Select Action");

@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/MQTT_Handler/startServer.java" line="142" mnemonic="7" />
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/MQTT_Handler/startServer.java" line="143" mnemonic="7" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d49aea38-3ebc-4662-beb3-cdcc5802d7e4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Daba/PersonDBImpl.class" afterPath="$PROJECT_DIR$/target/classes/Daba/PersonDBImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Entities/Message.class" afterPath="$PROJECT_DIR$/target/classes/Entities/Message.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Entities/Person.class" afterPath="$PROJECT_DIR$/target/classes/Entities/Person.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/MQTT_Handler/MQTTSubscribe.class" afterPath="$PROJECT_DIR$/target/classes/MQTT_Handler/MQTTSubscribe.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/MQTT_Handler/startServer.class" afterPath="$PROJECT_DIR$/target/classes/MQTT_Handler/startServer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Daba/MessageDBImpl.java" afterPath="$PROJECT_DIR$/src/main/java/Daba/MessageDBImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Daba/PersonDBImpl.java" afterPath="$PROJECT_DIR$/src/main/java/Daba/PersonDBImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Entities/Message.java" afterPath="$PROJECT_DIR$/src/main/java/Entities/Message.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Entities/MessageDB.java" afterPath="$PROJECT_DIR$/src/main/java/Entities/MessageDB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Entities/Person.java" afterPath="$PROJECT_DIR$/src/main/java/Entities/Person.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MQTT_Handler/MQTTSubscribe.java" afterPath="$PROJECT_DIR$/src/main/java/MQTT_Handler/MQTTSubscribe.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MQTT_Handler/startServer.java" afterPath="$PROJECT_DIR$/src/main/java/MQTT_Handler/startServer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/MQTT_Handler/incomingMessageHandler.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,18 +31,10 @@
       <file leaf-file-name="MessageDBImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Daba/MessageDBImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="138" column="13" lean-forward="true" selection-start-line="138" selection-start-column="13" selection-end-line="138" selection-end-column="13" />
+            <state relative-caret-position="3125">
+              <caret line="146" column="0" lean-forward="false" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1516211870568" expanded="true" signature="531:643" ph="CREATE TABLE... IF" />
-                <marker date="1516211870568" expanded="true" signature="531:709" ph="CREATE TABLE... IF" />
-                <marker date="1516211870568" expanded="true" signature="1373:1494" ph="INSERT INTO messages... " />
-                <marker date="1516211870568" expanded="true" signature="3082:3127" ph="SELECT * FRO... messages" />
-                <marker date="1516211870568" expanded="true" signature="3082:3186" ph="SELECT topic... messages" />
-                <marker date="1516211870568" expanded="true" signature="3625:3677" ph="SELECT * FRO... messages" />
-                <marker date="1516211870568" expanded="true" signature="3625:3679" ph="SELECT * FRO... messages" />
-                <marker date="1516211870568" expanded="true" signature="3625:3698" ph="SELECT * FRO... messages" />
               </folding>
             </state>
           </provider>
@@ -63,18 +43,18 @@
       <file leaf-file-name="MessageDB.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Entities/MessageDB.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="55" lean-forward="false" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
+            <state relative-caret-position="250">
+              <caret line="10" column="93" lean-forward="false" selection-start-line="10" selection-start-column="93" selection-end-line="10" selection-end-column="93" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="startServer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="startServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/MQTT_Handler/startServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="929">
-              <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+            <state relative-caret-position="475">
+              <caret line="95" column="11" lean-forward="false" selection-start-line="95" selection-start-column="11" selection-end-line="95" selection-end-column="11" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,13 +62,24 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="incomingMessageHandler.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/MQTT_Handler/incomingMessageHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="MQTTSubscribe.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/MQTT_Handler/MQTTSubscribe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
-              <caret line="106" column="44" lean-forward="false" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
+            <state relative-caret-position="2175">
+              <caret line="103" column="44" lean-forward="false" selection-start-line="103" selection-start-column="44" selection-end-line="103" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <marker date="1516220538000" expanded="true" signature="6018:6024" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -97,20 +88,11 @@
       <file leaf-file-name="PublishMessage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/DemoMessageSender/PublishMessage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-176">
+            <state relative-caret-position="350">
               <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="incomingMessageHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/MQTT_Handler/incomingMessageHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="93" column="20" lean-forward="false" selection-start-line="93" selection-start-column="20" selection-end-line="93" selection-end-column="20" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1516220538000" expanded="true" signature="1103:2957" ph="{...}" />
+                <marker date="1516220538000" expanded="true" signature="1118:1203" ph="//..." />
               </folding>
             </state>
           </provider>
@@ -119,10 +101,11 @@
       <file leaf-file-name="Person.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Entities/Person.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="95" column="22" lean-forward="false" selection-start-line="95" selection-start-column="22" selection-end-line="95" selection-end-column="22" />
+            <state relative-caret-position="2500">
+              <caret line="101" column="22" lean-forward="false" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <marker date="1516220538000" expanded="true" signature="2592:2837" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -131,13 +114,14 @@
       <file leaf-file-name="PersonDBImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Daba/PersonDBImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-51">
-              <caret line="97" column="29" lean-forward="false" selection-start-line="97" selection-start-column="29" selection-end-line="97" selection-end-column="29" />
+            <state relative-caret-position="2325">
+              <caret line="99" column="13" lean-forward="false" selection-start-line="99" selection-start-column="13" selection-end-line="99" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1516220246945" expanded="true" signature="522:707" ph="CREATE TABLE... IF" />
-                <marker date="1516220246945" expanded="true" signature="1368:1499" ph="INSERT INTO person... " />
-                <marker date="1516220246945" expanded="true" signature="2917:2959" ph="SELECT * FRO... person" />
+                <marker date="1516220538000" expanded="true" signature="3495:4020" ph="{...}" />
+                <marker date="1516220538000" expanded="false" signature="4057:4068" ph=" { " />
+                <marker date="1516220538000" expanded="false" signature="4080:4086" ph=" }" />
+                <marker date="1516220538000" expanded="true" signature="4122:4130" ph="{}" />
               </folding>
             </state>
           </provider>
@@ -146,7 +130,7 @@
       <file leaf-file-name="MQTTErrorFileHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/MQTT_Handler/MQTTErrorFileHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
+            <state relative-caret-position="325">
               <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
               <folding />
             </state>
@@ -156,12 +140,21 @@
       <file leaf-file-name="Message.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Entities/Message.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="68" column="40" lean-forward="false" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
+            <state relative-caret-position="1700">
+              <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#498#499#0" expanded="true" />
-                <element signature="e#530#531#0" expanded="true" />
+                <marker date="1516220538000" expanded="false" signature="1893:1899" ph=" }" />
+                <marker date="1516220538000" expanded="false" signature="1932:1943" ph=" { " />
+                <marker date="1516220538000" expanded="false" signature="1959:1965" ph=" }" />
+                <marker date="1516220538000" expanded="false" signature="2011:2022" ph=" { " />
+                <marker date="1516220538000" expanded="false" signature="2047:2053" ph=" }" />
+                <marker date="1516220538000" expanded="false" signature="2088:2099" ph=" { " />
+                <marker date="1516220538000" expanded="false" signature="2118:2124" ph=" }" />
+                <marker date="1516220538000" expanded="false" signature="2176:2187" ph=" { " />
+                <marker date="1516220538000" expanded="false" signature="2218:2224" ph=" }" />
+                <marker date="1516220538000" expanded="false" signature="2256:2267" ph=" { " />
+                <marker date="1516220538000" expanded="false" signature="2282:2288" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -222,8 +215,8 @@
         <option value="$PROJECT_DIR$/src/main/java/Daba/MessageDBImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/Entities/MessageDB.java" />
         <option value="$PROJECT_DIR$/src/main/java/MQTT_Handler/incomingMessageHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/MQTT_Handler/startServer.java" />
         <option value="$PROJECT_DIR$/src/main/java/Daba/PersonDBImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/MQTT_Handler/startServer.java" />
       </list>
     </option>
   </component>
@@ -262,6 +255,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -323,10 +320,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -519,31 +512,30 @@
       <workItem from="1515963903733" duration="1205000" />
       <workItem from="1516039283910" duration="6766000" />
       <workItem from="1516177389812" duration="13175000" />
-      <workItem from="1516208304001" duration="5365000" />
+      <workItem from="1516208304001" duration="5961000" />
+      <workItem from="1516367626084" duration="464000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91623000" />
+    <option name="totallyTimeSpent" value="92683000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3266385" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34633029" sideWeight="0.50208336" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33509514" sideWeight="0.49791667" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33509514" sideWeight="0.49791667" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1453125" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -555,6 +547,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3266385" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912844" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -578,14 +571,6 @@
           <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1516211870568" expanded="true" signature="531:643" ph="CREATE TABLE... IF" />
-            <marker date="1516211870568" expanded="true" signature="531:709" ph="CREATE TABLE... IF" />
-            <marker date="1516211870568" expanded="true" signature="1373:1494" ph="INSERT INTO messages... " />
-            <marker date="1516211870568" expanded="true" signature="3082:3127" ph="SELECT * FRO... messages" />
-            <marker date="1516211870568" expanded="true" signature="3082:3186" ph="SELECT topic... messages" />
-            <marker date="1516211870568" expanded="true" signature="3625:3677" ph="SELECT * FRO... messages" />
-            <marker date="1516211870568" expanded="true" signature="3625:3679" ph="SELECT * FRO... messages" />
-            <marker date="1516211870568" expanded="true" signature="3625:3698" ph="SELECT * FRO... messages" />
           </folding>
         </state>
       </provider>
@@ -596,9 +581,10 @@
           <caret line="0" column="13" lean-forward="true" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1516220246945" expanded="true" signature="522:707" ph="CREATE TABLE... IF" />
-            <marker date="1516220246945" expanded="true" signature="1368:1499" ph="INSERT INTO person... " />
-            <marker date="1516220246945" expanded="true" signature="2917:2959" ph="SELECT * FRO... person" />
+            <marker date="1516220538000" expanded="true" signature="3495:4020" ph="{...}" />
+            <marker date="1516220538000" expanded="false" signature="4057:4068" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="4080:4086" ph=" }" />
+            <marker date="1516220538000" expanded="true" signature="4122:4130" ph="{}" />
           </folding>
         </state>
       </provider>
@@ -617,7 +603,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
           <caret line="32" column="23" lean-forward="false" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
-          <folding />
+          <folding>
+            <marker date="1516220538000" expanded="true" signature="1103:2957" ph="{...}" />
+            <marker date="1516220538000" expanded="true" signature="1118:1203" ph="//..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -627,6 +616,7 @@
           <caret line="60" column="18" lean-forward="false" selection-start-line="60" selection-start-column="18" selection-end-line="60" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1516220538000" expanded="true" signature="2592:2837" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -637,6 +627,7 @@
           <caret line="75" column="54" lean-forward="true" selection-start-line="75" selection-start-column="54" selection-end-line="75" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1516220538000" expanded="true" signature="6018:6024" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -645,9 +636,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="850">
           <caret line="34" column="12" lean-forward="false" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="39" />
-          <folding>
-            <marker date="1515758830000" expanded="true" signature="917:1211" ph="CREATE TABLE... COMPANY" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -655,7 +644,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-          <folding />
+          <folding>
+            <marker date="1516220538000" expanded="true" signature="1103:2957" ph="{...}" />
+            <marker date="1516220538000" expanded="true" signature="1118:1203" ph="//..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -665,6 +657,7 @@
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1516220538000" expanded="true" signature="2592:2837" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -685,8 +678,17 @@
           <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#498#499#0" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
+            <marker date="1516220538000" expanded="false" signature="1893:1899" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="1932:1943" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="1959:1965" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2011:2022" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2047:2053" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2088:2099" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2118:2124" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2176:2187" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2218:2224" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2256:2267" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2282:2288" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -705,9 +707,10 @@
           <caret line="54" column="38" lean-forward="true" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1516220246945" expanded="true" signature="522:707" ph="CREATE TABLE... IF" />
-            <marker date="1516220246945" expanded="true" signature="1368:1499" ph="INSERT INTO person... " />
-            <marker date="1516220246945" expanded="true" signature="2917:2959" ph="SELECT * FRO... person" />
+            <marker date="1516220538000" expanded="true" signature="3495:4020" ph="{...}" />
+            <marker date="1516220538000" expanded="false" signature="4057:4068" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="4080:4086" ph=" }" />
+            <marker date="1516220538000" expanded="true" signature="4122:4130" ph="{}" />
           </folding>
         </state>
       </provider>
@@ -718,8 +721,17 @@
           <caret line="56" column="23" lean-forward="false" selection-start-line="56" selection-start-column="23" selection-end-line="56" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#498#499#0" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
+            <marker date="1516220538000" expanded="false" signature="1893:1899" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="1932:1943" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="1959:1965" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2011:2022" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2047:2053" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2088:2099" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2118:2124" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2176:2187" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2218:2224" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2256:2267" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2282:2288" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -728,7 +740,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
           <caret line="56" column="41" lean-forward="false" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
-          <folding />
+          <folding>
+            <marker date="1516220538000" expanded="true" signature="1103:2957" ph="{...}" />
+            <marker date="1516220538000" expanded="true" signature="1118:1203" ph="//..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -746,6 +761,7 @@
           <caret line="30" column="20" lean-forward="true" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1516220538000" expanded="true" signature="6018:6024" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -782,8 +798,17 @@
           <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#498#499#0" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
+            <marker date="1516220538000" expanded="false" signature="1893:1899" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="1932:1943" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="1959:1965" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2011:2022" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2047:2053" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2088:2099" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2118:2124" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2176:2187" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2218:2224" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2256:2267" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2282:2288" ph=" }" />
           </folding>
         </state>
       </provider>
@@ -802,6 +827,7 @@
           <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1516220538000" expanded="true" signature="6018:6024" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -871,9 +897,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="91">
           <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <marker date="1515758830000" expanded="true" signature="917:1211" ph="CREATE TABLE... COMPANY" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -887,7 +911,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MQTT_Handler/MQTTErrorFileHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
+        <state relative-caret-position="325">
           <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
           <folding />
         </state>
@@ -903,59 +927,94 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Entities/Message.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="68" column="40" lean-forward="false" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
+        <state relative-caret-position="1700">
+          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#498#499#0" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
+            <marker date="1516220538000" expanded="false" signature="1893:1899" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="1932:1943" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="1959:1965" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2011:2022" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2047:2053" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2088:2099" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2118:2124" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2176:2187" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2218:2224" ph=" }" />
+            <marker date="1516220538000" expanded="false" signature="2256:2267" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="2282:2288" ph=" }" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Entities/MessageDB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="55" lean-forward="false" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
+        <state relative-caret-position="250">
+          <caret line="10" column="93" lean-forward="false" selection-start-line="10" selection-start-column="93" selection-end-line="10" selection-end-column="93" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/DemoMessageSender/PublishMessage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-176">
+        <state relative-caret-position="350">
           <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-          <folding />
+          <folding>
+            <marker date="1516220538000" expanded="true" signature="1103:2957" ph="{...}" />
+            <marker date="1516220538000" expanded="true" signature="1118:1203" ph="//..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MQTT_Handler/MQTTSubscribe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="106" column="44" lean-forward="false" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
+        <state relative-caret-position="2175">
+          <caret line="103" column="44" lean-forward="false" selection-start-line="103" selection-start-column="44" selection-end-line="103" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
+            <marker date="1516220538000" expanded="true" signature="6018:6024" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Daba/PersonDBImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="97" column="29" lean-forward="false" selection-start-line="97" selection-start-column="29" selection-end-line="97" selection-end-column="29" />
+        <state relative-caret-position="2325">
+          <caret line="99" column="13" lean-forward="false" selection-start-line="99" selection-start-column="13" selection-end-line="99" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1516220246945" expanded="true" signature="522:707" ph="CREATE TABLE... IF" />
-            <marker date="1516220246945" expanded="true" signature="1368:1499" ph="INSERT INTO person... " />
-            <marker date="1516220246945" expanded="true" signature="2917:2959" ph="SELECT * FRO... person" />
+            <marker date="1516220538000" expanded="true" signature="3495:4020" ph="{...}" />
+            <marker date="1516220538000" expanded="false" signature="4057:4068" ph=" { " />
+            <marker date="1516220538000" expanded="false" signature="4080:4086" ph=" }" />
+            <marker date="1516220538000" expanded="true" signature="4122:4130" ph="{}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Entities/Person.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="95" column="22" lean-forward="false" selection-start-line="95" selection-start-column="22" selection-end-line="95" selection-end-column="22" />
+        <state relative-caret-position="2500">
+          <caret line="101" column="22" lean-forward="false" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1516220538000" expanded="true" signature="2592:2837" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Daba/MessageDBImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3125">
+          <caret line="146" column="0" lean-forward="false" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MQTT_Handler/startServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="95" column="11" lean-forward="false" selection-start-line="95" selection-start-column="11" selection-end-line="95" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -964,39 +1023,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MQTT_Handler/incomingMessageHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="93" column="20" lean-forward="false" selection-start-line="93" selection-start-column="20" selection-end-line="93" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Daba/MessageDBImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="138" column="13" lean-forward="true" selection-start-line="138" selection-start-column="13" selection-end-line="138" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1516211870568" expanded="true" signature="531:643" ph="CREATE TABLE... IF" />
-            <marker date="1516211870568" expanded="true" signature="531:709" ph="CREATE TABLE... IF" />
-            <marker date="1516211870568" expanded="true" signature="1373:1494" ph="INSERT INTO messages... " />
-            <marker date="1516211870568" expanded="true" signature="3082:3127" ph="SELECT * FRO... messages" />
-            <marker date="1516211870568" expanded="true" signature="3082:3186" ph="SELECT topic... messages" />
-            <marker date="1516211870568" expanded="true" signature="3625:3677" ph="SELECT * FRO... messages" />
-            <marker date="1516211870568" expanded="true" signature="3625:3679" ph="SELECT * FRO... messages" />
-            <marker date="1516211870568" expanded="true" signature="3625:3698" ph="SELECT * FRO... messages" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MQTT_Handler/startServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="929">
-          <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="100">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>

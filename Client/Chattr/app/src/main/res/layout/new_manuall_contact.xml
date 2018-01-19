@@ -4,7 +4,8 @@
     android:id="@+id/personal_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/gradient_primary">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -14,7 +15,7 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
-    <include layout="@layout/edit_contact_head" />
+    <include layout="@layout/edit_profile_head" />
 
     <EditText
         android:id="@+id/firstNameEdit"

@@ -67,15 +67,15 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_personal_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Edit your Profile");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        firstNameEdit = (EditText) findViewById(R.id.firstNameEdit);
-        nameEdit = (EditText) findViewById(R.id.nameEdit);
-        statusEdit = (EditText) findViewById(R.id.statusEdit);
+        firstNameEdit = findViewById(R.id.firstNameEdit);
+        nameEdit = findViewById(R.id.nameEdit);
+        statusEdit = findViewById(R.id.statusEdit);
 
         SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
         String firstName = sharedPreferences.getString("firstName", "default");
@@ -170,8 +170,8 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if (resultCode == RESULT_OK && requestCode == PROFILEIMAGE) {
-                ImageView profile_image = (ImageView) findViewById(R.id.profile_image);
-                TextView profileHintTextView = (TextView) findViewById(R.id.profileHintTextView);
+                ImageView profile_image = findViewById(R.id.profile_image);
+                TextView profileHintTextView = findViewById(R.id.profileHintTextView);
                 Uri targetUri = data.getData();
 
                 if (isGalleryChosen) {
@@ -189,8 +189,8 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
                 new ImageSaver(getApplicationContext()).setFileName("profile_image.png").setDirectoryName("images").save(bitmapProfile);
 
             } else if (resultCode == RESULT_OK && requestCode == COVERIMAGE) {
-                ImageView cover_image = (ImageView) findViewById(R.id.cover_image);
-                TextView coverImageHintTextView = (TextView) findViewById(R.id.coverImageHintTextView);
+                ImageView cover_image = findViewById(R.id.cover_image);
+                TextView coverImageHintTextView = findViewById(R.id.coverImageHintTextView);
                 Uri targetUri = data.getData();
 
                 if (isGalleryChosen) {

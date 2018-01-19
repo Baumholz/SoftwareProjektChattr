@@ -4,7 +4,8 @@
     android:id="@+id/personal_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/gradient_primary">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -34,9 +35,9 @@
             android:layout_height="96dp"
             android:layout_gravity="center"
             android:text="Add Profile Picture"
-            android:background="@android:color/transparent"
+            android:background="@drawable/gradient_accent"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/white" />
 
         <EditText
             android:id="@+id/user_name2"

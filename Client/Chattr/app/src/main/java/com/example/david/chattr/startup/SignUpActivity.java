@@ -11,6 +11,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -84,12 +86,11 @@ public class SignUpActivity extends AppCompatActivity {
         EditText firstNameSignUp = (EditText) findViewById(R.id.firstNameSignUp);
         EditText nameSignUp = (EditText) findViewById(R.id.nameSignUp);
         EditText phoneNumberSignUp = (EditText) findViewById(R.id.phoneNumberSignUp);
-        EditText statusSignUp = (EditText) findViewById(R.id.statusSignUp);
 
         String firstName = firstNameSignUp.getText().toString();
         String name = nameSignUp.getText().toString();
         String phoneNumber = phoneNumberSignUp.getText().toString();
-        String status = statusSignUp.getText().toString();
+        String status = "Hello, World!";
 
         SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -104,15 +105,28 @@ public class SignUpActivity extends AppCompatActivity {
         * Creating Signup message for the Server
         * 
         * */
-        byte[] byteArrayProfile = null;
-        byte[] byteArrayCover = null;
+        byte[] byteArrayProfile;
+        byte[] byteArrayCover;
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         if (bitmapProfile != null) {
             bitmapProfile.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byteArrayProfile = stream.toByteArray();
+        } else {
+            Log.e("SignUp", "Adding Default Profile");
+            Drawable drawable = getResources().getDrawable(R.drawable.default_profile);
+            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byteArrayProfile = stream.toByteArray();
         }
+
         if (bitmapCover != null) {
-            bitmapProfile.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            bitmapCover.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byteArrayCover = stream.toByteArray();
+        } else {
+            Log.e("SignUp", "Adding Default Cover");
+            Drawable drawable = getResources().getDrawable(R.drawable.default_cover);
+            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byteArrayCover = stream.toByteArray();
         }
 

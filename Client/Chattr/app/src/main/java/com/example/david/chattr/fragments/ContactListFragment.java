@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.david.chattr.ContactActivity;
+import com.example.david.chattr.menu.ContactActivity;
 import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;
 import com.example.david.chattr.utils.MySQLiteHelper;
@@ -24,21 +24,39 @@ import java.util.ArrayList;
  */
 public class ContactListFragment extends Fragment {
 
-    ContactListAdapter myContactListAdapter;
+    private ContactListAdapter myContactListAdapter;
+    private ArrayList<UserProfile> contacts;
+    private MySQLiteHelper myDbProfile;
+    private ListView contactListView;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        contacts = new ArrayList<>(myDbProfile.getProfiles());
+        myContactListAdapter.setContacts(contacts);
+        setContactListeners();
+        myContactListAdapter.notifyDataSetChanged();
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        MySQLiteHelper myDbProfile = new MySQLiteHelper(getContext());
+        myDbProfile = new MySQLiteHelper(getContext());
         View view =  inflater.inflate(R.layout.fragment_contactlist, container, false);
 
-        final ArrayList<UserProfile> contacts = new ArrayList<>(myDbProfile.getProfiles());
+        contacts = new ArrayList<>(myDbProfile.getProfiles());
 
         myContactListAdapter = new ContactListAdapter(contacts);
-        final ListView contactListView = view.findViewById(R.id.contactList);
+        contactListView = view.findViewById(R.id.contactList);
         contactListView.setAdapter(myContactListAdapter);
         myContactListAdapter.notifyDataSetChanged();
 
+        setContactListeners();
+
+        return view;
+    }
+
+    private void setContactListeners() {
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -53,7 +71,5 @@ public class ContactListFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        return view;
     }
 }

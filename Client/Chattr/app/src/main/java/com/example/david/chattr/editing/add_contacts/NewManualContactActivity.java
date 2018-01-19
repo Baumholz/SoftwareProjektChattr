@@ -9,24 +9,24 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.david.chattr.ContactActivity;
 import com.example.david.chattr.R;
+
 import com.example.david.chattr.entities.messaging.Message;
-import com.example.david.chattr.fragments.ContactListFragment;
 import com.example.david.chattr.messaging.PublishMessage;
-import com.example.david.chattr.startup.HomeActivity;
 import com.example.david.chattr.utils.BitmapScaler;
 import com.example.david.chattr.utils.MySQLiteHelper;
 
@@ -35,6 +35,8 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewManualContactActivity extends AppCompatActivity {
 
@@ -125,7 +127,7 @@ public class NewManualContactActivity extends AppCompatActivity {
 
         try {
             if (resultCode == RESULT_OK && requestCode == PROFILEIMAGE) {
-                ImageView profile_image = (ImageView) findViewById(R.id.profile_image);
+                CircleImageView profile_image = (CircleImageView) findViewById(R.id.profile_image_edit);
                 TextView profileHintTextView = (TextView) findViewById(R.id.profileHintTextView);
                 Uri targetUri = data.getData();
 
@@ -138,10 +140,11 @@ public class NewManualContactActivity extends AppCompatActivity {
                     bitmapProfileImage = (Bitmap) data.getExtras().get("data");
 
                 profile_image.setImageBitmap(bitmapProfileImage);
+                profileHintTextView.setBackgroundColor(Color.TRANSPARENT);
                 profileHintTextView.setText("");
 
             } else if (resultCode == RESULT_OK && requestCode == COVERIMAGE) {
-                ImageView cover_image = (ImageView) findViewById(R.id.cover_image);
+                ImageView cover_image = (ImageView) findViewById(R.id.cover_image_edit);
                 TextView coverImageHintTextView = (TextView) findViewById(R.id.coverImageHintTextView);
                 Uri targetUri = data.getData();
 
@@ -154,6 +157,7 @@ public class NewManualContactActivity extends AppCompatActivity {
                     bitmapCoverImage = (Bitmap) data.getExtras().get("data");
 
                 cover_image.setImageBitmap(bitmapCoverImage);
+                coverImageHintTextView.setBackgroundColor(Color.TRANSPARENT);
                 coverImageHintTextView.setText("");
             }
         } catch (FileNotFoundException e) {
@@ -225,9 +229,9 @@ public class NewManualContactActivity extends AppCompatActivity {
             setSqlPath();
 
             if(result != -1) {
-                Toast.makeText(NewManualContactActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
+                Log.i("NewContact", "Data inserted");
             }else{
-                Toast.makeText(NewManualContactActivity.this, "Data not Inserted", Toast.LENGTH_SHORT).show();
+                Log.i("NewContact", "Data not inserted");
             }
 
         }else{
@@ -235,7 +239,7 @@ public class NewManualContactActivity extends AppCompatActivity {
             return;
         }
         dbProfile.close();
-
+        finish();
     }
 
     public boolean alreadyInserted (String phoneNumber){

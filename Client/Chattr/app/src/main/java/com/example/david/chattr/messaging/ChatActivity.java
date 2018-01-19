@@ -170,7 +170,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
             messages.add(myMessage);
             myChatActivityListViewAdapter.notifyDataSetChanged();
             //Todo: Set the topic according to the person you are chatting with
-            mqttService.sendMessage("all/pub/trainID/camID/", myMessage.toString());
+            mqttService.sendMessage("all/"+recipientNR, myMessage.toString());
 
             db = myDb.getWritableDatabase();
             ContentValues values = new ContentValues();
@@ -230,7 +230,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
                 }
             }
 
-            if (topic.equals("false")) {
+            if (topic == null || topic.equals("false")) {
                 Random random = new Random();
                 int tmp = random.nextInt(9999999) + 10000000;
                 // Generate new topic

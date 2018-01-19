@@ -32,7 +32,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private final static int PERMISSION_READ_STATE = 1;
     MyMqttService mqttService;
-    private String clientId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +46,6 @@ public class HomeActivity extends AppCompatActivity {
         setToolbar();
         setUpTabs();
     }
-
-//    @Override
-//    public void setContentView(View view) {
-//
-//        SlidingMenuLayout layout = new SlidingMenuLayout(this);
-//        layout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
-//
-//        layout.addView(new AppMenuView());
-//        layout.addView(view);
-//
-//        super.setContentView(layout);
-//    }
 
     public void toastUserNumber()
     {
@@ -116,7 +102,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onStart();
         // Bind to MyMqttService
         Intent intent = new Intent(this, MyMqttService.class);
-        intent.putExtra("clientId", clientId);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
 

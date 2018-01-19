@@ -26,6 +26,11 @@ public class ChatListAdapter extends BaseAdapter {
         this.recipients = recipients;
     }
 
+    public void setRecipients(ArrayList<UserProfile> recipients)
+    {
+        this.recipients = recipients;
+    }
+
     @Override
     public int getCount() {
         return recipients.size();
@@ -55,14 +60,14 @@ public class ChatListAdapter extends BaseAdapter {
         CircleImageView profilePicture = view.findViewById(R.id.profilePicture);
 
 
-        TextView profileName = view.findViewById(R.id.profilName);
+        TextView profileName = view.findViewById(R.id.profileName);
 
             if (Arrays.equals(user.getProfilePicture(), "-1".getBytes())) {
                 profilePicture.setImageResource(R.drawable.default_profile);
             } else {
                 profilePicture.setImageBitmap(BitmapFactory.decodeByteArray(user.getProfilePicture(), 0, user.getProfilePicture().length));
             }
-            profileName.setText(user.getName());
+            profileName.setText(user.getFirstName() + " " + user.getName());
         return view;
     }
 

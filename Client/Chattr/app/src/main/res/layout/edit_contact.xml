@@ -15,13 +15,10 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
-    <ImageView
+    <View
         android:id="@+id/cover_image"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:adjustViewBounds="false"
-        android:cropToPadding="false"
-        android:scaleType="centerCrop" />
+        android:layout_height="150dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,13 +31,13 @@
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_gravity="center"
-            android:text="Add Profile Picture"
+            android:text="Change Profile Picture"
             android:background="@drawable/gradient_accent"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/white" />
 
         <EditText
-            android:id="@+id/user_name2"
+            android:id="@+id/first_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -50,7 +47,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/user_name"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

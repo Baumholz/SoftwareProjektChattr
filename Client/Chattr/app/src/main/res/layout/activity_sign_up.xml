@@ -61,6 +61,18 @@
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/statusSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="Biography"
+            android:inputType="textPersonName"
+            android:nextFocusDown="@+id/.."
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="40dp"

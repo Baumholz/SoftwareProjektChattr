@@ -1,5 +1,6 @@
 package com.example.david.chattr.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.david.chattr.ContactActivity;
 import com.example.david.chattr.R;
 import com.example.david.chattr.entities.users.UserProfile;
 import com.example.david.chattr.utils.MySQLiteHelper;
@@ -22,6 +24,8 @@ import java.util.ArrayList;
  */
 public class ContactListFragment extends Fragment {
 
+    ContactListAdapter myContactListAdapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class ContactListFragment extends Fragment {
 
         final ArrayList<UserProfile> contacts = new ArrayList<>(myDbProfile.getProfiles());
 
-        final ContactListAdapter myContactListAdapter = new ContactListAdapter(contacts);
+        myContactListAdapter = new ContactListAdapter(contacts);
         final ListView contactListView = view.findViewById(R.id.contactList);
         contactListView.setAdapter(myContactListAdapter);
         myContactListAdapter.notifyDataSetChanged();
@@ -38,7 +42,15 @@ public class ContactListFragment extends Fragment {
         contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO: Set Intent to Profile View
+                Intent intent = new Intent(getActivity(), ContactActivity.class);
+                intent.putExtra("phoneNumber", contacts.get(i).getPhoneNumber());
+                intent.putExtra("firstName", contacts.get(i).getFirstName());
+                intent.putExtra("name", contacts.get(i).getName());
+                intent.putExtra("status", contacts.get(i).getStatus());
+                intent.putExtra("profilePicture", contacts.get(i).getProfilePicture());
+                intent.putExtra("coverImage", contacts.get(i).getCoverImage());
+                intent.putExtra("topic", contacts.get(i).getTopic());
+                startActivity(intent);
             }
         });
 

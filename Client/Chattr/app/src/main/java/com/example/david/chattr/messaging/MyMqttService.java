@@ -1,14 +1,18 @@
 package com.example.david.chattr.messaging;
 
 import android.app.Service;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.david.chattr.utils.MySQLiteHelper;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -17,6 +21,9 @@ import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONObject;
+
+import java.util.Arrays;
 
 import static android.content.ContentValues.TAG;
 
@@ -28,7 +35,7 @@ public class MyMqttService extends Service implements MqttCallback{
 
     private final MyLocalBinder myBinder = new MyLocalBinder();
 
-    private final static String Broker = "tcp://iluhotcopvh4gnmu.myfritz.net:1883";
+    private final static String Broker = "tcp://7ofie4f20pn09gmt.myfritz.net";
 //    private final static String Broker = "tcp://broker.hivemq.com:1883";
     private final static int Quos = 2;
 
@@ -61,8 +68,6 @@ public class MyMqttService extends Service implements MqttCallback{
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-//        topic = intent.getStringExtra("topic");
-
         SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
         String phoneNumber = sharedPreferences.getString("phoneNumber", "default");
         if (phoneNumber.equals("default")) {
@@ -70,13 +75,6 @@ public class MyMqttService extends Service implements MqttCallback{
         } else {
             clientId = phoneNumber;
         }
-
-//        if (clientId != null) {
-//            clientId = intent.getStringExtra("clientId");
-//        } else {
-//            clientId = "SampleMessageReceiver";
-//        }
-
         try {
             connect();
         } catch (MqttException e) {
@@ -120,6 +118,17 @@ public class MyMqttService extends Service implements MqttCallback{
             e.printStackTrace();
         }
     }
+    public void sendMessage(String topic, byte[] message, int a) {
+        try {
+            MqttMessage mMessage = new MqttMessage(message);
+            mMessage.setRetained(true);
+            client.publish(topic, mMessage);
+            Log.d(TAG, "\nMessage send\n");
+//            Toast.makeText(MyMqttService.this, "Message send on topic: " + topic + "\n" + message, Toast.LENGTH_SHORT).show();
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void subscribe(final String topic) {
         try {
@@ -149,16 +158,35 @@ public class MyMqttService extends Service implements MqttCallback{
 
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
-        //Todo: Find out why messages do not arrive
-        String mMessage = message.getPayload().toString();
+        String mMessage = message.toString();
         Log.d(TAG, "\nMessage arrived on topic: " + topic + "\n" + message + "\n");
 //        Toast.makeText(MyMqttService.this, "Message arrived: " + message, Toast.LENGTH_SHORT).show();
 
         myBinder.messageArrived(topic, message);
 
-        //TODO: Make notification with real content
         MessageNotifier notifier = new MessageNotifier(this);
-        notifier.showOrUpdateNotification("Message arrived");
+        notifier.showOrUpdateNotification(mMessage);
+//        Toast.makeText(this, "Arived: "+ mMessage, Toast.LENGTH_SHORT).show();
+
+        JSONObject json = new JSONObject(mMessage);
+        String senderNr = json.getString("senderNr");
+        String recipientNR = json.getString("recipientNr");
+        String content = json.getString("content");
+//        String id = json.getString("id");
+
+        MySQLiteHelper myDb = new MySQLiteHelper(this);
+        SQLiteDatabase db = myDb.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COL_3,senderNr);
+        values.put(MySQLiteHelper.COL_4,recipientNR);
+        values.put(MySQLiteHelper.COL_5,content);
+        long result = db.insert(MySQLiteHelper.TABLE, null, values);
+
+        if(result != -1) {
+           Toast.makeText(this, "Data Inserted", Toast.LENGTH_LONG).show();
+        }else{
+           Toast.makeText(this, "Data not Inserted", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

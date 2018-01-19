@@ -19,7 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.david.chattr.ContactActivity;
 import com.example.david.chattr.R;
+import com.example.david.chattr.fragments.ContactListFragment;
+import com.example.david.chattr.startup.HomeActivity;
+import com.example.david.chattr.utils.BitmapScaler;
 import com.example.david.chattr.utils.MySQLiteHelper;
 
 import org.json.JSONException;
@@ -121,8 +125,11 @@ public class NewManualContactActivity extends AppCompatActivity {
                 TextView profileHintTextView = (TextView) findViewById(R.id.profileHintTextView);
                 Uri targetUri = data.getData();
 
-                if (isGalleryChosen)
+                if (isGalleryChosen) {
                     bitmapProfileImage = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                    if (bitmapProfileImage.getHeight() > 800 || bitmapProfileImage.getWidth() > 800)
+                        bitmapProfileImage = BitmapScaler.scaleBitmap(bitmapProfileImage);
+                }
                 else
                     bitmapProfileImage = (Bitmap) data.getExtras().get("data");
 
@@ -134,8 +141,11 @@ public class NewManualContactActivity extends AppCompatActivity {
                 TextView coverImageHintTextView = (TextView) findViewById(R.id.coverImageHintTextView);
                 Uri targetUri = data.getData();
 
-                if (isGalleryChosen)
+                if (isGalleryChosen) {
                     bitmapCoverImage = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                    if (bitmapCoverImage.getHeight() > 800 || bitmapCoverImage.getWidth() > 800)
+                        bitmapCoverImage = BitmapScaler.scaleBitmap(bitmapCoverImage);
+                }
                 else
                     bitmapCoverImage = (Bitmap) data.getExtras().get("data");
 
@@ -154,7 +164,6 @@ public class NewManualContactActivity extends AppCompatActivity {
         return true;
     }
 
-    //Todo: Functionality to Save Contact
     public void onSaveButtonClicked(View view) {
 
         EditText firstNameEdit = (EditText) findViewById(R.id.firstNameEdit);
@@ -187,6 +196,7 @@ public class NewManualContactActivity extends AppCompatActivity {
                 byte[] tempByteArray = "-1".getBytes();
                 values.put(MySQLiteHelper.PROFILE_PICTURE,tempByteArray);
             }
+
             if(bitmapProfileImage != null){
                 byte[] tempByteArray = getBytes(bitmapCoverImage);
                 values.put(MySQLiteHelper.COVER_IMAGE,tempByteArray);
@@ -194,6 +204,9 @@ public class NewManualContactActivity extends AppCompatActivity {
                 byte[] tempByteArray = "-1".getBytes();
                 values.put(MySQLiteHelper.PROFILE_PICTURE,tempByteArray);
             }
+
+            values.put(MySQLiteHelper.WRITEABLE,"false");
+            values.put(MySQLiteHelper.WRITEABLE,"false");
 
             long result = dbProfile.insert(MySQLiteHelper.TABLE_PROFILE, null, values);
 
@@ -210,8 +223,6 @@ public class NewManualContactActivity extends AppCompatActivity {
             return;
         }
         dbProfile.close();
-
-            //ArrayList<UserProfile> temp = new ArrayList<UserProfile>(myDbProfile.getProfiles());
 
     }
 

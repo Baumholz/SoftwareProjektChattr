@@ -31,7 +31,7 @@ public class ChatListFragment extends Fragment {
         MySQLiteHelper myDbProfile = new MySQLiteHelper(getContext());
         View view = inflater.inflate(R.layout.fragment_chatlist, container, false);
 
-        final ArrayList<UserProfile> recipients = new ArrayList<>(myDbProfile.getProfiles());
+        final ArrayList<UserProfile> recipients = new ArrayList<>(myDbProfile.getProfilesWritable());
 
         final ChatListAdapter myChatListAdapter = new ChatListAdapter(recipients);
         final ListView chatListView = view.findViewById(R.id.chatListView);
@@ -42,13 +42,13 @@ public class ChatListFragment extends Fragment {
         chatListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                int pos = chatListView.getSelectedItemPosition();
                 Intent intent = new Intent(ChatListFragment.this.getActivity(), ChatActivity.class);
                 intent.putExtra("phoneNumber", recipients.get(i).getPhoneNumber());
                 startActivity(intent);
             }
         });
 
+        myChatListAdapter.notifyDataSetChanged();
         return view;
     }
 }

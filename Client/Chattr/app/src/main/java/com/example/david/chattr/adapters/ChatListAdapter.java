@@ -57,13 +57,13 @@ public class ChatListAdapter extends BaseAdapter {
 
         TextView profileName = view.findViewById(R.id.profilName);
 
-        if(Arrays.equals(user.getProfilePicture(), "-1".getBytes())){
-            profilePicture.setImageResource(R.drawable.default_profile);
-        }else {
-            profilePicture.setImageBitmap(BitmapFactory.decodeByteArray(user.getProfilePicture(), 0, user.getProfilePicture().length));
-        }
-        profileName.setText(user.getName());
-
+            if (Arrays.equals(user.getProfilePicture(), "-1".getBytes())) {
+                profilePicture.setImageResource(R.drawable.default_profile);
+            } else {
+                profilePicture.setImageBitmap(BitmapFactory.decodeByteArray(user.getProfilePicture(), 0, user.getProfilePicture().length));
+            }
+            profileName.setText(user.getName());
         return view;
     }
+
 }

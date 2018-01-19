@@ -10,27 +10,30 @@ public class Message {
 
     private String id;
     private int timestamp;
-    private long senderNr;
-    private long recipientNr;
+    private String senderNr;
+    private String recipientNr;
     private String content;
-    private String topic;
+    private String topic = null;
     PublishMessage dm;
     JSONObject message;
 
-    public long getRecipientNr() {
+    public String getRecipientNr() {
         return recipientNr;
     }
 
+    /**
+     * @return
+     */
     public String getTopic() {
-        return topic;
+            return topic;
     }
 
     public void setTopic(String topic) {
         this.topic = topic;
     }
 
-    @Override
-    public String toString() {
+
+    public void wrapMessage() {
 
         message = new JSONObject();
         try {
@@ -39,26 +42,32 @@ public class Message {
             message.put("senderNr" , senderNr);
             message.put("recipientNr" , recipientNr);
             message.put("content" , content);
-            return message.toString();
+            message.put("topic", topic);
+            System.out.println(message.toString());
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
-    public Message(String id, int timestamp, long senderNr, long recipientNr, String content, String topic) {
+    public Message(String id, int timestamp, String senderNr, String recipientNr, String content) {
 
         this.id = id;
         this.timestamp = timestamp;
         this.senderNr = senderNr;
         this.recipientNr = recipientNr;
         this.content = content;
-        this.topic = topic;
+    }
+    public Message (){
+
     }
 
-    public void sendMessage(){
-       dm = new PublishMessage();
-       dm.sendTestMessage(this, 2);
+
+    public void sendMessage(String topic) {
+        dm = new PublishMessage();
+        wrapMessage();
+        dm.run(message.toString(), topic,2);
+      //  dm.sendTestMessage(message.toString(), getTopic(),2);
 
 
     }
@@ -70,27 +79,27 @@ public class Message {
         this.id = id;
     }
 
-    public int getTimestamp() {
+    public int gettimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void settimestamp(int timestamp) {
         this.timestamp = timestamp;
     }
 
-    public long getSenderNr() {
+    public String getSenderNr() {
         return senderNr;
     }
 
-    public void setSenderNr(long senderNr) {
+    public void setSenderNr(String senderNr) {
         this.senderNr = senderNr;
     }
 
-    public long isRecipientNr() {
+    public String isRecipientNr() {
         return recipientNr;
     }
 
-    public void setRecipientNr(long recipientNr) {
+    public void setRecipientNr(String recipientNr) {
         this.recipientNr = recipientNr;
     }
 

@@ -1,22 +1,78 @@
 package Entities;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Person {
 
+    private String phoneNumber;
+    private String status;
+    private String firstName;
+    private String name;
+    private String profilePicture;
+    private String coverImage;
     private String id;
-    private String cellphoneNumber;
-    private String nickName;
-    private String pictureURL;
 
-    public Person(String id, String cellphoneNumber, String nickName, String pictureURL) {
-        this.id = id;
-        this.cellphoneNumber = cellphoneNumber;
-        this.nickName = nickName;
-        this.pictureURL = pictureURL;
+    public Person(String phoneNumber, String status, String firstName, String name, String profilePicture, String coverImage) {
+        this.phoneNumber = phoneNumber;
+        this.status = status;
+        this.firstName = firstName;
+        this.name = name;
+        this.profilePicture = profilePicture;
+        this.coverImage = coverImage;
     }
 
     public Person(){};
-    public String getId() {
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
+    }
+
+    public String getId() {
         return id;
     }
 
@@ -24,26 +80,40 @@ public class Person {
         this.id = id;
     }
 
-
-    public String getCellphoneNumber() {
-        return cellphoneNumber;
+    @Override
+    public String toString() {
+        return "Person{" +
+                "phoneNumber='" + phoneNumber + '\'' +
+                ", status='" + status + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", name='" + name + '\'' +
+                ", profilePicture='" + profilePicture + '\'' +
+                ", coverImage='" + coverImage + '\'' +
+                ", id='" + id + '\'' +
+                '}';
     }
 
-    public void setCellphoneNumber(String cellphoneNumber) {
-        this.cellphoneNumber = cellphoneNumber;
-    }
+    public JSONObject personToJSON (){
 
-    public String getNickName() {
-        return nickName;
-    }
+     JSONObject message = new JSONObject();
+        try {
+            message.put("id" , id);
+            message.put("phoneNumber" , phoneNumber);
+            message.put("status" , status);
+            message.put("firstName" , firstName);
+            message.put("name" , name);
+            message.put("profilePicture", profilePicture);
+            message.put("coverImage", coverImage);
+            System.out.println("Created a Profil JSON:"+message.toString());
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-    public String getPictureURL(){
-        return pictureURL;
-    }
-    public void setPictureURL(String pictureURL){
-        this.pictureURL = pictureURL;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        return message;
+
     }
 }

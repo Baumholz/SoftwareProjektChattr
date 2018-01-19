@@ -32,7 +32,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private final static int PERMISSION_READ_STATE = 1;
     MyMqttService mqttService;
-    private String clientId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +102,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onStart();
         // Bind to MyMqttService
         Intent intent = new Intent(this, MyMqttService.class);
-        intent.putExtra("clientId", clientId);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
 

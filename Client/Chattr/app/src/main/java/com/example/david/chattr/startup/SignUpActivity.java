@@ -113,7 +113,6 @@ public class SignUpActivity extends AppCompatActivity {
             bitmapProfile.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byteArrayProfile = stream.toByteArray();
         } else {
-            Log.e("SignUp", "Adding Default Profile");
             Drawable drawable = getResources().getDrawable(R.drawable.default_profile);
             Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 
@@ -129,7 +128,6 @@ public class SignUpActivity extends AppCompatActivity {
             bitmapCover.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byteArrayCover = stream.toByteArray();
         } else {
-            Log.e("SignUp", "Adding Default Cover");
             Drawable drawable = getResources().getDrawable(R.drawable.default_cover);
             Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
 

@@ -25,8 +25,6 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * Created by david on 22.11.17.
  */
@@ -36,14 +34,15 @@ public class MyMqttService extends Service implements MqttCallback{
     private final MyLocalBinder myBinder = new MyLocalBinder();
 
     private final static String Broker = "tcp://7ofie4f20pn09gmt.myfritz.net";
+    private final static String TAG = "MyMqttService";
 //    private final static String Broker = "tcp://broker.hivemq.com:1883";
     private final static int Quos = 2;
 
-    MqttAndroidClient client;
+    private MqttAndroidClient client;
 
     //    private String topic;
     private String clientId;
-//    private Context context;
+    private String phoneNumber;
 
     // Returns this instance of MyMqttService, so that other clients/Activities can call its methods
     public class MyLocalBinder extends Binder {
@@ -69,7 +68,7 @@ public class MyMqttService extends Service implements MqttCallback{
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
-        String phoneNumber = sharedPreferences.getString("phoneNumber", "default");
+        phoneNumber = sharedPreferences.getString("phoneNumber", "default");
         if (phoneNumber.equals("default")) {
             clientId = intent.getStringExtra("clientId");
         } else {
@@ -96,6 +95,7 @@ public class MyMqttService extends Service implements MqttCallback{
                 Log.d(TAG, "\nonSuccess\n");
                 Toast.makeText(MyMqttService.this, "Connected with Broker", Toast.LENGTH_SHORT).show();
                 client.setCallback(MyMqttService.this);
+                subscribe();
             }
 
             @Override
@@ -130,7 +130,8 @@ public class MyMqttService extends Service implements MqttCallback{
         }
     }
 
-    public void subscribe(final String topic) {
+    public void subscribe() {
+        final String topic = "/all" + phoneNumber;
         try {
             IMqttToken token = client.subscribe(topic, Quos);
             token.setActionCallback(new IMqttActionListener() {

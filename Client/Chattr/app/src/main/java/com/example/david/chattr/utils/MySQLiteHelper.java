@@ -49,15 +49,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     //   public static final String SQL_ENTRIES = TABLE+COL_1 + COL_2 + COL_3 + COL_4 + COL_5 ;
     public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + TABLE + " ("
-            + BaseColumns._ID+" INTEGER PRIMARY KEY,"
+            + BaseColumns._ID + " INTEGER PRIMARY KEY,"
             + COL_1 + " TEXT,"
+            + COL_2 + "TEXT,"
             + COL_3 + " TEXT,"
             + COL_4 + " TEXT,"
             + COL_5 + " TEXT)";
 
     public static final String SQL_CREATE_TABLE_PROFILE = "CREATE TABLE " + TABLE_PROFILE + " ("
             + BaseColumns._ID + " INTEGER PRIMARY KEY,"
-            + FIRST_NAME  + " TEXT,"
+            + FIRST_NAME + " TEXT,"
             + NAME + " TEXT,"
             + PHONE_NUMBER + " TEXT,"
             + PROFILE_PICTURE + " TEXT,"
@@ -69,7 +70,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String SQL_DELETE_PROFILE_ENTRIES = "DROP TABLE IF EXIST " + TABLE_PROFILE;
 
     public MySQLiteHelper(Context context) {
-        super(context,DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -86,7 +87,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<UserProfile> getProfiles(){
+    public ArrayList<UserProfile> getProfiles() {
         ArrayList<UserProfile> recipients = new ArrayList<UserProfile>();
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -102,13 +103,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             String tempWriteable = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.WRITEABLE));
             String tempTopic = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.TOPIC));
 
-            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName,tempProfilePicture,tempCoverImage,tempWriteable,tempTopic);
+            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName, tempProfilePicture, tempCoverImage, tempWriteable, tempTopic);
             recipients.add(user);
         }
         return recipients;
     }
 
-    public ArrayList<UserProfile> getProfilesWritable(){
+    public ArrayList<UserProfile> getProfilesWritable() {
         ArrayList<UserProfile> recipients = new ArrayList<UserProfile>();
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -124,18 +125,19 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             String tempWriteable = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.WRITEABLE));
             String tempTopic = cursor.getString(cursor.getColumnIndexOrThrow(MySQLiteHelper.TOPIC));
 
-            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName,tempProfilePicture,tempCoverImage,tempWriteable,tempTopic);
-            if(user.getWriteable().equals("true")) {
+            UserProfile user = new UserProfile(tempPhoneNumber, "none", tempFirstName, tempName, tempProfilePicture, tempCoverImage, tempWriteable, tempTopic);
+            if (user.getWriteable().equals("true")) {
                 recipients.add(user);
             }
         }
         return recipients;
     }
-    public void updateTopic(String phoneNumber,String topic){
 
-        SQLiteDatabase db =  this.getReadableDatabase();
+    public void updateTopic(String phoneNumber, String topic) {
 
-        String query ="select * from " + MySQLiteHelper.TABLE_PROFILE + " where " + MySQLiteHelper.PHONE_NUMBER + "='" + phoneNumber + "';";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "select * from " + MySQLiteHelper.TABLE_PROFILE + " where " + MySQLiteHelper.PHONE_NUMBER + "='" + phoneNumber + "';";
         Cursor c = db.rawQuery(query, null);
 
         String firstName = "";
@@ -155,18 +157,18 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         c.close();
         db.close();
 
-        db =  this.getWritableDatabase();
+        db = this.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
-        cv.put(MySQLiteHelper.FIRST_NAME,firstName);
-        cv.put(MySQLiteHelper.NAME,name);
-        cv.put(MySQLiteHelper.WRITEABLE,writeable);
-        cv.put(MySQLiteHelper.PHONE_NUMBER,phoneNumber);
-        cv.put(MySQLiteHelper.PROFILE_PICTURE,profilePicture);
-        cv.put(MySQLiteHelper.COVER_IMAGE,coverImage);
-        cv.put(MySQLiteHelper.TOPIC,topic);
+        cv.put(MySQLiteHelper.FIRST_NAME, firstName);
+        cv.put(MySQLiteHelper.NAME, name);
+        cv.put(MySQLiteHelper.WRITEABLE, writeable);
+        cv.put(MySQLiteHelper.PHONE_NUMBER, phoneNumber);
+        cv.put(MySQLiteHelper.PROFILE_PICTURE, profilePicture);
+        cv.put(MySQLiteHelper.COVER_IMAGE, coverImage);
+        cv.put(MySQLiteHelper.TOPIC, topic);
 
-        db.update(MySQLiteHelper.TABLE_PROFILE, cv, MySQLiteHelper.PHONE_NUMBER+"=" +phoneNumber, null);
+        db.update(MySQLiteHelper.TABLE_PROFILE, cv, MySQLiteHelper.PHONE_NUMBER + "=" + phoneNumber, null);
 
     }
 }

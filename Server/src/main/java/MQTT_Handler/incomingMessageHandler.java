@@ -64,7 +64,7 @@ public class incomingMessageHandler {
      */
     private void normalMessage(JSONObject jsn, String topic) {
 
-        Message m1 = new Message(jsn.getString("id"), jsn.getInt("timestamp"), jsn.getString("senderNr"), jsn.getString("recipientNr"), jsn.getString("content"));
+        Message m1 = new Message(jsn.getString("id"), jsn.getString("timestamp"), jsn.getString("senderNr"), jsn.getString("recipientNr"), jsn.getString("content"));
         m1.setTopic(topic);
         mdi.insert(m1);
         System.out.println("Message inserted to database!");

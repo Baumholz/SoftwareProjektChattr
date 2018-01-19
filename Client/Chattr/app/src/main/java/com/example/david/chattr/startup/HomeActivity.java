@@ -26,6 +26,7 @@ import com.example.david.chattr.fragments.ContactListFragment;
 import com.example.david.chattr.menu.FaqActivity;
 import com.example.david.chattr.menu.PersonalProfileActivity;
 import com.example.david.chattr.messaging.MyMqttService;
+import com.facebook.stetho.Stetho;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
         setUpActivityView();
     }
 

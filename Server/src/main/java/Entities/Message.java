@@ -9,7 +9,7 @@ public class Message {
 
 
     private String id;
-    private int timestamp;
+    private String timestamp;
     private String senderNr;
     private String recipientNr;
     private String content;
@@ -50,7 +50,7 @@ public class Message {
         }
     }
 
-    public Message(String id, int timestamp, String senderNr, String recipientNr, String content) {
+    public Message(String id, String timestamp, String senderNr, String recipientNr, String content) {
 
         this.id = id;
         this.timestamp = timestamp;
@@ -79,11 +79,11 @@ public class Message {
         this.id = id;
     }
 
-    public int gettimestamp() {
+    public String gettimestamp() {
         return timestamp;
     }
 
-    public void settimestamp(int timestamp) {
+    public void settimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 

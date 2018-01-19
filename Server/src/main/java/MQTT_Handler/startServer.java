@@ -8,7 +8,9 @@ import Entities.Person;
 import org.json.JSONObject;
 
 
+import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Date;
 
 public class startServer {
 
@@ -32,20 +34,23 @@ public class startServer {
          */
 
         Calendar calendar = Calendar.getInstance();
-        java.util.Date now = calendar.getTime();
-        java.sql.Timestamp currentTimestamp;
+        Date now = calendar.getTime();
+        Timestamp currentTimestamp;
         System.out.println("...\n\n\n\nFuellen der DB mit Testnachrichten...");
         /**
          * Füllen der DB mit Testnachrichten zwischen zwei personen
          */
 
         for (int i = 0; i < 3; i++) {
+
+            now = calendar.getTime();
             currentTimestamp = new java.sql.Timestamp(now.getTime());
             //    public Message(String id, int timestamp, String senderNr, String recipientNr, String content) {
             Message msg = new Message("1", currentTimestamp.getNanos(), "015730975250", "015730975251", "Hello World! FROM: 015730975250!");
             msg.setTopic("all/testtopic");
             msg.sendMessage("all/testtopic");
 
+            now = calendar.getTime();
             currentTimestamp = new java.sql.Timestamp(now.getTime());
             //    public Message(String id, int timestamp, String senderNr, String recipientNr, String content) {
             Message msg2 = new Message("1", currentTimestamp.getNanos(), "015730975251", "015730975250", "Hello World! FROM: 015730975251!");

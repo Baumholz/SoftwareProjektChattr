@@ -170,7 +170,7 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if (resultCode == RESULT_OK && requestCode == PROFILEIMAGE) {
-                ImageView profile_image = (ImageView) findViewById(R.id.profile_image);
+                ImageView profile_image = (ImageView) findViewById(R.id.profile_image_edit);
                 TextView profileHintTextView = (TextView) findViewById(R.id.profileHintTextView);
                 Uri targetUri = data.getData();
 
@@ -189,7 +189,7 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
                 new ImageSaver(getApplicationContext()).setFileName("profile_image.png").setDirectoryName("images").save(bitmapProfile);
 
             } else if (resultCode == RESULT_OK && requestCode == COVERIMAGE) {
-                ImageView cover_image = (ImageView) findViewById(R.id.cover_image);
+                ImageView cover_image = (ImageView) findViewById(R.id.cover_image_edit);
                 TextView coverImageHintTextView = (TextView) findViewById(R.id.coverImageHintTextView);
                 Uri targetUri = data.getData();
 

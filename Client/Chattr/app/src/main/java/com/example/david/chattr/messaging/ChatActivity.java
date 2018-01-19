@@ -230,7 +230,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
                 }
             }
 
-            if (topic.equals("false")) {
+            if (topic == null || topic.equals("false")) {
                 Random random = new Random();
                 int tmp = random.nextInt(9999999) + 10000000;
                 // Generate new topic

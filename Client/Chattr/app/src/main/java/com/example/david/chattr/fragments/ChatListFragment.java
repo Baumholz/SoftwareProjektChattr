@@ -25,20 +25,38 @@ import java.util.ArrayList;
 
 public class ChatListFragment extends Fragment {
 
+    private ChatListAdapter myChatListAdapter;
+    private ArrayList<UserProfile> recipients;
+    private MySQLiteHelper myDbProfile;
+    private ListView chatListView;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        recipients = new ArrayList<UserProfile>(myDbProfile.getProfilesWritable());
+        myChatListAdapter.setRecipients(recipients);
+        setRecipientsListeners();
+        myChatListAdapter.notifyDataSetChanged();
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        MySQLiteHelper myDbProfile = new MySQLiteHelper(getContext());
+        myDbProfile = new MySQLiteHelper(getContext());
         View view = inflater.inflate(R.layout.fragment_chatlist, container, false);
 
-        final ArrayList<UserProfile> recipients = new ArrayList<>(myDbProfile.getProfilesWritable());
+        recipients = new ArrayList<>(myDbProfile.getProfilesWritable());
 
-        final ChatListAdapter myChatListAdapter = new ChatListAdapter(recipients);
-        final ListView chatListView = view.findViewById(R.id.chatListView);
+        myChatListAdapter = new ChatListAdapter(recipients);
+        chatListView = view.findViewById(R.id.chatListView);
         chatListView.setAdapter(myChatListAdapter);
 
-        //David i changed something her added an intent to the chatActivity #Manu
-        //ClickListener for the listView /Main view
+        myChatListAdapter.notifyDataSetChanged();
+        return view;
+    }
+
+    private void setRecipientsListeners() {
         chatListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -47,8 +65,5 @@ public class ChatListFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        myChatListAdapter.notifyDataSetChanged();
-        return view;
     }
 }

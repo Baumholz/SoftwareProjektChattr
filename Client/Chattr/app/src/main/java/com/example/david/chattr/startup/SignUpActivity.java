@@ -186,7 +186,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if (resultCode == RESULT_OK && requestCode == PROFILEIMAGE) {
-                CircleImageView profile_image = (CircleImageView) findViewById(R.id.profile_image);
+                CircleImageView profile_image = (CircleImageView) findViewById(R.id.profile_image_edit);
                 TextView profileHintTextView = (TextView) findViewById(R.id.profileHintTextView);
                 Uri targetUri = data.getData();
 
@@ -207,7 +207,7 @@ public class SignUpActivity extends AppCompatActivity {
                 new ImageSaver(getApplicationContext()).setFileName("profile_image.png").setDirectoryName("images").save(bitmapProfile);
 
             } else if (resultCode == RESULT_OK && requestCode == COVERIMAGE) {
-                ImageView cover_image = (ImageView) findViewById(R.id.cover_image);
+                ImageView cover_image = (ImageView) findViewById(R.id.cover_image_edit);
                 TextView coverImageHintTextView = (TextView) findViewById(R.id.coverImageHintTextView);
                 Uri targetUri = data.getData();
 

@@ -15,12 +15,18 @@ import com.example.david.chattr.entities.users.UserProfile;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class ContactListAdapter extends BaseAdapter {
 
     private ArrayList<UserProfile> contacts ;
 
     public ContactListAdapter(ArrayList<UserProfile> contacts) {
+        this.contacts = contacts;
+    }
+
+    public void setContacts(ArrayList<UserProfile> contacts) {
         this.contacts = contacts;
     }
 
@@ -50,7 +56,7 @@ public class ContactListAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.contact_list_entry,null,false); //Use our Layout
         }
 
-        ImageView profilePicture = view.findViewById(R.id.profilePicture);
+        CircleImageView profilePicture = view.findViewById(R.id.profilePicture);
 
         TextView profileName = view.findViewById(R.id.profilName);
         if(Arrays.equals(user.getProfilePicture(), "-1".getBytes())){
@@ -58,7 +64,7 @@ public class ContactListAdapter extends BaseAdapter {
         }else {
             profilePicture.setImageBitmap(BitmapFactory.decodeByteArray(user.getProfilePicture(), 0, user.getProfilePicture().length));
         }
-        profileName.setText(user.getName());
+        profileName.setText(user.getFirstName() + " " + user.getName());
 
         return view;
     }

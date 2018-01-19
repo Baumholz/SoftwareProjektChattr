@@ -86,11 +86,12 @@ public class SignUpActivity extends AppCompatActivity {
         EditText firstNameSignUp = findViewById(R.id.firstNameSignUp);
         EditText nameSignUp = findViewById(R.id.nameSignUp);
         EditText phoneNumberSignUp = findViewById(R.id.phoneNumberSignUp);
+        EditText statusSignUp = findViewById(R.id.statusSignUp);
 
         String firstName = firstNameSignUp.getText().toString();
         String name = nameSignUp.getText().toString();
         String phoneNumber = phoneNumberSignUp.getText().toString();
-        String status = "Hello, World!";
+        String status = statusSignUp.getText().toString();
 
         SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

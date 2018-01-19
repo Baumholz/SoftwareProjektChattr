@@ -33,8 +33,9 @@ public class PersonalProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal_profile);
-        findViewById(R.id.contact_bar).setVisibility(View.INVISIBLE);
+        setContentView(R.layout.user_profile);
+        findViewById(R.id.contact_bar).setVisibility(View.GONE);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Personal Profile");
         setSupportActionBar(toolbar);

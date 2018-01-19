@@ -29,7 +29,8 @@
         <!-- ACTIVITIES -->
         <activity
             android:name=".startup.MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +41,9 @@
         <activity
             android:name=".startup.HomeActivity"
             android:label="@string/home_title"
-            android:uiOptions="splitActionBarWhenNarrow">
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.UI_OPTIONS"
                 android:value="splitActionBarWhenNarrow" />
@@ -51,22 +54,40 @@
         </activity>
         <activity
             android:name=".messaging.ChatActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".editing.add_contacts.NewManualContactActivity"
-            android:label="NewManuallContactActivity" />
+            android:label="NewManuallContactActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".menu.FaqActivity"
-            android:label="@string/title_activity_faq" />
+            android:label="@string/title_activity_faq"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".editing.EditContactActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".startup.SignUpActivity" />
-        <activity android:name=".editing.add_contacts.ShowQrActivity" />
-        <activity android:name=".editing.add_contacts.NfcBeamActivity" />
-        <activity android:name=".menu.PersonalProfileActivity" />
-        <activity android:name=".editing.EditPersonalProfileActivity" />
-        <activity android:name=".ContactActivity"></activity>
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity android:name=".startup.SignUpActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".editing.add_contacts.ShowQrActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".editing.add_contacts.NfcBeamActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".menu.PersonalProfileActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".editing.EditPersonalProfileActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ContactActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

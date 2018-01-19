@@ -2,10 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/user_profile"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/palePrimary"
     android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <include layout="@layout/profile_header" />
 
@@ -219,15 +226,15 @@
         <RelativeLayout
             android:id="@+id/edit_profile_bar"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:gravity="end|center_vertical"
+            android:layout_height="match_parent"
+            android:gravity="end|bottom"
             android:padding="10dp">
 
             <ImageView
                 android:contentDescription="@string/edit_profile_icon"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/gradient_secondary" />
+                android:background="@drawable/gradient_accent" />
 
             <Button
                 android:id="@+id/edit_profile"
@@ -240,8 +247,7 @@
         <LinearLayout
             android:id="@+id/contact_bar"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             android:baselineAligned="false">
 
@@ -250,21 +256,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="start"
+                android:gravity="start|bottom"
                 android:padding="10dp">
 
                 <ImageView
+                    android:id="@+id/add_contact_bg"
                     android:contentDescription="@string/add_contact_icon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
                     android:background="@drawable/gradient_primary" />
 
                 <Button
                     android:id="@+id/add_contact"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginStart="10dp"
+                    android:layout_alignStart="@+id/add_contact_bg"
+                    android:layout_alignBottom="@+id/add_contact_bg"
                     android:background="@drawable/ic_add_contact" />
             </RelativeLayout>
 
@@ -273,7 +283,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="end"
+                android:gravity="end|bottom"
                 android:padding="10dp">
 
                 <ImageView

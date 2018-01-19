@@ -33,7 +33,7 @@ public class PublishMessage extends Thread{
      * @param qos
      * @return
      */
-        public boolean sendTestMessage(String tmp, String topic,int qos) {
+        public boolean sendTestMessage(String tmp, String topic, int qos) {
 
             //String topic = "/receiver";
             //ObjectMapper mapper = new ObjectMapper();

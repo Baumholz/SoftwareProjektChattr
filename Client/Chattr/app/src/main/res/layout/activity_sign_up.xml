@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.david.chattr.startup.SignUpActivity">
+    tools:context="com.example.david.chattr.startup.SignUpActivity"
+    android:background="@drawable/gradient_primary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,13 +17,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome to Chattr! Please fill out the fields bellow."
+            android:text="Welcome to Chattr!\nPlease fill out the fields below to get started.\n"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
-        <include layout="@layout/edit_contact_head" />
+        <include layout="@layout/edit_profile_head" />
 
         <EditText
             android:id="@+id/firstNameSignUp"
@@ -55,18 +56,6 @@
             android:gravity="center"
             android:hint="Phone Number"
             android:inputType="phone"
-            android:nextFocusDown="@+id/.."
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/statusSignUp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="Status"
-            android:inputType="text"
             android:nextFocusDown="@+id/.."
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorPrimaryDark"

@@ -44,7 +44,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String NAME = "name";
     public static final String PROFILE_PICTURE = "profilePicture";
     public static final String COVER_IMAGE = "coverImage";
-    public static final String WRITEABLE = "writeabel";
+    public static final String WRITEABLE = "writeable";
     public static final String TOPIC = "topic";
 
     //   public static final String SQL_ENTRIES = TABLE+COL_1 + COL_2 + COL_3 + COL_4 + COL_5 ;

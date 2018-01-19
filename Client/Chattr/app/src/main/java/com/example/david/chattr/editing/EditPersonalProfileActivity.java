@@ -67,15 +67,15 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_personal_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Edit your Profile");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        firstNameEdit = (EditText) findViewById(R.id.firstNameEdit);
-        nameEdit = (EditText) findViewById(R.id.nameEdit);
-        statusEdit = (EditText) findViewById(R.id.statusEdit);
+        firstNameEdit = findViewById(R.id.firstNameEdit);
+        nameEdit = findViewById(R.id.nameEdit);
+        statusEdit = findViewById(R.id.statusEdit);
 
         SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
         String firstName = sharedPreferences.getString("firstName", "default");

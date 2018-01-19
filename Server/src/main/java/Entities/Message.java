@@ -9,7 +9,7 @@ public class Message {
 
 
     private String id;
-    private String timestampSender;
+    private int timestamp;
     private String senderNr;
     private String recipientNr;
     private String content;
@@ -21,10 +21,11 @@ public class Message {
         return recipientNr;
     }
 
+    /**
+     * @return
+     */
     public String getTopic() {
-
-        topic = "all/"+recipientNr;
-        return topic;
+            return topic;
     }
 
     public void setTopic(String topic) {
@@ -37,7 +38,7 @@ public class Message {
         message = new JSONObject();
         try {
             message.put("id" , id);
-            message.put("timestampSender" , timestampSender);
+            message.put("timestamp" , timestamp);
             message.put("senderNr" , senderNr);
             message.put("recipientNr" , recipientNr);
             message.put("content" , content);
@@ -49,10 +50,10 @@ public class Message {
         }
     }
 
-    public Message(String id, String timestampSender, String senderNr, String recipientNr, String content) {
+    public Message(String id, int timestamp, String senderNr, String recipientNr, String content) {
 
         this.id = id;
-        this.timestampSender = timestampSender;
+        this.timestamp = timestamp;
         this.senderNr = senderNr;
         this.recipientNr = recipientNr;
         this.content = content;
@@ -61,10 +62,11 @@ public class Message {
 
     }
 
-    public void sendMessage() {
+
+    public void sendMessage(String topic) {
         dm = new PublishMessage();
         wrapMessage();
-        dm.run(message.toString(), getTopic(),2);
+        dm.run(message.toString(), topic,2);
       //  dm.sendTestMessage(message.toString(), getTopic(),2);
 
 
@@ -77,12 +79,12 @@ public class Message {
         this.id = id;
     }
 
-    public String getTimestampSender() {
-        return timestampSender;
+    public int gettimestamp() {
+        return timestamp;
     }
 
-    public void settimestampSender(String timestampSender) {
-        this.timestampSender = timestampSender;
+    public void settimestamp(int timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getSenderNr() {

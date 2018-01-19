@@ -8,7 +8,7 @@ public interface MessageDB
 
     void insert(Message message);
 
-    JSONObject getAllFromTopic(String topic);
+    JSONObject sendChactHistoryBetweenSenderAndReceiver(String senderNr, String recipientNr);
 
 
 }

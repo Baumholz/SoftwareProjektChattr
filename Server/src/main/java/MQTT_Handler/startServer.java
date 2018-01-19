@@ -19,7 +19,7 @@ public class startServer {
          * Start to subscribe.
          */
         MQTTSubscribe sub = new MQTTSubscribe();
-        sub.run();
+        sub.start();
 
         try {
             Thread.sleep(5000);
@@ -30,41 +30,81 @@ public class startServer {
         /**
          *wait that our Subscribe Thread is finished and then send TestMessage
          */
-        /*
+
         Calendar calendar = Calendar.getInstance();
         java.util.Date now = calendar.getTime();
-        java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
-        Message msg = new Message("ServerTestPublisher", Integer.toString(currentTimestamp.getNanos()), "015730975250", "015730975250", "Hello World!", "all/testtopic");
-        msg.sendMessage();
-/*
+        java.sql.Timestamp currentTimestamp;
 
+        /**
+         * FFüllen der DB mit Testnachrichten zwischen zwei personen
+         */
+
+        for (int i = 0; i < 10; i++) {
+            currentTimestamp = new java.sql.Timestamp(now.getTime());
+            //    public Message(String id, int timestamp, String senderNr, String recipientNr, String content) {
+            Message msg = new Message("1", currentTimestamp.getNanos(), "015730975250", "015730975251", "Hello World! FROM: 015730975250!");
+            msg.setTopic("all/testtopic");
+            msg.sendMessage("all/testtopic");
+
+            currentTimestamp = new java.sql.Timestamp(now.getTime());
+            //    public Message(String id, int timestamp, String senderNr, String recipientNr, String content) {
+            Message msg2 = new Message("1", currentTimestamp.getNanos(), "015730975251", "015730975250", "Hello World! FROM: 015730975251!");
+            msg2.setTopic("all/testtopic");
+            msg2.sendMessage("all/testtopic");
+        }
 
         /*SQLiteJDBC db = new SQLiteJDBC();
         db.openDBConnection();
         db.createTable(); */
+
         /**
-         * Test der Person DB
+         * Test des Profil empfangs! indem ein Profil verschickt wird
          */
-        /*
-        PersonDBImpl pdi = new PersonDBImpl();
-        pdi.createPersonTable();
-        //String id, String cellphoneNumber, String status, String sureName, String lastName,String pictureURL
-        Person person = new Person("01520975250", ":)", "Michael", "Kurras", "c/data/pictures/profilepicture");
-        pdi.insert(person);
-        Person person2 = new Person("182983928329", ":)", "David", "Hierholz", "c/data/pictures/profilepicture");
-        pdi.insert(person2);
-        Person person3 = new Person("2274824728427", ":)", "Manuel", "Schneckenburger", "c/data/pictures/profilepicture");
-        pdi.insert(person3);
-        Person p2 = pdi.selectById("182983928329");
-        System.out.println(p2.toString());
-/*
+
+        //public Person(String phoneNumber, String status, String firstName, String name, String profilePicture, String coverImage) {
+        Person person = new Person("015730975250", ":)", "Michael", "Kurras", "prfilIMAGEXYZ", "coverIMAGEXYZ");
+        person.setId("10");
+        PublishMessage pubm = new PublishMessage();
+        pubm.run(person.personToJSON().toString(), "all/testtopic", 2);
+        Person person2 = new Person("182983928329", ":) I'm the best!", "David", "Hierholz", "prfilIMAGEXYZ", "coverIMAGEXYZ");
+        person2.setId("10");
+        pubm.sendTestMessage(person2.personToJSON().toString(), "all/testtopic", 2);
+        Person person3 = new Person("2274824728427", "HELLO THERE", "Manuel", "Schneckenburger", "prfilIMAGEXYZ", "coverIMAGEXYZ");
+        person3.setId("10");
+        pubm.sendTestMessage(person3.personToJSON().toString(), "all/testtopic", 2);
+
+
+        /**
+         *  Test des Profil Verschickens.
+         */
+
+        currentTimestamp = new java.sql.Timestamp(now.getTime());
+        Message msg3 = new Message("13", currentTimestamp.getNanos(), "015730975250", "015730975251", "015730975250");
+        msg3.setTopic("all/testtopic");
+        msg3.sendMessage("all/testtopic");
+
+        currentTimestamp = new java.sql.Timestamp(now.getTime());
+        Message msg4 = new Message("11", currentTimestamp.getNanos(), "015730975250", "015730975251", "");
+        msg4.setTopic("all/testtopic");
+        msg4.sendMessage("all/testtopic");
+
+
+        /**
+         * Chat History anfordern
+         */
+
+        currentTimestamp = new java.sql.Timestamp(now.getTime());
+        Message msg5 = new Message("11", currentTimestamp.getNanos(), "015730975250", "015730975251", "XYZ");
+        msg5.setTopic("all/testtopic");
+        msg5.sendMessage("all/testtopic");
+
 
         /**
          *  TestProfil Verschicken, um Eingang in DB zu testen.
          */
 
         //Person(String cellphoneNumber, String status, String sureName, String lastName, String pictureURL)
-        int i = 0;
+        /*int i = 0;
         while(i < 2000) {
 
             Person person4 = new Person(Integer.toString(i), "meinStatus!", "Manuella", "Stratz", "c/data/pictures/profilepicture", "c/data/pictures/profilepicture");
@@ -77,13 +117,13 @@ public class startServer {
             m2.sendMessage();
 
             i++;
-        }
+        } */
         /**Test der Message DB
          */
 /*
         MessageDBImpl mdi = new MessageDBImpl();
         mdi.createMessageTable();
-        //String id, String timestampSender, String senderNr, String recipientNr, String content, String topic
+        //String id, String timestamp, String senderNr, String recipientNr, String content, String topic
         Message m1 = new Message("2788273872382", "22323232", "015730975250", "01573929829", "Hallo WELT!");
         mdi.insert(m1);
         Message m2 = new Message("23323", "4343", "01523275250", "01573929829", "Hallo WELT2!");

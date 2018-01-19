@@ -30,7 +30,9 @@ public class ContactActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.contact_profile);
+        setContentView(R.layout.user_profile);
+
+        findViewById(R.id.edit_profile_bar).setVisibility(View.GONE);
 
         String firstName = (String)getIntent().getSerializableExtra("firstName");
         String name = (String)getIntent().getSerializableExtra("name");

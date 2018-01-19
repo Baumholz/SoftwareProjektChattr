@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/gradient_primary">
     <!--android:background="@color/white">-->
 
     <LinearLayout
@@ -21,7 +22,7 @@
                 android:id="@+id/manuallButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradient_secondary"
+                android:background="@drawable/gradient_accent"
                 android:gravity="center"
                 android:text="Add contact manually"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -60,7 +61,7 @@
                 android:id="@+id/qrButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradient_secondary"
+                android:background="@drawable/gradient_accent"
                 android:gravity="center"
                 android:text="Add contact with QR"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"

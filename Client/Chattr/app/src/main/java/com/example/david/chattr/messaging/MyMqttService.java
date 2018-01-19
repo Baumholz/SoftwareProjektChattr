@@ -25,7 +25,6 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by david on 22.11.17.
@@ -36,6 +35,7 @@ public class MyMqttService extends Service implements MqttCallback{
     private final MyLocalBinder myBinder = new MyLocalBinder();
 
     private final static String Broker = "tcp://7ofie4f20pn09gmt.myfritz.net";
+    private final static String TAG = "MyMqttService";
 //    private final static String Broker = "tcp://broker.hivemq.com:1883";
     private final static int Quos = 2;
 

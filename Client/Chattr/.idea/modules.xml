@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Chattr.iml" filepath="$PROJECT_DIR$/Chattr.iml" />
+      <module fileurl="file://C:\Users\Micha\Documents\chattr\ti-proj-1718-10\Client\Chattr\Chattr.iml" filepath="C:\Users\Micha\Documents\chattr\ti-proj-1718-10\Client\Chattr\Chattr.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Micha\Documents\chattr\ti-proj-1718-10\Client\Chattr\app\app.iml" filepath="C:\Users\Micha\Documents\chattr\ti-proj-1718-10\Client\Chattr\app\app.iml" />
     </modules>
   </component>
 </project>

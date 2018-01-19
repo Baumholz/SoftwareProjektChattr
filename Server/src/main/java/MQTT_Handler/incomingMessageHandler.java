@@ -84,7 +84,7 @@ public class incomingMessageHandler {
         String phoneNumber = jsn.getString("content"); //Profil welches angefordert wird.
         String receiverNumber =  jsn.getString("senderNr"); //Topic an die die Person geschickt wird.
         Person person = pdi.selectById(phoneNumber);
-        person.setId("13"); //Send Profil ID
+        person.setId("15"); //Send Profil ID
         System.out.println("Selected Person from database: " +person.toString());
         PublishMessage send = new PublishMessage();
         send.run(person.personToJSON().toString(), receiverNumber, 2);

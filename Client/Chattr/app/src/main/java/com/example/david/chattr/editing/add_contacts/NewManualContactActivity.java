@@ -1,8 +1,10 @@
 package com.example.david.chattr.editing.add_contacts;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -21,7 +23,9 @@ import android.widget.Toast;
 
 import com.example.david.chattr.ContactActivity;
 import com.example.david.chattr.R;
+import com.example.david.chattr.entities.messaging.Message;
 import com.example.david.chattr.fragments.ContactListFragment;
+import com.example.david.chattr.messaging.PublishMessage;
 import com.example.david.chattr.startup.HomeActivity;
 import com.example.david.chattr.utils.BitmapScaler;
 import com.example.david.chattr.utils.MySQLiteHelper;
@@ -173,6 +177,14 @@ public class NewManualContactActivity extends AppCompatActivity {
         String firstNameDB = firstNameEdit.getText().toString();
         String nameDB = nameEdit.getText().toString();
         String phoneNumberDB = phoneNumberEdit.getText().toString();
+        //(String id, int timestamp, String senderNr, String recipientNr, String content)
+
+        SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
+        String myPhoneNumber = sharedPreferences.getString("phoneNumber", "default");
+        Message msg = new Message("13",1,myPhoneNumber, "",phoneNumberEdit.getText().toString());
+        PublishMessage pubM = new PublishMessage();
+        pubM.start();
+        pubM.run(msg.toString(),"all/server", 2, myPhoneNumber);
 
         try {
             if (alreadyInserted(phoneNumberDB)) {

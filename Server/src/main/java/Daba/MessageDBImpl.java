@@ -113,7 +113,7 @@ public class MessageDBImpl implements MessageDB {
             resSet = preStmt.executeQuery();
 
             while (resSet.next()) {
-                Message msg = new Message("11", resSet.getInt("timestamp"), resSet.getString("senderNr"), resSet.getString("recipientNr"), resSet.getString("content"));
+                Message msg = new Message("14", resSet.getInt("timestamp"), resSet.getString("senderNr"), resSet.getString("recipientNr"), resSet.getString("content"));
                 msg.setTopic(topic); //schickt alle Nachrichten aus der DB einzelnd
                 msg.sendMessage("all/"+senderNr);
             }

@@ -34,12 +34,12 @@ public class startServer {
         Calendar calendar = Calendar.getInstance();
         java.util.Date now = calendar.getTime();
         java.sql.Timestamp currentTimestamp;
-
+        System.out.println("...\n\n\n\nFuellen der DB mit Testnachrichten...");
         /**
-         * FFüllen der DB mit Testnachrichten zwischen zwei personen
+         * Füllen der DB mit Testnachrichten zwischen zwei personen
          */
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             currentTimestamp = new java.sql.Timestamp(now.getTime());
             //    public Message(String id, int timestamp, String senderNr, String recipientNr, String content) {
             Message msg = new Message("1", currentTimestamp.getNanos(), "015730975250", "015730975251", "Hello World! FROM: 015730975250!");
@@ -53,10 +53,20 @@ public class startServer {
             msg2.sendMessage("all/testtopic");
         }
 
+        /**
+         * Give the other thread some time to work.
+         */
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
         /*SQLiteJDBC db = new SQLiteJDBC();
         db.openDBConnection();
         db.createTable(); */
-
+        System.out.println("...\n\n\n\nTesten des Profilempfangs...");
         /**
          * Test des Profil empfangs! indem ein Profil verschickt wird
          */
@@ -75,24 +85,37 @@ public class startServer {
 
 
         /**
+         * Give the other thread some time to work.
+         */
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        /**
          *  Test des Profil Verschickens.
          */
-
+        System.out.println("...\n\n\n\nTest des Profil verschickens...");
         currentTimestamp = new java.sql.Timestamp(now.getTime());
         Message msg3 = new Message("13", currentTimestamp.getNanos(), "015730975250", "015730975251", "015730975250");
         msg3.setTopic("all/testtopic");
         msg3.sendMessage("all/testtopic");
 
-        currentTimestamp = new java.sql.Timestamp(now.getTime());
-        Message msg4 = new Message("11", currentTimestamp.getNanos(), "015730975250", "015730975251", "");
-        msg4.setTopic("all/testtopic");
-        msg4.sendMessage("all/testtopic");
 
+        /**
+         * Give the other thread some time to work.
+         */
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         /**
          * Chat History anfordern
          */
-
+        System.out.println("...\n\n\n\nTest der Chat History Funktion");
         currentTimestamp = new java.sql.Timestamp(now.getTime());
         Message msg5 = new Message("11", currentTimestamp.getNanos(), "015730975250", "015730975251", "XYZ");
         msg5.setTopic("all/testtopic");

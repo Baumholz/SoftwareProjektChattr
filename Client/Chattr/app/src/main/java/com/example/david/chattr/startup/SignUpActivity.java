@@ -32,6 +32,7 @@ import com.example.david.chattr.entities.messaging.Message;
 import com.example.david.chattr.entities.users.UserProfile;
 import com.example.david.chattr.messaging.ChatActivity;
 import com.example.david.chattr.messaging.MyMqttService;
+import com.example.david.chattr.messaging.PublishMessage;
 import com.example.david.chattr.utils.BitmapScaler;
 import com.example.david.chattr.utils.ImageSaver;
 
@@ -131,10 +132,12 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         String userProfile = new UserProfile(phoneNumber,status,firstName,name,byteArrayProfile,byteArrayCover,"false","false").toJson().toString();
-        Message signUpMessage = new Message("10", 0, phoneNumber, "-1", userProfile);
-        Log.i("signUpMessage", signUpMessage.toString());
-        Log.i("userProfile", userProfile);
-        mqttService.sendMessage("/all", signUpMessage.toString());
+        Log.i("signUpUserProfile", userProfile);
+        String clientId = sharedPreferences.getString("phoneNumber", "default");
+        PublishMessage pubM = new PublishMessage();
+        pubM.start();
+        pubM.run(userProfile,"all/server", 2, clientId);
+       // mqttService.sendMessage("/all", "HELLO PROFIL!");
 
         /*
         *

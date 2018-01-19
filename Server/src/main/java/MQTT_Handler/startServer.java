@@ -1,14 +1,12 @@
 package MQTT_Handler;
-
-import Daba.MessageDBImpl;
-import Daba.PersonDBImpl;
 import DemoMessageSender.PublishMessage;
 import Entities.Message;
 import Entities.Person;
-import org.json.JSONObject;
 
-
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+
 
 public class startServer {
 
@@ -32,23 +30,23 @@ public class startServer {
          */
 
         Calendar calendar = Calendar.getInstance();
-        java.util.Date now = calendar.getTime();
-        java.sql.Timestamp currentTimestamp;
+        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
         System.out.println("...\n\n\n\nFuellen der DB mit Testnachrichten...");
         /**
          * Füllen der DB mit Testnachrichten zwischen zwei personen
          */
 
         for (int i = 0; i < 3; i++) {
-            currentTimestamp = new java.sql.Timestamp(now.getTime());
+
+            timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+
             //    public Message(String id, int timestamp, String senderNr, String recipientNr, String content) {
-            Message msg = new Message("1", currentTimestamp.getNanos(), "015730975250", "015730975251", "Hello World! FROM: 015730975250!");
+            Message msg = new Message("1", timestamp, "015730975250", "015730975251", "Hello World! FROM: 015730975250!");
             msg.setTopic("all/testtopic");
             msg.sendMessage("all/testtopic");
-
-            currentTimestamp = new java.sql.Timestamp(now.getTime());
             //    public Message(String id, int timestamp, String senderNr, String recipientNr, String content) {
-            Message msg2 = new Message("1", currentTimestamp.getNanos(), "015730975251", "015730975250", "Hello World! FROM: 015730975251!");
+            timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+            Message msg2 = new Message("1", timestamp, "015730975251", "015730975250", "Hello World! FROM: 015730975251!");
             msg2.setTopic("all/testtopic");
             msg2.sendMessage("all/testtopic");
         }
@@ -97,8 +95,8 @@ public class startServer {
          *  Test des Profil Verschickens.
          */
         System.out.println("...\n\n\n\nTest des Profil verschickens...");
-        currentTimestamp = new java.sql.Timestamp(now.getTime());
-        Message msg3 = new Message("13", currentTimestamp.getNanos(), "015730975250", "015730975251", "015730975250");
+        timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        Message msg3 = new Message("13",timestamp, "015730975250", "015730975251", "015730975250");
         msg3.setTopic("all/testtopic");
         msg3.sendMessage("all/testtopic");
 
@@ -116,8 +114,8 @@ public class startServer {
          * Chat History anfordern
          */
         System.out.println("...\n\n\n\nTest der Chat History Funktion");
-        currentTimestamp = new java.sql.Timestamp(now.getTime());
-        Message msg5 = new Message("11", currentTimestamp.getNanos(), "015730975250", "015730975251", "XYZ");
+        timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        Message msg5 = new Message("11", timestamp, "015730975250", "015730975251", "XYZ");
         msg5.setTopic("all/testtopic");
         msg5.sendMessage("all/testtopic");
 

@@ -1,12 +1,12 @@
 package Daba;
 
+
 import Entities.Message;
-import Entities.MessageDB;
 import org.json.JSONObject;
 
 import java.sql.*;
 
-public class MessageDBImpl implements MessageDB {
+public class MessageDBImpl {
 
     Connection c = null;
     Statement stmt = null;
@@ -17,7 +17,7 @@ public class MessageDBImpl implements MessageDB {
         try {
             c = DriverManager.getConnection("jdbc:sqlite:datenbank.db"); //im Root Ordner auf datenbank.db zugreifen
             stmt = c.createStatement(); //manipulation der DB
-            stmt.execute("CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY, recipientNr VARCHAR(50), senderNr VARCHAR(50), timestamp INTEGER ,content TEXT, topic VARCHAR(255), idM VARCHAR(255))");
+            stmt.execute("CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY, recipientNr VARCHAR(50), senderNr VARCHAR(50), timestamp VARCHAR(255) ,content TEXT, topic VARCHAR(255), idM VARCHAR(255))");
             System.out.println("Message Table created! in dir:\n" + System.getProperty("user.dir"));
 
 
@@ -47,7 +47,7 @@ public class MessageDBImpl implements MessageDB {
                     "VALUES (?,?,?,?,?,?)"); //in the brackets mqsl statement syntax protects from sql inject.
             preStmt.setString(1, message.getRecipientNr());
             preStmt.setString(2, message.getSenderNr());
-            preStmt.setInt(3, message.gettimestamp());
+            preStmt.setString(3, message.gettimestamp());
             preStmt.setString(4, message.getContent());
             preStmt.setString(5, message.getTopic());
             preStmt.setString(6, message.getId());
@@ -113,7 +113,7 @@ public class MessageDBImpl implements MessageDB {
             resSet = preStmt.executeQuery();
 
             while (resSet.next()) {
-                Message msg = new Message("14", resSet.getInt("timestamp"), resSet.getString("senderNr"), resSet.getString("recipientNr"), resSet.getString("content"));
+                Message msg = new Message("14", resSet.getString("timestamp"), resSet.getString("senderNr"), resSet.getString("recipientNr"), resSet.getString("content"));
                 msg.setTopic(topic); //schickt alle Nachrichten aus der DB einzelnd
                 msg.sendMessage("all/"+senderNr);
             }

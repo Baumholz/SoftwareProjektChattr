@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.david.chattr.R;
@@ -20,22 +21,26 @@ import java.util.ArrayList;
 public class ChatActivityListViewAdapter extends BaseAdapter{
 
 
-    private ArrayList<Message> recipients ;
+    private ArrayList<Message> messages ;
     private String recipientNR;
 
     public ChatActivityListViewAdapter(ArrayList<Message> messages, String recipientNR) {
-        this.recipients = messages;
+        this.messages = messages;
         this.recipientNR = recipientNR;
+    }
+
+    public void setMessages(ArrayList<Message> messages) {
+        this.messages = messages;
     }
 
     @Override
     public int getCount() {
-        return recipients.size();
+        return messages.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return recipients.get(i);
+        return messages.get(i);
     }
 
     @Override
@@ -47,7 +52,7 @@ public class ChatActivityListViewAdapter extends BaseAdapter{
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
         Context context = viewGroup.getContext();
-        Message message = recipients.get(i);
+        Message message = messages.get(i);
 
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -62,15 +67,15 @@ public class ChatActivityListViewAdapter extends BaseAdapter{
             Log.e("Option 2", "RecipientNR: "+recipientNR + "message.getRecipientNr(): " + message.getRecipientNr());
         }
 
-        if (view != null) {
-            holder = (ViewHolder) view.getTag();
-        } else {
+
            view = inflater.inflate(layoutResource, viewGroup, false);
             holder = new ViewHolder(view);
             view.setTag(holder);
-        }
 
-        holder.text.setText(message.getContent());
+
+      TextView textView = view.findViewById(R.id.text);
+       textView.setText(message.getContent());
+     //   holder.text.setText(message.getContent());
 
         return view;
     }

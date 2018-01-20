@@ -37,6 +37,8 @@
         android:dividerHeight="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:transcriptMode="alwaysScroll"
+        android:stackFromBottom="true"
         android:layout_gravity="top"
         android:layout_weight="1" />
 
@@ -73,7 +75,7 @@
             android:background="@drawable/ic_send"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:onClick="onEditTextButtonClicked"
+            android:onClick="onSendButtonClicked"
             android:layout_gravity="center"/>
 
     </LinearLayout>

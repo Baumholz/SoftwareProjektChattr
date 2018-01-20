@@ -11,11 +11,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.provider.BaseColumns;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,7 +25,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.example.david.chattr.R;
@@ -41,12 +38,9 @@ import com.example.david.chattr.entities.users.UserProfile;
 import com.example.david.chattr.messaging.MyMqttService.MyLocalBinder;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,7 +52,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ChatActivity extends AppCompatActivity implements MessageArrivedListener {
 
     private MyMqttService mqttService;
-    private ArrayList<Message> messages;
     private EditText giveInput;
     private String name;
     private String recipientNR;
@@ -88,9 +81,9 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        recipientNR = (String)getIntent().getSerializableExtra("phoneNumber");
+        recipientNR = (String) getIntent().getSerializableExtra("phoneNumber");
 
-        giveInput = (EditText)findViewById(R.id.chatInput);
+        giveInput = (EditText) findViewById(R.id.chatInput);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         ListView chatListView = (ListView) findViewById(R.id.chat);
 
@@ -103,47 +96,26 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
         SharedPreferences sharedPreferences = getSharedPreferences("phoneNumber", Context.MODE_PRIVATE);
         senderNr = sharedPreferences.getString("phoneNumber", "default");
 
-        messages = new ArrayList<Message>();
+        ArrayList<Message> messages = new ArrayList<Message>();
 
-        //Read out the Database
-        db = myDb.getReadableDatabase();
-//        String [] projection = {
-//
-//                BaseColumns._ID,
-//                MySQLiteHelper.COL_1,
-//                MySQLiteHelper.COL_3,
-//                MySQLiteHelper.COL_4,
-//                MySQLiteHelper.COL_5
-//        };
-//        String selection = MySQLiteHelper.COL_4 + " = ?";
-//        String [] selectionArgs = {recipientNR};
-        Log.e("Number",recipientNR);
-        String query ="select * from " + MySQLiteHelper.TABLE + " where " + MySQLiteHelper.COL_3 +
-                "='" + recipientNR + "' or " + MySQLiteHelper.COL_4 + "='" + recipientNR + "';";
+        messages = readMessagesFromSendrNrandReceiverNrDB();
 
-        Cursor c = db.rawQuery(query, null);
-//        Cursor c = db.query(MySQLiteHelper.TABLE, projection, selection, selectionArgs,null,null,null);
+        readMessagesFromSendrNrandReceiverNrDB();
 
-        while (c.moveToNext()){
-            String temp = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.COL_5));
-            //name = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.COL_1));
-            String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-            Message oldMessage = new Message(name,timeStamp,"me",recipientNR,temp);
-            messages.add(oldMessage);
-        }
         ArrayList<UserProfile> recipients = new ArrayList<UserProfile>(myDb.getProfiles());
 
-        for(int i=0; i < recipients.size(); i++){
-           if(recipients.get(i).getPhoneNumber().equals(recipientNR)){
+        for (int i = 0; i < recipients.size(); i++) {
+            if (recipients.get(i).getPhoneNumber().equals(recipientNR)) {
                 temp = recipients.get(i);
-           }
+            }
         }
 
         //finish DB
 
         image = (ImageView) findViewById(R.id.image);
 
-        myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages, senderNr);
+
+        myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages, recipientNR);
         chatListView.setAdapter(myChatActivityListViewAdapter);
 
         // Set Toolbar Title and Profile Picture
@@ -151,48 +123,77 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
         TextView chatActivityTitle = findViewById(R.id.chatActivityTitle);
 
         chatActivityTitle.setText(temp.getFirstName() + " " + temp.getName());
-        if(Arrays.equals(temp.getProfilePicture(), "-1".getBytes())){
+        if (Arrays.equals(temp.getProfilePicture(), "-1".getBytes())) {
             profilPicture.setImageResource(R.drawable.default_profile);
-        }else {
+        } else {
             profilPicture.setImageBitmap(BitmapFactory.decodeByteArray(temp.getProfilePicture(), 0, temp.getProfilePicture().length));
         }
         //todo: hier muss das ProfilPicture rein /dB
     }
 
+    private ArrayList<Message> readMessagesFromSendrNrandReceiverNrDB() {
+        //Read out the Database
+        ArrayList<Message> messages = new ArrayList<>();
+        db = myDb.getReadableDatabase();
+        Log.e("Number", recipientNR);
+        String query = "select * from " + MySQLiteHelper.TABLE + " where " + MySQLiteHelper.SENDERnr +
+                "='" + recipientNR + "' or " + MySQLiteHelper.RECIPIENtnr + "='" + recipientNR + "';";
+
+        Cursor c = db.rawQuery(query, null);
+//        Cursor c = db.query(MySQLiteHelper.TABLE, projection, selection, selectionArgs,null,null,null);
+        while (c.moveToNext()) {
+            String tmstmp = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.TIMESTAMP));
+            String snr = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.SENDERnr));
+            String rnr = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.RECIPIENtnr));
+            String cnt = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.MsgCONTENT));
+            //public Message(String id, String timestamp, String senderNr, String recipientNr, String content)
+            Message oldMessage = new Message("1", tmstmp, snr, rnr, cnt);
+            System.out.println(oldMessage.toString() + " <--- Nachrichten aus der DB");
+            messages.add(oldMessage);
+        }
+        return messages;
+    }
+
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         unbindService(mConnection);
         super.onDestroy();
     }
 
     //Here is where the Button Click is handled
-    public void onEditTextButtonClicked(View v) {
+    public void onSendButtonClicked(View v) {
         String message = giveInput.getText().toString();
         if (!message.isEmpty()) {
             String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
             Message myMessage = new Message("1", timeStamp, senderNr, recipientNR, message);
-            messages.add(myMessage);
-            myChatActivityListViewAdapter.notifyDataSetChanged();
-            mqttService.sendMessage("all/"+recipientNR, myMessage.toString());
+            //messages.add(myMessage);
+            //myChatActivityListViewAdapter.notifyDataSetChanged();
+            System.out.println(myMessage.toString() + " DIESE Nachricht wird jetzt verschickt.");
+            mqttService.sendMessage("all/" + recipientNR, myMessage.toString());
 
             db = myDb.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put(MySQLiteHelper.COL_1,name);
-            values.put(MySQLiteHelper.COL_3,senderNr);
-            values.put(MySQLiteHelper.COL_4,recipientNR);
-            values.put(MySQLiteHelper.COL_5,message);
+            values.put(MySQLiteHelper.TIMESTAMP, timeStamp);
+            values.put(MySQLiteHelper.SENDERnr, senderNr);
+            values.put(MySQLiteHelper.RECIPIENtnr, recipientNR);
+            values.put(MySQLiteHelper.MsgCONTENT, message);
             long result = db.insert(MySQLiteHelper.TABLE, null, values);
-           // boolean isInserted =  myDb.insertData(message);
+            // boolean isInserted =  myDb.insertData(message);
 
 //            if(result != -1) {
 //               Toast.makeText(ChatActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
 //            }else{
 //               Toast.makeText(ChatActivity.this, "Data not Inserted", Toast.LENGTH_SHORT).show();
 //            }
-           // myDb.updateTopic(recipientNR,"teeeest";
+            // myDb.updateTopic(recipientNR,"teeeest";
         }
         giveInput.setText("");
+        updateListView();
+    }
+
+    public void updateListView() {
+        myChatActivityListViewAdapter.setMessages(readMessagesFromSendrNrandReceiverNrDB());
+        myChatActivityListViewAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -203,7 +204,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
 
     //for the back button
     @Override
-    public  boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
@@ -217,7 +218,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
             mqttService = binder.getService();
             binder.setMessageArrivedListener(ChatActivity.this);
 
-            recipientNR = (String)getIntent().getSerializableExtra("phoneNumber");
+            recipientNR = (String) getIntent().getSerializableExtra("phoneNumber");
 
             //Start Service
             Intent startServiceIntent = new Intent(ChatActivity.this, MyMqttService.class);
@@ -227,8 +228,8 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
             // topic: “receiver_number” with palyloud: Sender “sender_nr” ChatTopic “rand_nummer_timestamp”
             ArrayList<UserProfile> profiles = new ArrayList<>(myDb.getProfiles());
 
-            for(int i =0; i < profiles.size();i++){
-                if(profiles.get(i).getPhoneNumber().equals(recipientNR)){
+            for (int i = 0; i < profiles.size(); i++) {
+                if (profiles.get(i).getPhoneNumber().equals(recipientNR)) {
                     topic = profiles.get(i).getTopic();
                     break;
                 }
@@ -242,7 +243,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
                 String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
                 Message message = new Message("12", timeStamp, senderNr, recipientNR, topic);
                 mqttService.sendMessage("all/" + recipientNR, message.toString());
-                myDb.updateTopic(recipientNR,topic);
+                myDb.updateTopic(recipientNR, topic);
             }
 
             //Todo: Save topic in database
@@ -259,12 +260,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
     @Override
     public void messageArrived(String topic, MqttMessage message) {
         // TODO: Save message into database
-//
-        if(isWaitingForImage) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(message.getPayload(), 0 , message.getPayload().length);
-            image.setImageBitmap(bitmap);
-
-        }
+        updateListView();
     }
 
     public void onClickSendImage(View view) {
@@ -318,8 +314,7 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
                     if (bitmap.getHeight() > 800 || bitmap.getWidth() > 800)
                         bitmap = BitmapScaler.scaleBitmap(bitmap);
-                }
-                else if (requestCode == 1)
+                } else if (requestCode == 1)
                     bitmap = (Bitmap) data.getExtras().get("data");
 
                 startAckDialog();

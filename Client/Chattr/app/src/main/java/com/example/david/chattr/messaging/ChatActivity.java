@@ -89,7 +89,6 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
         setContentView(R.layout.activity_chat);
 
         recipientNR = (String)getIntent().getSerializableExtra("phoneNumber");
-        name = (String)getIntent().getSerializableExtra("name");
 
         giveInput = (EditText)findViewById(R.id.chatInput);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -144,14 +143,14 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
 
         image = (ImageView) findViewById(R.id.image);
 
-        myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages, senderNr);
+        myChatActivityListViewAdapter = new ChatActivityListViewAdapter(messages, recipientNR);
         chatListView.setAdapter(myChatActivityListViewAdapter);
 
         // Set Toolbar Title and Profile Picture
         CircleImageView profilPicture = findViewById(R.id.profilePicutreChat);
+        TextView chatActivityTitle = findViewById(R.id.chatActivityTitle);
 
-
-      //  chatActivityTitle.setText(temp.getFirstName() + " " + temp.getName());
+        chatActivityTitle.setText(temp.getFirstName() + " " + temp.getName());
         if(Arrays.equals(temp.getProfilePicture(), "-1".getBytes())){
             profilPicture.setImageResource(R.drawable.default_profile);
         }else {

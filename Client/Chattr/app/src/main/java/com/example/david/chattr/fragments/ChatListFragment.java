@@ -61,7 +61,6 @@ public class ChatListFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ChatListFragment.this.getActivity(), ChatActivity.class);
                 intent.putExtra("phoneNumber", recipients.get(i).getPhoneNumber());
-                intent.putExtra("name", recipients.get(i).getName());
                 startActivity(intent);
             }
         });

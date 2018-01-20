@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Binder;
 import android.os.IBinder;
@@ -221,21 +222,49 @@ public class MyMqttService extends Service implements MqttCallback{
         String content = json.getString("content");
         String timestamp = json.getString("timestamp");
 
+        String tmstmp = ""; //Tmp Timestamp aus db fuer vergleich.
+
+
         MySQLiteHelper myDb = new MySQLiteHelper(this);
-        SQLiteDatabase db = myDb.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(MySQLiteHelper.SENDERnr,senderNr);
-        values.put(MySQLiteHelper.RECIPIENtnr,recipientNR);
-        values.put(MySQLiteHelper.MsgCONTENT,content);
-        values.put(MySQLiteHelper.TIMESTAMP,timestamp);
-        long result = db.insert(MySQLiteHelper.TABLE, null, values);
-        if(result != -1) {
-//           Toast.makeText(this, "Data Inserted", Toast.LENGTH_LONG).show();
-            Log.d(TAG, "Data Inserted");
-        }else{
-//           Toast.makeText(this, "Data not Inserted", Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "Data not Inserted");
+        SQLiteDatabase dbr;
+        dbr = myDb.getReadableDatabase();
+        String query = "select * from " + MySQLiteHelper.TABLE + " where " + MySQLiteHelper.SENDERnr +
+                "='" + senderNr + "' AND " + MySQLiteHelper.RECIPIENtnr + "='" + recipientNR + "' AND " + MySQLiteHelper.MsgCONTENT +
+        "='" + content + "' AND " + MySQLiteHelper.TIMESTAMP + "='" + timestamp + "';";
+
+        Cursor c = dbr.rawQuery(query, null);
+//        Cursor c = db.query(MySQLiteHelper.TABLE, projection, selection, selectionArgs,null,null,null);
+        while (c.moveToNext()) {
+             tmstmp = c.getString(c.getColumnIndexOrThrow(MySQLiteHelper.TIMESTAMP));
         }
+
+        if (tmstmp == ""){
+
+            SQLiteDatabase db = myDb.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(MySQLiteHelper.SENDERnr,senderNr);
+            values.put(MySQLiteHelper.RECIPIENtnr,recipientNR);
+            values.put(MySQLiteHelper.MsgCONTENT,content);
+            values.put(MySQLiteHelper.TIMESTAMP,timestamp);
+            long result = db.insert(MySQLiteHelper.TABLE, null, values);
+            if(result != -1) {
+//           Toast.makeText(this, "Data Inserted", Toast.LENGTH_LONG).show();
+                Log.d(TAG, "Data Inserted");
+            }else{
+//           Toast.makeText(this, "Data not Inserted", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Data not Inserted");
+            }
+
+
+        }
+
+
+
+
+
+
+
+
     }
 
     @Override

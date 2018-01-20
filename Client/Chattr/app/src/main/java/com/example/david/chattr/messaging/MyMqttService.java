@@ -72,7 +72,6 @@ public class MyMqttService extends Service implements MqttCallback{
     @Override
     public void onCreate() {
         super.onCreate();
-        isSubscribed = false;
     }
 
     @Override
@@ -178,7 +177,6 @@ public class MyMqttService extends Service implements MqttCallback{
         Log.d(TAG, "\nMessage arrived on topic: " + topic + "\n" + message + "\n");
 //        Toast.makeText(MyMqttService.this, "Message arrived: " + message, Toast.LENGTH_SHORT).show();
 
-        myBinder.messageArrived(topic, message);
 
         JSONObject json = new JSONObject(mMessage);
         String id = json.getString("id");
@@ -208,6 +206,7 @@ public class MyMqttService extends Service implements MqttCallback{
             default:
                 break;
         }
+        myBinder.messageArrived(topic, message);
     }
 
     private void makeNotification(String content) {
@@ -220,13 +219,15 @@ public class MyMqttService extends Service implements MqttCallback{
         String senderNr = json.getString("senderNr");
         String recipientNR = json.getString("recipientNr");
         String content = json.getString("content");
+        String timestamp = json.getString("timestamp");
 
         MySQLiteHelper myDb = new MySQLiteHelper(this);
         SQLiteDatabase db = myDb.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(MySQLiteHelper.COL_3,senderNr);
-        values.put(MySQLiteHelper.COL_4,recipientNR);
-        values.put(MySQLiteHelper.COL_5,content);
+        values.put(MySQLiteHelper.SENDERnr,senderNr);
+        values.put(MySQLiteHelper.RECIPIENtnr,recipientNR);
+        values.put(MySQLiteHelper.MsgCONTENT,content);
+        values.put(MySQLiteHelper.TIMESTAMP,timestamp);
         long result = db.insert(MySQLiteHelper.TABLE, null, values);
         if(result != -1) {
 //           Toast.makeText(this, "Data Inserted", Toast.LENGTH_LONG).show();

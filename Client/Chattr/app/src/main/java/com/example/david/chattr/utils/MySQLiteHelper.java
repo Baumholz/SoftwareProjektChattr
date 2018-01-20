@@ -31,11 +31,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     //Table Message
     public static final String TABLE = "Messages";
-    public static final String COL_1 = "name";
-    public static final String COL_2 = "timestamp";
-    public static final String COL_3 = "senderNr";
-    public static final String COL_4 = "recipientNR";
-    public static final String COL_5 = "content";
+   // public static final String COL_1 = "name";
+    public static final String TIMESTAMP = "timestamp";
+    public static final String SENDERnr = "senderNr";
+    public static final String RECIPIENtnr = "recipientNR";
+    public static final String MsgCONTENT = "content";
     // Table Profile
     public static final String TABLE_PROFILE = "userProfile";
     public static final String PHONE_NUMBER = "phoneNumber";
@@ -47,14 +47,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String WRITEABLE = "writeable";
     public static final String TOPIC = "topic";
 
-    //   public static final String SQL_ENTRIES = TABLE+COL_1 + COL_2 + COL_3 + COL_4 + COL_5 ;
+    //   public static final String SQL_ENTRIES = TABLE+COL_1 + TIMESTAMP + SENDERnr + RECIPIENtnr + MsgCONTENT ;
     public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + TABLE + " ("
             + BaseColumns._ID + " INTEGER PRIMARY KEY,"
-            + COL_1 + " TEXT,"
-            + COL_2 + "TEXT,"
-            + COL_3 + " TEXT,"
-            + COL_4 + " TEXT,"
-            + COL_5 + " TEXT)";
+            +TIMESTAMP + " TEXT,"
+            +SENDERnr +" TEXT,"
+            +RECIPIENtnr +" TEXT,"
+            +MsgCONTENT +" TEXT)";
 
     public static final String SQL_CREATE_TABLE_PROFILE = "CREATE TABLE " + TABLE_PROFILE + " ("
             + BaseColumns._ID + " INTEGER PRIMARY KEY,"

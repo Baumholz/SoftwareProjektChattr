@@ -29,8 +29,7 @@ public class startServer {
          *wait that our Subscribe Thread is finished and then send TestMessage
          */
 
-        Calendar calendar = Calendar.getInstance();
-        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String timestamp;
         System.out.println("...\n\n\n\nFuellen der DB mit Testnachrichten...");
         /**
          * Füllen der DB mit Testnachrichten zwischen zwei personen

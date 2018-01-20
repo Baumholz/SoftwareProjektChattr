@@ -37,6 +37,7 @@ public class MyMqttService extends Service implements MqttCallback{
 
     private final static String Broker = "tcp://7ofie4f20pn09gmt.myfritz.net";
     private final static String TAG = "MyMqttService";
+    private final static String TOPICALL = "all/";
 //    private final static String Broker = "tcp://broker.hivemq.com:1883";
     private final static int Quos = 2;
 
@@ -45,6 +46,8 @@ public class MyMqttService extends Service implements MqttCallback{
     //    private String topic;
     private String clientId;
     private String phoneNumber;
+    private String topic;
+    private boolean isSubscribed;
 
     // Returns this instance of MyMqttService, so that other clients/Activities can call its methods
     public class MyLocalBinder extends Binder {
@@ -64,6 +67,12 @@ public class MyMqttService extends Service implements MqttCallback{
                 listener.messageArrived(topic, message);
             }
         }
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        isSubscribed = false;
     }
 
     @Override
@@ -97,7 +106,9 @@ public class MyMqttService extends Service implements MqttCallback{
                 Log.d(TAG, "\nonSuccess\n");
 //                Toast.makeText(MyMqttService.this, "Connected with Broker", Toast.LENGTH_SHORT).show();
                 client.setCallback(MyMqttService.this);
-                subscribe();
+                if (!isSubscribed && !phoneNumber.equals("default")) {
+                    subscribe();
+                }
             }
 
             @Override
@@ -133,19 +144,21 @@ public class MyMqttService extends Service implements MqttCallback{
     }
 
     public void subscribe() {
-        final String topic = "all/" + phoneNumber;
+        topic = TOPICALL + phoneNumber;
         try {
             IMqttToken token = client.subscribe(topic, Quos);
             token.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     Log.d(TAG, "\nSubscribed successfully on topic: " + topic + "\n");
+                    isSubscribed = true;
 //                    Toast.makeText(MyMqttService.this, "Subscribed successfully on topic: " + topic, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.d(TAG, "\nFailed to subscribe on topic: " + topic + "\n");
+                    isSubscribed = false;
 //                    Toast.makeText(MyMqttService.this, "Failed to subscribe on topic: " + topic, Toast.LENGTH_SHORT).show();
                 }
             });
@@ -233,5 +246,19 @@ public class MyMqttService extends Service implements MqttCallback{
     @Override
     public IBinder onBind(Intent intent) {
         return myBinder;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (client != null) {
+            try {
+                client.unsubscribe(topic);
+                Log.d(TAG, "\nUnsubscribed on topic: " + topic + "\n");
+            } catch (MqttException e) {
+                e.printStackTrace();
+            }
+        }
+        isSubscribed = false;
     }
 }

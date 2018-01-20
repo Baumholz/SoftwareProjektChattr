@@ -125,7 +125,7 @@ public class EditPersonalProfileActivity extends AppCompatActivity {
         String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
         Message signUpMessage = new Message("10", timeStamp, phoneNumber, "-1", userProfile);
         Log.i("newProfileMessage", signUpMessage.toString());
-        mqttService.sendMessage("all/", signUpMessage.toString());
+        mqttService.sendMessage("TOPICALL", signUpMessage.toString());
     }
 
     //for the back button

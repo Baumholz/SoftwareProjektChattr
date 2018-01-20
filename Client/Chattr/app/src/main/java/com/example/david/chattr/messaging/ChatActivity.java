@@ -174,7 +174,10 @@ public class ChatActivity extends AppCompatActivity implements MessageArrivedLis
             Message myMessage = new Message("1", timeStamp, senderNr, recipientNR, message);
             messages.add(myMessage);
             myChatActivityListViewAdapter.notifyDataSetChanged();
-            mqttService.sendMessage("all/"+recipientNR, myMessage.toString());
+
+            PublishMessage pubm = new PublishMessage();
+            pubm.run(myMessage.toString(),"all/"+recipientNR,2, senderNr);
+          //  mqttService.sendMessage("all/"+recipientNR, myMessage.toString());
 
             db = myDb.getWritableDatabase();
             ContentValues values = new ContentValues();
